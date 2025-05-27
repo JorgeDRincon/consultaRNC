@@ -37,9 +37,9 @@ class Rnc extends Model
         'RNC' => 'rnc',
         'RAZÓN SOCIAL' => 'business_name',
         'ACTIVIDAD ECONÓMICA' => 'economic_activity',
-        'FECHA INICIO' => 'start_date',
+        'FECHA DE INICIO OPERACIONES' => 'start_date',
         'ESTADO' => 'status',
-        'RÉGIMEN DE PAGOS' => 'payment_regime',
+        'RÉGIMEN DE PAGO' => 'payment_regime',
         // Agrega aquí otras columnas si es necesario
       ],
 
@@ -71,6 +71,9 @@ class Rnc extends Model
     $updateColumns = $config['update_columns'];
     $totalRows = 0;
 
+    // Definir columnas de fecha
+    $dateColumns = ['fecha_registro', 'created_at', 'updated_at', 'start_date']; // Ajusta según tus columnas
+
     try {
       // Primera lectura para obtener los headers
       $reader = Reader::createFromPath($csvFilePath, 'r');
@@ -78,10 +81,15 @@ class Rnc extends Model
       $reader->setDelimiter(',');
       $reader->skipInputBOM();
 
-      // Convertir los headers a UTF-8 usando Windows-1252
+      // Leer los headers directamente del archivo
+      $file = fopen($csvFilePath, 'r');
+      $headers = fgetcsv($file, 0, ',');
+      fclose($file);
+
+      // Convertir los headers a UTF-8
       $headers = array_map(function ($header) {
-        return mb_convert_encoding($header, 'UTF-8', 'Windows-1252');
-      }, $reader->getHeader());
+        return mb_convert_encoding(trim($header), 'UTF-8', 'Windows-1252');
+      }, $headers);
 
       // Segunda lectura para procesar los registros
       $reader = Reader::createFromPath($csvFilePath, 'r');
@@ -93,12 +101,17 @@ class Rnc extends Model
       $records = $reader->getIterator();
 
       // Modificar el mapping para usar los headers en UTF-8
-      $columnMapping = array_combine(
-        array_map(function ($key) use ($headers) {
-          return $headers[array_search($key, $headers)];
-        }, array_keys($config['column_mapping'])),
-        array_values($config['column_mapping'])
-      );
+      $columnMapping = [];
+      foreach ($config['column_mapping'] as $csvHeader => $dbColumn) {
+        // Buscar el header en UTF-8 que coincida con el header original
+        $utf8Header = array_filter($headers, function ($header) use ($csvHeader) {
+          return mb_strtolower($header) === mb_strtolower($csvHeader);
+        });
+
+        if (!empty($utf8Header)) {
+          $columnMapping[reset($utf8Header)] = $dbColumn;
+        }
+      }
 
       DB::beginTransaction(); // Start a transaction for mass update
 
@@ -108,27 +121,40 @@ class Rnc extends Model
         }
 
         $mappedData = [];
-        Log::info('--------------------------------'); // Log separator
-        Log::info(['record' => array_map(function ($value) {
-          return mb_convert_encoding($value, 'UTF-8', 'Windows-1252');
-        }, $record)]);
-        foreach ($columnMapping as $csvHeader => $dbColumn) {
-          Log::info(['csvHeader' => $csvHeader]);
-          Log::info(['dbColumn' => $dbColumn]);
 
-          $value = $record[$csvHeader] ?? null;
-          Log::info(['record[' . $csvHeader . ']' => $record[$csvHeader]]);
-          Log::info(['value' => $value]);
-          Log::info('--------------------------------'); // Log separator
+        $utf8Record = [];
+        foreach ($record as $key => $value) {
+          $utf8Key = mb_convert_encoding($key, 'UTF-8', 'Windows-1252');
+          $utf8Record[$utf8Key] = $value;
+        }
+
+        foreach ($columnMapping as $csvHeader => $dbColumn) {
+          // Buscar la key original en el record
+          $originalKey = array_search($csvHeader, array_map(function ($key) {
+            return mb_convert_encoding($key, 'UTF-8', 'Windows-1252');
+          }, array_keys($record)));
+
+          $value = $originalKey !== false ? $record[array_keys($record)[$originalKey]] : null;
 
           if ($value !== null) {
             $value = trim($value);
           }
 
+          // Columnas que NO necesitan encoding
+          $noEncodingColumns = array_merge(['rnc'], $dateColumns);
+
+          // Aplica encoding a todas las columnas excepto las que no lo necesitan
+          if (!in_array($dbColumn, $noEncodingColumns)) {
+            $value = mb_convert_encoding($value, 'UTF-8', 'Windows-1252');
+          }
+
+          // Parsear fecha si corresponde
+          if (in_array($dbColumn, $dateColumns)) {
+            $value = self::parseDate($value);
+          }
+
           $mappedData[$dbColumn] = $value;
         }
-        Log::info(['mappedData' => $mappedData]);
-        dd('stop');
         // Saltar filas sin business_name o rnc
         if (empty($mappedData['business_name']) || empty($mappedData['rnc'])) {
           continue;
@@ -140,11 +166,7 @@ class Rnc extends Model
             $processedCount += count($batch);
             $batch = [];
             // Log progreso y guardar en archivo temporal
-            Log::info("Importación RNC: Procesados $processedCount de $totalRows registros");
-            file_put_contents(storage_path('app/import_progress.json'), json_encode([
-              'processed' => $processedCount,
-              'total' => $totalRows
-            ]));
+            self::saveProgress($processedCount, $totalRows);
           } catch (\Exception $e) {
             throw $e;
           }
@@ -155,11 +177,7 @@ class Rnc extends Model
           self::upsert($batch, $uniqueBy, $updateColumns);
           $processedCount += count($batch);
           // Log progreso final y guardar en archivo temporal
-          Log::info("Importación RNC: Procesados $processedCount de $totalRows registros (final)");
-          file_put_contents(storage_path('app/import_progress.json'), json_encode([
-            'processed' => $processedCount,
-            'total' => $totalRows
-          ]));
+          self::saveProgress($processedCount, $totalRows);
         } catch (\Exception $e) {
           Log::error('RNC Import Model: Error during final batch upsert.', ['error' => $e->getMessage(), 'batch_size' => count($batch)]);
           throw $e;
@@ -177,5 +195,38 @@ class Rnc extends Model
       unlink(storage_path('app/import_progress.json'));
     }
     return $processedCount;
+  }
+
+  private static function parseDate($value)
+  {
+    if (empty($value)) {
+      return null;
+    }
+    try {
+      $date = \Carbon\Carbon::createFromFormat('d/m/Y', $value);
+      // Si la fecha no es válida, createFromFormat retorna false
+      if (!$date || $date->format('Y-m-d') === '-0001-11-30') {
+        Log::error('RNC Import Model: Fecha inválida detectada durante el parseo.', [
+          'valor_original' => $value,
+          'resultado_parseo' => $date ? $date->format('Y-m-d') : null
+        ]);
+        return null;
+      }
+      return $date->format('Y-m-d');
+    } catch (\Exception $e) {
+      Log::error('RNC Import Model: Error durante el parseo de fecha.', [
+        'error' => $e->getMessage(),
+        'valor_original' => $value
+      ]);
+      return null;
+    }
+  }
+
+  private static function saveProgress($processedCount, $totalRows)
+  {
+    file_put_contents(storage_path('app/import_progress.json'), json_encode([
+      'processed' => $processedCount,
+      'total' => $totalRows
+    ]));
   }
 }
