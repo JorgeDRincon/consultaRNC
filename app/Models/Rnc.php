@@ -13,6 +13,8 @@ class Rnc extends Model
 {
   use HasFactory;
 
+  protected $table = 'rncs';
+
   protected $fillable = [
     'rnc',
     'business_name',
@@ -35,9 +37,9 @@ class Rnc extends Model
         'RNC' => 'rnc',
         'RAZÓN SOCIAL' => 'business_name',
         'ACTIVIDAD ECONÓMICA' => 'economic_activity',
-        'FECHA DE INICIO OPERACIONES' => 'start_date',
+        'FECHA INICIO' => 'start_date',
         'ESTADO' => 'status',
-        'RÉGIMEN DE PAGO' => 'payment_regime',
+        'RÉGIMEN DE PAGOS' => 'payment_regime',
         // Agrega aquí otras columnas si es necesario
       ],
 
@@ -70,41 +72,66 @@ class Rnc extends Model
     $totalRows = 0;
 
     try {
-      $reader = Reader::createFromPath($csvFilePath, 'r');
-      $reader->setHeaderOffset(0); // The first row is the header
-      $records = $reader->getIterator();
-      foreach ($records as $record) {
-        $totalRows++;
-      }
-      // Reset iterator
+      // Primera lectura para obtener los headers
       $reader = Reader::createFromPath($csvFilePath, 'r');
       $reader->setHeaderOffset(0);
+      $reader->setDelimiter(',');
+      $reader->skipInputBOM();
+
+      // Convertir los headers a UTF-8 usando Windows-1252
+      $headers = array_map(function ($header) {
+        return mb_convert_encoding($header, 'UTF-8', 'Windows-1252');
+      }, $reader->getHeader());
+
+      // Segunda lectura para procesar los registros
+      $reader = Reader::createFromPath($csvFilePath, 'r');
+      $reader->setHeaderOffset(0);
+      $reader->setDelimiter(',');
+      $reader->skipInputBOM();
+
+      $totalRows = $reader->count();
       $records = $reader->getIterator();
+
+      // Modificar el mapping para usar los headers en UTF-8
+      $columnMapping = array_combine(
+        array_map(function ($key) use ($headers) {
+          return $headers[array_search($key, $headers)];
+        }, array_keys($config['column_mapping'])),
+        array_values($config['column_mapping'])
+      );
+
       DB::beginTransaction(); // Start a transaction for mass update
+
       foreach ($records as $record) {
         if ($limit > 0 && $processedCount >= $limit) {
           break;
         }
+
         $mappedData = [];
+        Log::info('--------------------------------'); // Log separator
+        Log::info(['record' => array_map(function ($value) {
+          return mb_convert_encoding($value, 'UTF-8', 'Windows-1252');
+        }, $record)]);
         foreach ($columnMapping as $csvHeader => $dbColumn) {
+          Log::info(['csvHeader' => $csvHeader]);
+          Log::info(['dbColumn' => $dbColumn]);
+
           $value = $record[$csvHeader] ?? null;
+          Log::info(['record[' . $csvHeader . ']' => $record[$csvHeader]]);
+          Log::info(['value' => $value]);
+          Log::info('--------------------------------'); // Log separator
+
           if ($value !== null) {
             $value = trim($value);
           }
-          if (in_array($dbColumn, ['start_date'])) {
-            if (!empty($value)) {
-              try {
-                $date = Carbon::parse($value);
-                $value = $date->format('Y-m-d');
-              } catch (\Exception $e) {
-                Log::warning("RNC Import Model: Could not parse date '{$value}' for DB column '{$dbColumn}'. Error: {$e->getMessage()}");
-                $value = null;
-              }
-            } else {
-              $value = null;
-            }
-          }
+
           $mappedData[$dbColumn] = $value;
+        }
+        Log::info(['mappedData' => $mappedData]);
+        dd('stop');
+        // Saltar filas sin business_name o rnc
+        if (empty($mappedData['business_name']) || empty($mappedData['rnc'])) {
+          continue;
         }
         $batch[] = $mappedData;
         if (count($batch) >= $chunkSize) {
@@ -119,7 +146,6 @@ class Rnc extends Model
               'total' => $totalRows
             ]));
           } catch (\Exception $e) {
-            Log::error('RNC Import Model: Error during batch upsert.', ['error' => $e->getMessage(), 'batch_size' => count($batch)]);
             throw $e;
           }
         }
