@@ -13,26 +13,6 @@ use Illuminate\Support\Facades\Storage;
 
 class RncImportController extends Controller
 {
-  // public function import(Request $request)
-  // {
-  //   $request->validate([
-  //     'file' => 'required|mimes:csv,txt|max:200000'
-  //   ]);
-
-  //   try {
-  //     Excel::import(new RncsImport, $request->file('file'));
-
-  //     return response()->json([
-  //       'message' => 'Archivo CSV importado exitosamente'
-  //     ], 200);
-  //   } catch (\Exception $e) {
-  //     return response()->json([
-  //       'message' => 'Error al importar el archivo CSV',
-  //       'error' => $e->getMessage()
-  //     ], 500);
-  //   }
-  // }
-
   public function importForm(Request $request)
   {
     Log::info('Importando archivo CSV');
