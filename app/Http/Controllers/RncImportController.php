@@ -1,15 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Imports\RncsImport as ImportsRncsImport;
-use App\Models\Rnc;
-use App\Models\RncsImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Jobs\ImportRncCsvJob;
-use Illuminate\Support\Facades\Storage;
 
 class RncImportController extends Controller
 {
