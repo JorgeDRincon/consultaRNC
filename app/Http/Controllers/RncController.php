@@ -6,48 +6,41 @@ use App\Models\Rnc;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Schema;
 
 class RncController extends Controller
 {
-    /**
-     * Retrieve a specific RNC record by its RNC number, with validation.
-     *
-     * @param string $rnc The RNC number from the route parameter.
-     * @return JsonResponse
-     */
-    public function show(string $rnc): JsonResponse
-    {
-        try {
-            $validator = validator(['rnc' => $rnc], [
-                'rnc' => ['required', 'string', 'digits_between:9,11'],
-            ]);
+  /**
+   * Search RNC records by one or more parameters.
+   *
+   * @param Request $request
+   * @return JsonResponse
+   */
+  public function advancedSearch(Request $request): JsonResponse
+  {
+    $allowedParams = Rnc::getAllowedSearchParams();
 
-            $validator->validate();
+    $inputParams = array_keys($request->all());
+    $invalidParams = array_diff($inputParams, $allowedParams);
 
-            $record = Rnc::where('rnc', $rnc)->first();
-
-            if (!$record) {
-                return response()->json([
-                    'message' => 'RNC record not found for the provided RNC number.',
-                ], 404);
-            }
-
-            return response()->json([
-                'message' => 'RNC record retrieved successfully.',
-                'data' => $record,
-            ], 200);
-
-        } catch (ValidationException $e) {
-            return response()->json([
-                'message' => 'The provided RNC is invalid.',
-                'errors' => $e->errors(),
-            ], 422);
-        } catch (Exception $e) {
-            return response()->json([
-                'message' => 'An unexpected error occurred while processing your request.',
-                'error' => $e->getMessage(),
-            ], 500);
-        }
+    if (count($inputParams) > 0 && count($invalidParams) > 0) {
+      return response()->json([
+        'message' => 'Invalid parameter(s): ' . implode(', ', $invalidParams),
+        'allowed_parameters' => array_values($allowedParams)
+      ], 422); 
     }
+
+    $params = $request->only($allowedParams);
+    $result = Rnc::filterByParams($params);
+    $query = $result['query'];
+    $hasFilter = $result['hasFilter'];
+
+    $results = $query->limit(30)->get();
+
+    return response()->json([
+      'message' => $hasFilter ? 'Advanced search completed.' : 'No filters provided. Showing first 50 records.',
+      'count' => $results->count(),
+      'data' => $results,
+    ], 200);
+  }
 }
