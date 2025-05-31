@@ -8,6 +8,7 @@ use League\Csv\Reader;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Schema;
 
 class Rnc extends Model
 {
@@ -245,5 +246,59 @@ class Rnc extends Model
     if ($processedCount % 1000 === 0) {
       Log::info('RNC Import Model: Progress update', $progress);
     }
+  }
+
+  public static function filterByParams(array $params)
+  {
+    $query = self::query();
+
+    if (!empty($params['rnc'])) {
+      $query->where('rnc', $params['rnc']);
+    }
+    if (!empty($params['business_name'])) {
+      $query->where('business_name', 'LIKE', "%{$params['business_name']}%");
+    }
+    if (!empty($params['economic_activity'])) {
+      $query->where('economic_activity', 'LIKE', "%{$params['economic_activity']}%");
+    }
+    if (!empty($params['status'])) {
+      $query->where('status', $params['status']);
+    }
+    if (!empty($params['payment_regime'])) {
+      $query->where('payment_regime', $params['payment_regime']);
+    }
+    if (!empty($params['start_date_from']) && !empty($params['start_date_to'])) {
+      $query->whereBetween('start_date', [$params['start_date_from'], $params['start_date_to']]);
+    } elseif (!empty($params['start_date_from'])) {
+      $query->where('start_date', '>=', $params['start_date_from']);
+    } elseif (!empty($params['start_date_to'])) {
+      $query->where('start_date', '<=', $params['start_date_to']);
+    }
+
+    // Determina si hay algún filtro aplicado
+    $hasFilter = !empty(array_filter([
+      $params['rnc'] ?? null,
+      $params['business_name'] ?? null,
+      $params['economic_activity'] ?? null,
+      $params['status'] ?? null,
+      $params['payment_regime'] ?? null,
+      $params['start_date_from'] ?? null,
+      $params['start_date_to'] ?? null,
+    ], function ($v) {
+      return $v !== null && $v !== '';
+    }));
+
+    return [
+      'query' => $query,
+      'hasFilter' => $hasFilter
+    ];
+  }
+
+  public static function getAllowedSearchParams()
+  {
+    $columns = Schema::getColumnListing((new self)->getTable());
+    $special = ['start_date_from', 'start_date_to'];
+    // Exclude 'id'
+    return array_diff(array_merge($columns, $special), ['id']);
   }
 }

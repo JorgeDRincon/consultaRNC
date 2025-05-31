@@ -10,8 +10,10 @@ Route::get('/user', function (Request $request) {
   return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/rnc/{rnc}', [RncController::class, 'show']);
-Route::post('/rncs/import', [RncImportController::class, 'import']);
+Route::get('/rnc/search', [RncController::class, 'advancedSearch']);
+
+Route::post('/rnc/import', [RncImportController::class, 'import']);
+
 
 Route::get('/rnc-import/progress', function () {
   $progressFile = storage_path('app/import_progress.json');
