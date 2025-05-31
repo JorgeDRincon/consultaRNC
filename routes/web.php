@@ -12,3 +12,11 @@ Route::get('/rnc/import', function () {
 })->name('rnc.import.form');
 
 Route::post('/rnc/import', [RncImportController::class, 'importForm'])->name('rnc.import.form');
+
+Route::get('/{any?}', function () {
+    return view('welcome');
+})->where('any', '.*');
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
