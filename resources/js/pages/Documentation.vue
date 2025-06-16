@@ -75,54 +75,34 @@
                 </ul>
             </div>
 
-            <!-- Tipos de Respuestas -->
-            <div class="mb-8 text-left">
+            <!-- Enlaces a la Documentación -->
+            <div class="mb-8">
                 <h2 class="text-2xl font-semibold mb-4 text-gray-800">
-                    Tipos de Respuestas
+                    Documentación Técnica
                 </h2>
-                <div class="bg-gray-50 p-4 rounded-lg">
-                    <h3 class="font-semibold text-gray-700 mb-2">
-                        Formato JSON
-                    </h3>
-                    <pre
-                        class="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto"
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <Link
+                        href="/documentation/endpoints"
+                        class="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition"
                     >
-{
-    "success": true,
-    "data": {
-        "rnc": "123456789",
-        "nombre": "Empresa Ejemplo",
-        "tipo": "Persona Jurídica",
-        "estado": "Activo"
-    },
-    "message": "Consulta exitosa"
-}</pre
+                        <h3 class="font-semibold text-gray-700 mb-2">
+                            Endpoints y Parámetros
+                        </h3>
+                        <p class="text-gray-500">
+                            Consulta todos los endpoints disponibles y sus parámetros
+                        </p>
+                    </Link>
+                    <Link
+                        href="/documentation/responses"
+                        class="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition"
                     >
-                </div>
-            </div>
-
-            <!-- Endpoints Principales -->
-            <div class="mb-8 text-left">
-                <h2 class="text-2xl font-semibold mb-4 text-gray-800">
-                    Endpoints Principales
-                </h2>
-                <div class="space-y-4">
-                    <div class="bg-gray-50 p-4 rounded-lg">
                         <h3 class="font-semibold text-gray-700 mb-2">
-                            Consulta RNC
+                            Tipos de Respuestas
                         </h3>
-                        <code class="bg-gray-800 text-gray-100 p-2 rounded"
-                            >GET /api/v1/rnc/{numero}</code
-                        >
-                    </div>
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                        <h3 class="font-semibold text-gray-700 mb-2">
-                            Búsqueda por Nombre
-                        </h3>
-                        <code class="bg-gray-800 text-gray-100 p-2 rounded"
-                            >GET /api/v1/search?q={nombre}</code
-                        >
-                    </div>
+                        <p class="text-gray-500">
+                            Conoce los formatos de respuesta y códigos de estado
+                        </p>
+                    </Link>
                 </div>
             </div>
 
@@ -139,6 +119,6 @@
 </template>
 
 <script setup>
-import { Head } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 // Página estática, no requiere lógica JS
 </script>
