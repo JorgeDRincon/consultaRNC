@@ -1,0 +1,2 @@
+# GitHub configuration for pull request templates
+pull_request_template: .github/pull_request_template.md
