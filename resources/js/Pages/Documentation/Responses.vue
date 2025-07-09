@@ -12,7 +12,7 @@
                     <h2 class="text-2xl font-semibold mb-4 text-gray-800">
                         Respuesta Exitosa
                     </h2>
-                    <div class="bg-gray-50 p-6 rounded-lg">
+                    <div class="bg-gray-100 p-6 rounded-lg">
                         <h3 class="text-xl font-medium mb-3 text-gray-700">
                             Estructura
                         </h3>
@@ -39,7 +39,7 @@
                     <h2 class="text-2xl font-semibold mb-4 text-gray-800">
                         Respuesta de Error
                     </h2>
-                    <div class="bg-gray-50 p-6 rounded-lg">
+                    <div class="bg-gray-100 p-6 rounded-lg">
                         <h3 class="text-xl font-medium mb-3 text-gray-700">
                             Estructura
                         </h3>
@@ -63,7 +63,7 @@
                     <h2 class="text-2xl font-semibold mb-4 text-gray-800">
                         Códigos de Estado HTTP
                     </h2>
-                    <div class="bg-gray-50 p-6 rounded-lg">
+                    <div class="bg-gray-100 p-6 rounded-lg">
                         <ul class="space-y-4">
                             <li class="flex items-start">
                                 <span class="font-semibold text-green-600 mr-2"
