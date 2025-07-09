@@ -4,30 +4,10 @@
         class="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-slate-50 to-slate-200"
     >
         <!-- Header con navegación -->
-        <header class="absolute top-0 left-0 right-0 p-6">
-            <nav class="max-w-4xl mx-auto flex justify-between items-center">
-                <Link href="/" class="text-2xl font-bold text-gray-800">
-                    API DGII
-                </Link>
-                <div class="flex space-x-6">
-                    <Link
-                        href="/documentation"
-                        class="text-red-600 font-medium transition"
-                    >
-                        Documentación
-                    </Link>
-                    <Link
-                        href="/about"
-                        class="text-gray-600 hover:text-gray-800 font-medium transition"
-                    >
-                        About
-                    </Link>
-                </div>
-            </nav>
-        </header>
+        <Navigation />
 
         <!-- Contenido principal con sidebar -->
-        <div class="flex w-full max-w-7xl mt-16 mb-8">
+        <div class="flex w-full max-w-7xl mt-16 mb-8 mx-auto flex-1">
             <!-- Sidebar -->
             <div class="w-64 flex-shrink-0 mr-8">
                 <div class="bg-white rounded-2xl shadow-lg p-6 sticky top-8">
@@ -35,77 +15,146 @@
                         Contenido
                     </h3>
                     <nav class="space-y-2">
-                        <a
-                            href="#introduccion"
-                            class="block px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
-                        >
-                            Introducción
-                        </a>
-                        <a
-                            href="#por-que-desarrollada"
-                            class="block px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
-                        >
-                            ¿Por qué fue desarrollada?
-                        </a>
-                        <a
-                            href="#caracteristicas"
-                            class="block px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
-                        >
-                            Características Principales
-                        </a>
-                        <a
-                            href="#endpoints"
-                            class="block px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
-                        >
-                            Endpoints de la API
-                        </a>
-                        <a
-                            href="#busqueda-rnc"
-                            class="block px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition ml-3"
-                        >
-                            • Búsqueda RNC
-                        </a>
-                        <a
-                            href="#busqueda-nombre"
-                            class="block px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition ml-3"
-                        >
-                            • Búsqueda por Nombre
-                        </a>
+                        <div>
+                            <a
+                                href="#busqueda-rnc"
+                                :class="[
+                                    'block px-3 py-2 text-sm rounded-lg transition font-medium',
+                                    activeSection === 'busqueda-rnc'
+                                        ? 'text-blue-600 bg-blue-50'
+                                        : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50',
+                                ]"
+                            >
+                                Búsqueda Avanzada RNC
+                            </a>
+                            <!-- Sub-opciones de parámetros -->
+                            <div class="ml-4 mt-2 space-y-1">
+                                <a
+                                    href="#param-rnc"
+                                    :class="[
+                                        'block px-3 py-2 text-sm rounded transition',
+                                        activeSection === 'param-rnc'
+                                            ? 'text-blue-600 bg-blue-50 font-medium'
+                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                    ]"
+                                >
+                                    • RNC
+                                </a>
+                                <a
+                                    href="#param-business-name"
+                                    :class="[
+                                        'block px-3 py-2 text-sm rounded transition',
+                                        activeSection === 'param-business-name'
+                                            ? 'text-blue-600 bg-blue-50 font-medium'
+                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                    ]"
+                                >
+                                    • Nombre Comercial
+                                </a>
+                                <a
+                                    href="#param-economic-activity"
+                                    :class="[
+                                        'block px-3 py-2 text-sm rounded transition',
+                                        activeSection ===
+                                        'param-economic-activity'
+                                            ? 'text-blue-600 bg-blue-50 font-medium'
+                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                    ]"
+                                >
+                                    • Actividad Económica
+                                </a>
+                                <a
+                                    href="#param-status"
+                                    :class="[
+                                        'block px-3 py-2 text-sm rounded transition',
+                                        activeSection === 'param-status'
+                                            ? 'text-blue-600 bg-blue-50 font-medium'
+                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                    ]"
+                                >
+                                    • Estado
+                                </a>
+                                <a
+                                    href="#param-payment-regime"
+                                    :class="[
+                                        'block px-3 py-2 text-sm rounded transition',
+                                        activeSection === 'param-payment-regime'
+                                            ? 'text-blue-600 bg-blue-50 font-medium'
+                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                    ]"
+                                >
+                                    • Régimen de Pago
+                                </a>
+                                <a
+                                    href="#param-start-date"
+                                    :class="[
+                                        'block px-3 py-2 text-sm rounded transition',
+                                        activeSection === 'param-start-date'
+                                            ? 'text-blue-600 bg-blue-50 font-medium'
+                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                    ]"
+                                >
+                                    • Fecha de Inicio
+                                </a>
+                            </div>
+                        </div>
                         <a
                             href="#tipos-respuestas"
-                            class="block px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
+                            :class="[
+                                'block px-3 py-2 text-sm rounded-lg transition font-medium',
+                                activeSection === 'tipos-respuestas'
+                                    ? 'text-blue-600 bg-blue-50'
+                                    : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50',
+                            ]"
                         >
                             Tipos de Respuestas
                         </a>
-                        <a
-                            href="#respuesta-exitosa"
-                            class="block px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition ml-3"
-                        >
-                            • Respuesta Exitosa
-                        </a>
-                        <a
-                            href="#respuesta-error"
-                            class="block px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition ml-3"
-                        >
-                            • Respuesta de Error
-                        </a>
-                        <a
-                            href="#codigos-estado"
-                            class="block px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition ml-3"
-                        >
-                            • Códigos de Estado
-                        </a>
+                        <!-- Sub-opciones de tipos de respuestas -->
+                        <div class="ml-4 mt-2 space-y-1">
+                            <a
+                                href="#respuesta-exitosa"
+                                :class="[
+                                    'block px-3 py-2 text-sm rounded transition',
+                                    activeSection === 'respuesta-exitosa'
+                                        ? 'text-blue-600 bg-blue-50 font-medium'
+                                        : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                ]"
+                            >
+                                • Respuesta Exitosa
+                            </a>
+                            <a
+                                href="#respuesta-error"
+                                :class="[
+                                    'block px-3 py-2 text-sm rounded transition',
+                                    activeSection === 'respuesta-error'
+                                        ? 'text-blue-600 bg-blue-50 font-medium'
+                                        : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                ]"
+                            >
+                                • Respuesta de Error
+                            </a>
+                            <a
+                                href="#codigos-estado"
+                                :class="[
+                                    'block px-3 py-2 text-sm rounded transition',
+                                    activeSection === 'codigos-estado'
+                                        ? 'text-blue-600 bg-blue-50 font-medium'
+                                        : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                ]"
+                            >
+                                • Códigos de Estado
+                            </a>
+                        </div>
                         <a
                             href="#ejemplos-integracion"
-                            class="block px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
+                            :class="[
+                                'block px-3 py-2 text-sm rounded-lg transition',
+                                activeSection === 'ejemplos-integracion'
+                                    ? 'text-blue-600 bg-blue-50 font-medium'
+                                    : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50',
+                            ]"
                         >
                             Ejemplos de Integración
-                        </a>
-                        <a
-                            href="#informacion-adicional"
-                            class="block px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
-                        >
-                            Información Adicional
                         </a>
                     </nav>
                 </div>
@@ -118,190 +167,426 @@
                         id="introduccion"
                         class="text-3xl font-bold mb-2 text-gray-900"
                     >
-                        Bienvenido a la Documentación de la API DGII
+                        Documentación de ConsultaRNC
                     </h1>
                     <p class="text-gray-500 mb-6">
-                        Esta aplicación provee una API moderna para consultar
-                        información tributaria y de RNC en República Dominicana.
+                        Guía completa para integrar y utilizar nuestra API de
+                        consulta tributaria.
                     </p>
 
-                    <!-- Por qué fue desarrollada -->
-                    <div id="por-que-desarrollada" class="mb-8 text-left">
-                        <h2 class="text-2xl font-semibold mb-4 text-gray-800">
-                            ¿Por qué fue desarrollada esta API?
-                        </h2>
-                        <div class="space-y-4 text-gray-700">
-                            <p>
-                                La API DGII nació de la necesidad de modernizar
-                                y simplificar el acceso a la información
-                                tributaria en República Dominicana.
-                                Tradicionalmente, consultar datos del RNC
-                                (Registro Nacional de Contribuyentes) requería
-                                procesos manuales, tiempos de espera prolongados
-                                y acceso limitado a la información actualizada.
-                            </p>
-                            <p>
-                                <strong
-                                    >Nuestros objetivos principales
-                                    incluyen:</strong
-                                >
-                            </p>
-                            <ul class="list-disc list-inside space-y-2 ml-4">
-                                <li>
-                                    <strong>Automatización:</strong> Eliminar
-                                    procesos manuales y reducir el tiempo de
-                                    consulta de información tributaria de horas
-                                    a segundos.
-                                </li>
-                                <li>
-                                    <strong>Accesibilidad:</strong> Proporcionar
-                                    acceso 24/7 a datos actualizados del RNC
-                                    para desarrolladores, empresas y sistemas
-                                    integrados.
-                                </li>
-                                <li>
-                                    <strong>Estandarización:</strong> Crear un
-                                    formato consistente y estructurado para la
-                                    información tributaria que facilite la
-                                    integración con diferentes sistemas.
-                                </li>
-                                <li>
-                                    <strong>Transparencia:</strong> Facilitar la
-                                    verificación de información tributaria de
-                                    manera rápida y confiable.
-                                </li>
-                                <li>
-                                    <strong>Innovación:</strong> Impulsar el
-                                    desarrollo de nuevas aplicaciones y
-                                    servicios que aprovechen los datos
-                                    tributarios de manera eficiente.
-                                </li>
-                            </ul>
-                            <p>
-                                Esta API representa un paso hacia la
-                                digitalización del sector tributario dominicano,
-                                ofreciendo herramientas modernas que benefician
-                                tanto al sector público como al privado,
-                                promoviendo la eficiencia y transparencia en los
-                                procesos relacionados con la información
-                                tributaria.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Características -->
-                    <div id="caracteristicas" class="mb-8 text-left">
-                        <h2 class="text-2xl font-semibold mb-4 text-gray-800">
-                            Características Principales
-                        </h2>
-                        <ul class="space-y-2">
-                            <li class="flex items-center gap-2 text-gray-700">
-                                <span>🔍</span> Búsqueda avanzada de RNC y
-                                contribuyentes
-                            </li>
-                            <li class="flex items-center gap-2 text-gray-700">
-                                <span>📄</span> Documentación clara y ejemplos
-                                de uso
-                            </li>
-                            <li class="flex items-center gap-2 text-gray-700">
-                                <span>⚡</span> Respuestas rápidas y eficientes
-                            </li>
-                            <li class="flex items-center gap-2 text-gray-700">
-                                <span>🚀</span> Integración sencilla con tus
-                                sistemas
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- ENDPOINTS -->
-                    <div id="endpoints" class="mb-12 text-left">
+                    <!-- Búsqueda Avanzada RNC -->
+                    <div id="busqueda-rnc" class="mb-12 text-left">
                         <h2 class="text-2xl font-semibold mb-6 text-gray-800">
-                            Endpoints de la API
+                            Búsqueda Avanzada RNC
                         </h2>
+                        <div class="bg-gray-100 p-6 rounded-lg">
+                            <h4 class="text-lg font-medium mb-3 text-gray-700">
+                                <span
+                                    class="bg-blue-100 text-blue-800 px-3 py-1 rounded-lg font-mono text-sm border border-blue-200"
+                                >
+                                    GET /api/rnc/search
+                                </span>
+                            </h4>
+                            <p class="text-gray-600 mb-4">
+                                Realiza búsquedas avanzadas de contribuyentes en
+                                el RNC.
+                            </p>
 
-                        <!-- Sección de Búsqueda RNC -->
-                        <div id="busqueda-rnc" class="mb-8">
-                            <h3
-                                class="text-xl font-semibold mb-4 text-gray-800"
-                            >
-                                Búsqueda de RNC
-                            </h3>
-                            <div class="bg-gray-50 p-6 rounded-lg">
-                                <h4
-                                    class="text-lg font-medium mb-3 text-gray-700"
+                            <h5 class="font-semibold mb-2 text-gray-700">
+                                Parámetros de consulta:
+                            </h5>
+                            <div class="space-y-4">
+                                <div
+                                    id="param-rnc"
+                                    class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200"
                                 >
-                                    GET /api/v1/rnc/{numero}
-                                </h4>
-                                <p class="text-gray-600 mb-4">
-                                    Consulta información de un RNC específico.
-                                </p>
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span
+                                            class="bg-blue-200 text-gray-800 px-2 py-1 rounded text-xs font-semibold"
+                                            >string</span
+                                        >
+                                        <code
+                                            class="text-gray-700 font-mono font-semibold"
+                                            >rnc</code
+                                        >
+                                    </div>
+                                    <p class="text-gray-600 text-sm mb-2">
+                                        Número de RNC específico del
+                                        contribuyente
+                                    </p>
+                                    <div
+                                        class="bg-gray-100 border border-gray-300 rounded p-2"
+                                    >
+                                        <code
+                                            class="text-gray-800 font-mono text-xs"
+                                            >GET
+                                            /api/rnc/search?rnc=123456789</code
+                                        >
+                                    </div>
+                                </div>
 
-                                <h5 class="font-semibold mb-2 text-gray-700">
-                                    Parámetros:
-                                </h5>
-                                <ul
-                                    class="list-disc list-inside mb-4 text-gray-600"
+                                <div
+                                    id="param-business-name"
+                                    class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200"
                                 >
-                                    <li>
-                                        numero: Número de RNC a consultar
-                                        (requerido)
-                                    </li>
-                                </ul>
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span
+                                            class="bg-blue-200 text-gray-800 px-2 py-1 rounded text-xs font-semibold"
+                                            >string</span
+                                        >
+                                        <code
+                                            class="text-gray-700 font-mono font-semibold"
+                                            >business_name</code
+                                        >
+                                    </div>
+                                    <p class="text-gray-600 text-sm mb-2">
+                                        Nombre o razón social de la empresa
+                                        (búsqueda parcial)
+                                    </p>
+                                    <div
+                                        class="bg-gray-100 border border-gray-300 rounded p-2"
+                                    >
+                                        <code
+                                            class="text-gray-800 font-mono text-xs"
+                                            >GET
+                                            /api/rnc/search?business_name=empresa</code
+                                        >
+                                    </div>
+                                </div>
 
-                                <h5 class="font-semibold mb-2 text-gray-700">
-                                    Ejemplo de uso:
-                                </h5>
-                                <pre
-                                    class="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm"
+                                <div
+                                    id="param-economic-activity"
+                                    class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200"
                                 >
-GET /api/v1/rnc/123456789</pre
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span
+                                            class="bg-blue-200 text-gray-800 px-2 py-1 rounded text-xs font-semibold"
+                                            >string</span
+                                        >
+                                        <code
+                                            class="text-gray-700 font-mono font-semibold"
+                                            >economic_activity</code
+                                        >
+                                    </div>
+                                    <p class="text-gray-600 text-sm mb-2">
+                                        Actividad económica del contribuyente
+                                        (búsqueda parcial)
+                                    </p>
+                                    <div
+                                        class="bg-gray-100 border border-gray-300 rounded p-2"
+                                    >
+                                        <code
+                                            class="text-gray-800 font-mono text-xs"
+                                            >GET
+                                            /api/rnc/search?economic_activity=comercio</code
+                                        >
+                                    </div>
+                                </div>
+
+                                <div
+                                    id="param-status"
+                                    class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200"
                                 >
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span
+                                            class="bg-blue-200 text-gray-800 px-2 py-1 rounded text-xs font-semibold"
+                                            >string</span
+                                        >
+                                        <code
+                                            class="text-gray-700 font-mono font-semibold"
+                                            >status</code
+                                        >
+                                    </div>
+                                    <p class="text-gray-600 text-sm mb-2">
+                                        Estado del contribuyente (ej: Activo,
+                                        Inactivo, Cancelado)
+                                    </p>
+                                    <div
+                                        class="bg-gray-100 border border-gray-300 rounded p-2"
+                                    >
+                                        <code
+                                            class="text-gray-800 font-mono text-xs"
+                                            >GET
+                                            /api/rnc/search?status=Activo</code
+                                        >
+                                    </div>
+                                </div>
+
+                                <div
+                                    id="param-payment-regime"
+                                    class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200"
+                                >
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span
+                                            class="bg-blue-200 text-gray-800 px-2 py-1 rounded text-xs font-semibold"
+                                            >string</span
+                                        >
+                                        <code
+                                            class="text-gray-700 font-mono font-semibold"
+                                            >payment_regime</code
+                                        >
+                                    </div>
+                                    <p class="text-gray-600 text-sm mb-2">
+                                        Régimen de pago (ej: General, Pequeño
+                                        Contribuyente)
+                                    </p>
+                                    <div
+                                        class="bg-gray-100 border border-gray-300 rounded p-2"
+                                    >
+                                        <code
+                                            class="text-gray-800 font-mono text-xs"
+                                            >GET
+                                            /api/rnc/search?payment_regime=General</code
+                                        >
+                                    </div>
+                                </div>
+
+                                <div
+                                    id="param-start-date"
+                                    class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200"
+                                >
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span
+                                            class="bg-blue-200 text-gray-800 px-2 py-1 rounded text-xs font-semibold"
+                                            >date</span
+                                        >
+                                        <code
+                                            class="text-gray-700 font-mono font-semibold"
+                                            >start_date_from</code
+                                        >
+                                    </div>
+                                    <p class="text-gray-600 text-sm mb-2">
+                                        Fecha de inicio de operaciones desde
+                                        (formato: YYYY-MM-DD)
+                                    </p>
+                                    <div
+                                        class="bg-gray-100 border border-gray-300 rounded p-2"
+                                    >
+                                        <code
+                                            class="text-gray-800 font-mono text-xs"
+                                            >GET
+                                            /api/rnc/search?start_date_from=2020-01-01</code
+                                        >
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200"
+                                >
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span
+                                            class="bg-blue-200 text-gray-800 px-2 py-1 rounded text-xs font-semibold"
+                                            >date</span
+                                        >
+                                        <code
+                                            class="text-gray-700 font-mono font-semibold"
+                                            >start_date_to</code
+                                        >
+                                    </div>
+                                    <p class="text-gray-600 text-sm mb-2">
+                                        Fecha de inicio de operaciones hasta
+                                        (formato: YYYY-MM-DD)
+                                    </p>
+                                    <div
+                                        class="bg-gray-100 border border-gray-300 rounded p-2"
+                                    >
+                                        <code
+                                            class="text-gray-800 font-mono text-xs"
+                                            >GET
+                                            /api/rnc/search?start_date_to=2024-12-31</code
+                                        >
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Sección de Búsqueda por Nombre -->
-                        <div id="busqueda-nombre" class="mb-8">
-                            <h3
-                                class="text-xl font-semibold mb-4 text-gray-800"
-                            >
-                                Búsqueda por Nombre
-                            </h3>
-                            <div class="bg-gray-50 p-6 rounded-lg">
-                                <h4
-                                    class="text-lg font-medium mb-3 text-gray-700"
+                            <h5 class="font-semibold mb-2 mt-6 text-gray-700">
+                                Ejemplos de uso:
+                            </h5>
+                            <div class="space-y-2">
+                                <div
+                                    class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
                                 >
-                                    GET /api/v1/search
-                                </h4>
-                                <p class="text-gray-600 mb-4">
-                                    Busca contribuyentes por nombre o razón
-                                    social.
-                                </p>
+                                    <h6
+                                        class="text-sm font-medium text-gray-700 mb-2"
+                                    >
+                                        Búsqueda de empresas por nombre
+                                    </h6>
+                                    <code
+                                        class="text-zinc-900 font-mono text-sm"
+                                    >
+                                        GET /api/rnc/search?<span
+                                            class="font-semibold"
+                                            >business_name</span
+                                        >=<span
+                                            class="text-red-600 font-semibold"
+                                            >empresa</span
+                                        >
+                                    </code>
+                                </div>
+                                <div
+                                    class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
+                                >
+                                    <h6
+                                        class="text-sm font-medium text-gray-700 mb-2"
+                                    >
+                                        Búsqueda de contribuyente por RNC
+                                    </h6>
+                                    <code
+                                        class="text-zinc-900 font-mono text-sm"
+                                    >
+                                        GET /api/rnc/search?<span
+                                            class="font-semibold"
+                                            >rnc</span
+                                        >=<span
+                                            class="text-red-600 font-semibold"
+                                            >123456789</span
+                                        >
+                                    </code>
+                                </div>
+                                <div
+                                    class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
+                                >
+                                    <h6
+                                        class="text-sm font-medium text-gray-700 mb-2"
+                                    >
+                                        Búsqueda por actividad económica
+                                    </h6>
+                                    <code
+                                        class="text-zinc-900 font-mono text-sm"
+                                    >
+                                        GET /api/rnc/search?<span
+                                            class="font-semibold"
+                                            >economic_activity</span
+                                        >=<span
+                                            class="text-red-600 font-semibold"
+                                            >comercio</span
+                                        >
+                                    </code>
+                                </div>
+                                <div
+                                    class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
+                                >
+                                    <h6
+                                        class="text-sm font-medium text-gray-700 mb-2"
+                                    >
+                                        Búsqueda con múltiples filtros
+                                    </h6>
+                                    <code
+                                        class="text-zinc-900 font-mono text-sm"
+                                    >
+                                        GET /api/rnc/search?<span
+                                            class="font-semibold"
+                                            >status</span
+                                        >=<span
+                                            class="text-red-600 font-semibold"
+                                            >Activo</span
+                                        >&<span class="font-semibold"
+                                            >payment_regime</span
+                                        >=<span
+                                            class="text-red-600 font-semibold"
+                                            >General</span
+                                        >
+                                    </code>
+                                </div>
+                            </div>
 
-                                <h5 class="font-semibold mb-2 text-gray-700">
-                                    Parámetros de consulta:
-                                </h5>
-                                <ul
-                                    class="list-disc list-inside mb-4 text-gray-600"
+                            <h5 class="font-semibold mb-2 text-gray-700 mt-6">
+                                Ejemplos de combinaciones:
+                            </h5>
+                            <div class="space-y-2">
+                                <div
+                                    class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
                                 >
-                                    <li>q: Término de búsqueda (requerido)</li>
-                                    <li>
-                                        page: Número de página (opcional,
-                                        default: 1)
-                                    </li>
-                                    <li>
-                                        per_page: Resultados por página
-                                        (opcional, default: 10)
-                                    </li>
-                                </ul>
-
-                                <h5 class="font-semibold mb-2 text-gray-700">
-                                    Ejemplo de uso:
-                                </h5>
-                                <pre
-                                    class="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm"
+                                    <h6
+                                        class="text-sm font-medium text-gray-700 mb-2"
+                                    >
+                                        Búsqueda de empresas activas por nombre
+                                    </h6>
+                                    <code
+                                        class="text-zinc-900 font-mono text-sm"
+                                    >
+                                        GET /api/rnc/search?<span
+                                            class="font-semibold"
+                                            >business_name</span
+                                        >=<span
+                                            class="text-red-600 font-semibold"
+                                            >empresa</span
+                                        >&<span class="font-semibold"
+                                            >status</span
+                                        >=<span
+                                            class="text-red-600 font-semibold"
+                                            >Activo</span
+                                        >
+                                    </code>
+                                    <p class="text-gray-600 text-xs mt-1">
+                                        Buscar empresas activas con "empresa" en
+                                        el nombre
+                                    </p>
+                                </div>
+                                <div
+                                    class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
                                 >
-GET /api/v1/search?q=empresa&page=1&per_page=20</pre
+                                    <h6
+                                        class="text-sm font-medium text-gray-700 mb-2"
+                                    >
+                                        Búsqueda de comercios con régimen
+                                        general
+                                    </h6>
+                                    <code
+                                        class="text-zinc-900 font-mono text-sm"
+                                    >
+                                        GET /api/rnc/search?<span
+                                            class="font-semibold"
+                                            >economic_activity</span
+                                        >=<span
+                                            class="text-red-600 font-semibold"
+                                            >comercio</span
+                                        >&<span class="font-semibold"
+                                            >payment_regime</span
+                                        >=<span
+                                            class="text-red-600 font-semibold"
+                                            >General</span
+                                        >
+                                    </code>
+                                    <p class="text-gray-600 text-xs mt-1">
+                                        Buscar comercios con régimen general
+                                    </p>
+                                </div>
+                                <div
+                                    class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
                                 >
+                                    <h6
+                                        class="text-sm font-medium text-gray-700 mb-2"
+                                    >
+                                        Búsqueda de contribuyentes activos por
+                                        rango de fechas
+                                    </h6>
+                                    <code
+                                        class="text-zinc-900 font-mono text-sm"
+                                    >
+                                        GET /api/rnc/search?<span
+                                            class="font-semibold"
+                                            >start_date_from</span
+                                        >=<span
+                                            class="text-red-600 font-semibold"
+                                            >2020-01-01</span
+                                        >&<span class="font-semibold"
+                                            >start_date_to</span
+                                        >=<span
+                                            class="text-red-600 font-semibold"
+                                            >2024-12-31</span
+                                        >&<span class="font-semibold"
+                                            >status</span
+                                        >=<span
+                                            class="text-red-600 font-semibold"
+                                            >Activo</span
+                                        >
+                                    </code>
+                                    <p class="text-gray-600 text-xs mt-1">
+                                        Buscar contribuyentes activos
+                                        registrados entre 2020 y 2024
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -319,7 +604,7 @@ GET /api/v1/search?q=empresa&page=1&per_page=20</pre
                             >
                                 Respuesta Exitosa
                             </h3>
-                            <div class="bg-gray-50 p-6 rounded-lg">
+                            <div class="bg-gray-100 p-6 rounded-lg">
                                 <h4
                                     class="text-lg font-medium mb-3 text-gray-700"
                                 >
@@ -350,7 +635,7 @@ GET /api/v1/search?q=empresa&page=1&per_page=20</pre
                             >
                                 Respuesta de Error
                             </h3>
-                            <div class="bg-gray-50 p-6 rounded-lg">
+                            <div class="bg-gray-100 p-6 rounded-lg">
                                 <h4
                                     class="text-lg font-medium mb-3 text-gray-700"
                                 >
@@ -378,7 +663,7 @@ GET /api/v1/search?q=empresa&page=1&per_page=20</pre
                             >
                                 Códigos de Estado HTTP
                             </h3>
-                            <div class="bg-gray-50 p-6 rounded-lg">
+                            <div class="bg-gray-100 p-6 rounded-lg">
                                 <ul class="space-y-4">
                                     <li class="flex items-start">
                                         <span
@@ -429,35 +714,177 @@ GET /api/v1/search?q=empresa&page=1&per_page=20</pre
                         <h2 class="text-2xl font-semibold mb-4 text-gray-800">
                             Ejemplos de Integración
                         </h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="space-y-6">
+                            <div class="bg-gray-100 p-6 rounded-lg">
                                 <h3 class="font-semibold text-gray-700 mb-3">
-                                    JavaScript (Fetch)
+                                    JavaScript (Fetch) - Búsqueda
                                 </h3>
-                                <pre
+                                <div
                                     class="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm"
                                 >
-fetch('/api/v1/rnc/123456789')
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error(error));</pre
-                                >
+                                    <div class="mb-2">
+                                        <span
+                                            class="text-green-400 font-semibold"
+                                            >fetch</span
+                                        >
+                                        <span class="text-yellow-400">(</span>
+                                        <span class="text-blue-300 font-mono"
+                                            >'<span class="text-blue-200"
+                                                >https://consultarnc.com.do/api/rnc/search?<span
+                                                    class="text-blue-400 font-semibold"
+                                                    >business_name</span
+                                                >=<span class="text-blue-300"
+                                                    >empresa</span
+                                                ></span
+                                            >'</span
+                                        >
+                                        <span class="text-yellow-400">)</span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <span class="text-purple-400"
+                                            >.then</span
+                                        >
+                                        <span class="text-yellow-400">(</span>
+                                        <span class="text-blue-300"
+                                            >response</span
+                                        >
+                                        <span class="text-yellow-400"> =></span>
+                                        <span class="text-blue-300">
+                                            response</span
+                                        >
+                                        <span class="text-yellow-400">.</span>
+                                        <span class="text-purple-400"
+                                            >json</span
+                                        >
+                                        <span class="text-yellow-400">())</span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <span class="text-purple-400"
+                                            >.then</span
+                                        >
+                                        <span class="text-yellow-400">(</span>
+                                        <span class="text-blue-300">data</span>
+                                        <span class="text-yellow-400"> =></span>
+                                        <span class="text-purple-400">
+                                            console</span
+                                        >
+                                        <span class="text-yellow-400">.</span>
+                                        <span class="text-purple-400">log</span>
+                                        <span class="text-yellow-400">(</span>
+                                        <span class="text-blue-300">data</span>
+                                        <span class="text-yellow-400">))</span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <span class="text-purple-400"
+                                            >.catch</span
+                                        >
+                                        <span class="text-yellow-400">(</span>
+                                        <span class="text-blue-300">error</span>
+                                        <span class="text-yellow-400"> =></span>
+                                        <span class="text-purple-400">
+                                            console</span
+                                        >
+                                        <span class="text-yellow-400">.</span>
+                                        <span class="text-red-400">error</span>
+                                        <span class="text-yellow-400">(</span>
+                                        <span class="text-blue-300">error</span>
+                                        <span class="text-yellow-400">));</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="bg-gray-50 p-6 rounded-lg">
+                            <div class="bg-gray-100 p-6 rounded-lg">
                                 <h3 class="font-semibold text-gray-700 mb-3">
-                                    PHP (cURL)
+                                    PHP (cURL) - Búsqueda
                                 </h3>
-                                <pre
+                                <div
                                     class="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm"
                                 >
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, 
-    'https://api.dgii.com/api/v1/rnc/123456789');
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-$response = curl_exec($ch);
-curl_close($ch);
-$data = json_decode($response, true);</pre
-                                >
+                                    <div class="mb-2">
+                                        <span class="text-purple-400">$ch</span>
+                                        <span class="text-yellow-400"> =</span>
+                                        <span class="text-green-400">
+                                            curl_init</span
+                                        >
+                                        <span class="text-yellow-400">();</span>
+                                    </div>
+                                    <div class="mb-2">
+                                        <span class="text-green-400"
+                                            >curl_setopt</span
+                                        >
+                                        <span class="text-yellow-400">(</span>
+                                        <span class="text-purple-400">$ch</span>
+                                        <span class="text-yellow-400">,</span>
+                                        <span class="text-blue-300">
+                                            CURLOPT_URL</span
+                                        >
+                                        <span class="text-yellow-400">,</span>
+                                    </div>
+                                    <div class="ml-4 mb-2">
+                                        <span class="text-blue-200 font-mono"
+                                            >'https://consultarnc.com.do/api/rnc/search?<span
+                                                class="text-blue-400 font-semibold"
+                                                >rnc</span
+                                            >=<span class="text-blue-300"
+                                                >123456789</span
+                                            >'</span
+                                        >
+                                        <span class="text-yellow-400">);</span>
+                                    </div>
+                                    <div class="mb-2">
+                                        <span class="text-green-400"
+                                            >curl_setopt</span
+                                        >
+                                        <span class="text-yellow-400">(</span>
+                                        <span class="text-purple-400">$ch</span>
+                                        <span class="text-yellow-400">,</span>
+                                        <span class="text-blue-300">
+                                            CURLOPT_RETURNTRANSFER</span
+                                        >
+                                        <span class="text-yellow-400">,</span>
+                                        <span class="text-green-400">
+                                            true</span
+                                        >
+                                        <span class="text-yellow-400">);</span>
+                                    </div>
+                                    <div class="mb-2">
+                                        <span class="text-purple-400"
+                                            >$response</span
+                                        >
+                                        <span class="text-yellow-400"> =</span>
+                                        <span class="text-green-400">
+                                            curl_exec</span
+                                        >
+                                        <span class="text-yellow-400">(</span>
+                                        <span class="text-purple-400">$ch</span>
+                                        <span class="text-yellow-400">);</span>
+                                    </div>
+                                    <div class="mb-2">
+                                        <span class="text-green-400"
+                                            >curl_close</span
+                                        >
+                                        <span class="text-yellow-400">(</span>
+                                        <span class="text-purple-400">$ch</span>
+                                        <span class="text-yellow-400">);</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-purple-400"
+                                            >$data</span
+                                        >
+                                        <span class="text-yellow-400"> =</span>
+                                        <span class="text-green-400">
+                                            json_decode</span
+                                        >
+                                        <span class="text-yellow-400">(</span>
+                                        <span class="text-purple-400"
+                                            >$response</span
+                                        >
+                                        <span class="text-yellow-400">,</span>
+                                        <span class="text-green-400">
+                                            true</span
+                                        >
+                                        <span class="text-yellow-400">);</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -497,12 +924,107 @@ $data = json_decode($response, true);</pre
                 </div>
             </div>
         </div>
-        <footer class="mt-8 text-gray-400 text-sm">
-            Proyecto open source &copy; 2024 - Desarrollado por tu equipo
-        </footer>
+        <Footer />
     </div>
 </template>
 
 <script setup>
-import { Head, Link } from "@inertiajs/vue3";
+import Footer from "@/Components/Footer.vue";
+import Navigation from "@/Components/Navigation.vue";
+import { Head } from "@inertiajs/vue3";
+import { onMounted, onUnmounted, ref } from "vue";
+
+const activeSection = ref("busqueda-rnc");
+
+const sections = [
+    "busqueda-rnc",
+    "param-rnc",
+    "param-business-name",
+    "param-economic-activity",
+    "param-status",
+    "param-payment-regime",
+    "param-start-date",
+    "tipos-respuestas",
+    "respuesta-exitosa",
+    "respuesta-error",
+    "codigos-estado",
+    "ejemplos-integracion",
+    "informacion-adicional",
+];
+
+const updateActiveSection = () => {
+    const scrollPosition = window.scrollY + 50; // Offset for header
+
+    // Check parameter subsections first (they have priority when within their bounds)
+    const paramSections = sections.filter((section) =>
+        section.startsWith("param-")
+    );
+    for (let i = paramSections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(paramSections[i]);
+        if (section) {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+
+            if (
+                scrollPosition >= sectionTop &&
+                scrollPosition < sectionTop + sectionHeight
+            ) {
+                activeSection.value = paramSections[i];
+                return;
+            }
+        }
+    }
+
+    // Check response type subsections
+    const responseSections = [
+        "respuesta-exitosa",
+        "respuesta-error",
+        "codigos-estado",
+    ];
+    for (let i = responseSections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(responseSections[i]);
+        if (section) {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+
+            if (
+                scrollPosition >= sectionTop &&
+                scrollPosition < sectionTop + sectionHeight
+            ) {
+                activeSection.value = responseSections[i];
+                return;
+            }
+        }
+    }
+
+    // If no parameter or response section is active, check main sections
+    const mainSections = sections.filter(
+        (section) =>
+            !section.startsWith("param-") && !responseSections.includes(section)
+    );
+    for (let i = mainSections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(mainSections[i]);
+        if (section) {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+
+            if (
+                scrollPosition >= sectionTop &&
+                scrollPosition < sectionTop + sectionHeight
+            ) {
+                activeSection.value = mainSections[i];
+                break;
+            }
+        }
+    }
+};
+
+onMounted(() => {
+    window.addEventListener("scroll", updateActiveSection);
+    updateActiveSection(); // Initial check
+});
+
+onUnmounted(() => {
+    window.removeEventListener("scroll", updateActiveSection);
+});
 </script>

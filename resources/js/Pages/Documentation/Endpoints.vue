@@ -12,28 +12,28 @@
                     <h2 class="text-2xl font-semibold mb-4 text-gray-800">
                         Búsqueda de RNC
                     </h2>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-xl font-medium mb-3 text-gray-700">
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <h4 class="text-lg font-medium mb-3 text-gray-700">
                             GET /api/v1/rnc/{numero}
-                        </h3>
+                        </h4>
                         <p class="text-gray-600 mb-4">
                             Consulta información de un RNC específico.
                         </p>
 
-                        <h4 class="font-semibold mb-2 text-gray-700">
+                        <h5 class="font-semibold mb-2 text-gray-700">
                             Parámetros:
-                        </h4>
+                        </h5>
                         <ul class="list-disc list-inside mb-4 text-gray-600">
                             <li>
                                 numero: Número de RNC a consultar (requerido)
                             </li>
                         </ul>
 
-                        <h4 class="font-semibold mb-2 text-gray-700">
+                        <h5 class="font-semibold mb-2 text-gray-700">
                             Ejemplo de uso:
-                        </h4>
+                        </h5>
                         <pre
-                            class="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto"
+                            class="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm"
                         >
 GET /api/v1/rnc/123456789</pre
                         >
@@ -45,7 +45,7 @@ GET /api/v1/rnc/123456789</pre
                     <h2 class="text-2xl font-semibold mb-4 text-gray-800">
                         Búsqueda por Nombre
                     </h2>
-                    <div class="bg-gray-50 p-6 rounded-lg">
+                    <div class="bg-gray-100 p-6 rounded-lg">
                         <h3 class="text-xl font-medium mb-3 text-gray-700">
                             GET /api/v1/search
                         </h3>

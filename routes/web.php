@@ -31,6 +31,10 @@ Route::prefix('documentation')->group(function () {
   Route::get('/responses', function () {
     return Inertia::render('Documentation/Responses');
   })->name('documentation.responses');
+
+  Route::get('/about', function () {
+    return Inertia::render('About');
+  })->name('about');
 });
 
 Route::get('/dashboard', function () {
@@ -44,4 +48,9 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+
+Route::get('/rnc/import', function () {
+  return Inertia::render('RncImport');
+})->name('rnc.import');
+
 Route::post('/rnc/import', [RncImportController::class, 'importForm'])->name('rnc.import.form');
