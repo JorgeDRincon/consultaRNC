@@ -14,7 +14,6 @@ Route::get('/rnc/search', [RncController::class, 'advancedSearch']);
 
 Route::post('/rnc/import', [RncImportController::class, 'import']);
 
-
 Route::get('/rnc-import/progress', function () {
   $progressFile = storage_path('app/import_progress.json');
   if (file_exists($progressFile)) {
