@@ -37,7 +37,7 @@ class ProcessRncData extends Command
      * Set to 0 or null to process all records.
      * @var int|null
      */
-    protected $recordLimit = 1000; // <-- CAMBIO AQUÍ: Establecido a 1000 para pruebas.
+    protected $recordLimit = null; // <-- CAMBIO AQUÍ: Establecido a 1000 para pruebas.
 
     // Define los formatos de fecha posibles para intentar parsear
     protected $dateFormatAttempts = [
