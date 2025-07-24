@@ -10,7 +10,7 @@
         <div class="flex w-full max-w-7xl mt-16 mb-8 mx-auto flex-1">
             <div class="flex-1">
                 <div
-                    class="bg-white rounded-2xl shadow-lg px-10 py-8 text-center relative overflow-hidden"
+                    class="bg-white rounded-2xl shadow-lg p-10 text-center relative overflow-hidden"
                 >
                     <!-- Background decoration -->
                     <div
@@ -38,7 +38,7 @@
 
                     <!-- Hero section -->
                     <div class="mb-12">
-                        <div class="bg-blue-700 text-white p-8 rounded-xl">
+                        <div class="bg-blue-700 text-white p-8 rounded-xl mb-8">
                             <h2 class="text-2xl font-semibold mb-4">
                                 ¿Qué puedes hacer con nuestra API?
                             </h2>
