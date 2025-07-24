@@ -15,12 +15,12 @@ return new class extends Migration
       $table->id();
       $table->string('rnc')->unique();
       $table->string('business_name');
-      $table->string('economic_activity')->nullable();
+      $table->text('economic_activity')->nullable();
       $table->date('start_date')->nullable();
       $table->string('status')->nullable();
       $table->string('payment_regime')->nullable();
       $table->timestamps();
-    });
+    }); 
   }
 
   /**
