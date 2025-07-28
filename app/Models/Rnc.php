@@ -255,25 +255,44 @@ class Rnc extends Model
     if (!empty($params['rnc'])) {
       $query->where('rnc', $params['rnc']);
     }
+
     if (!empty($params['business_name'])) {
       $query->where('business_name', 'LIKE', "%{$params['business_name']}%");
     }
+
     if (!empty($params['economic_activity'])) {
       $query->where('economic_activity', 'LIKE', "%{$params['economic_activity']}%");
     }
+
     if (!empty($params['status'])) {
       $query->where('status', $params['status']);
     }
+
     if (!empty($params['payment_regime'])) {
       $query->where('payment_regime', $params['payment_regime']);
     }
-    if (!empty($params['start_date_from']) && !empty($params['start_date_to'])) {
-      $query->whereBetween('start_date', [$params['start_date_from'], $params['start_date_to']]);
-    } elseif (!empty($params['start_date_from'])) {
-      $query->where('start_date', '>=', $params['start_date_from']);
-    } elseif (!empty($params['start_date_to'])) {
-      $query->where('start_date', '<=', $params['start_date_to']);
+
+    if (!empty($params['start_date'])) { 
+      if (is_string($params['start_date'])) {
+        $query->where('start_date', $params['start_date']);
+      } elseif (is_array($params['start_date']) && count($params['start_date']) === 2) {
+        if (!empty($params['start_date'][0]) && !empty($params['start_date'][1])) {
+          $query->whereBetween('start_date', [$params['start_date'][0], $params['start_date'][1]]);
+        } elseif (!empty($params['start_date'][0])) {
+          $query->where('start_date', '>=', $params['start_date'][0]);
+        } elseif (!empty($params['start_date'][1])) {
+          $query->where('start_date', '<=', $params['start_date'][1]);
+        }
+      }
     }
+
+    // if (!empty($params['start_date_from']) && !empty($params['start_date_to'])) {
+    //   $query->whereBetween('start_date', [$params['start_date_from'], $params['start_date_to']]);
+    // } elseif (!empty($params['start_date_from'])) {
+    //   $query->where('start_date', '>=', $params['start_date_from']);
+    // } elseif (!empty($params['start_date_to'])) {
+    //   $query->where('start_date', '<=', $params['start_date_to']);
+    // }
 
     // Determina si hay algún filtro aplicado
     $hasFilter = !empty(array_filter([
@@ -282,8 +301,9 @@ class Rnc extends Model
       $params['economic_activity'] ?? null,
       $params['status'] ?? null,
       $params['payment_regime'] ?? null,
-      $params['start_date_from'] ?? null,
-      $params['start_date_to'] ?? null,
+      $params['start_date'] ?? null,
+      // $params['start_date_from'] ?? null,
+      // $params['start_date_to'] ?? null,
     ], function ($v) {
       return $v !== null && $v !== '';
     }));
