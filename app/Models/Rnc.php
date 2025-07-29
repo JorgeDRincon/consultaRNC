@@ -252,7 +252,7 @@ class Rnc extends Model
   {
     $query = self::query();
 
-    if (!empty($params['rnc'])) {
+    if (isset($params['rnc']) && $params['rnc'] !== '') {
       $query->where('rnc', $params['rnc']);
     }
     if (!empty($params['business_name'])) {
@@ -277,7 +277,7 @@ class Rnc extends Model
 
     // Determina si hay algún filtro aplicado
     $hasFilter = !empty(array_filter([
-      $params['rnc'] ?? null,
+      isset($params['rnc']) && $params['rnc'] !== '' ? $params['rnc'] : null,
       $params['business_name'] ?? null,
       $params['economic_activity'] ?? null,
       $params['status'] ?? null,

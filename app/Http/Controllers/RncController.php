@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Log;
 
 class RncController extends Controller
 {
@@ -36,6 +37,14 @@ class RncController extends Controller
     $hasFilter = $result['hasFilter'];
 
     $results = $query->limit(30)->get();
+    $count = $results->count();
+
+    if ($count === 0) {
+      return response()->json([
+        'message' => 'No records found.',
+        'count' => $count,
+      ], 404);
+    }
 
     return response()->json([
       'message' => $hasFilter ? 'Advanced search completed.' : 'No filters provided. Showing first 50 records.',

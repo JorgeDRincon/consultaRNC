@@ -179,414 +179,235 @@
                         <h2 class="text-2xl font-semibold mb-6 text-gray-800">
                             Búsqueda Avanzada RNC
                         </h2>
-                        <div class="bg-gray-100 p-6 rounded-lg">
-                            <h4 class="text-lg font-medium mb-3 text-gray-700">
-                                <span
-                                    class="bg-blue-100 text-blue-800 px-3 py-1 rounded-lg font-mono text-sm border border-blue-200"
-                                >
-                                    GET /api/rnc/search
-                                </span>
-                            </h4>
-                            <p class="text-gray-600 mb-4">
-                                Realiza búsquedas avanzadas de contribuyentes en
-                                el RNC.
-                            </p>
+                        <!-- Leyenda de Badges con FeatureCard -->
+                        <div class="grid md:grid-cols-2 gap-4 mb-6">
+                            <FeatureCard
+                                title="Exacta"
+                                description="Coincidencia 100&nbsp;% del valor enviado. El parámetro debe coincidir exactamente con el valor almacenado en la base de datos, sin mayúsculas/minúsculas extra ni espacios."
+                                fa-icon="fa-solid fa-crosshairs"
+                                color="red"
+                            />
+                            <FeatureCard
+                                title="Parcial"
+                                description="Búsqueda flexible (LIKE) que permite coincidencias parciales. El valor ingresado puede encontrarse en cualquier parte del texto almacenado, ideal para búsquedas por nombre o actividad."
+                                fa-icon="fa-solid fa-magnifying-glass"
+                                color="blue"
+                            />
+                        </div>
+                        <div class="space-y-4">
+                            <ParamCard
+                                param-id="param-rnc"
+                                type="string"
+                                name="rnc"
+                                description="Número de RNC específico del contribuyente"
+                                example="/api/rnc/search?rnc=123456789"
+                                :is-exact="true"
+                            />
 
-                            <h5 class="font-semibold mb-2 text-gray-700">
-                                Parámetros de consulta:
-                            </h5>
-                            <div class="space-y-4">
-                                <div
-                                    id="param-rnc"
-                                    class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200"
-                                >
-                                    <div class="flex items-center gap-2 mb-2">
-                                        <span
-                                            class="bg-blue-200 text-gray-800 px-2 py-1 rounded text-xs font-semibold"
-                                            >string</span
-                                        >
-                                        <code
-                                            class="text-gray-700 font-mono font-semibold"
-                                            >rnc</code
-                                        >
-                                    </div>
-                                    <p class="text-gray-600 text-sm mb-2">
-                                        Número de RNC específico del
-                                        contribuyente
-                                    </p>
-                                    <div
-                                        class="bg-gray-100 border border-gray-300 rounded p-2"
-                                    >
-                                        <code
-                                            class="text-gray-800 font-mono text-xs"
-                                            >GET
-                                            /api/rnc/search?rnc=123456789</code
-                                        >
-                                    </div>
-                                </div>
+                            <ParamCard
+                                param-id="param-business-name"
+                                type="string"
+                                name="business_name"
+                                description="Nombre o razón social de la empresa (búsqueda parcial)"
+                                example="/api/rnc/search?business_name=empresa"
+                                :is-exact="false"
+                            />
 
-                                <div
-                                    id="param-business-name"
-                                    class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200"
-                                >
-                                    <div class="flex items-center gap-2 mb-2">
-                                        <span
-                                            class="bg-blue-200 text-gray-800 px-2 py-1 rounded text-xs font-semibold"
-                                            >string</span
-                                        >
-                                        <code
-                                            class="text-gray-700 font-mono font-semibold"
-                                            >business_name</code
-                                        >
-                                    </div>
-                                    <p class="text-gray-600 text-sm mb-2">
-                                        Nombre o razón social de la empresa
-                                        (búsqueda parcial)
-                                    </p>
-                                    <div
-                                        class="bg-gray-100 border border-gray-300 rounded p-2"
-                                    >
-                                        <code
-                                            class="text-gray-800 font-mono text-xs"
-                                            >GET
-                                            /api/rnc/search?business_name=empresa</code
-                                        >
-                                    </div>
-                                </div>
+                            <ParamCard
+                                param-id="param-economic-activity"
+                                type="string"
+                                name="economic_activity"
+                                description="Actividad económica del contribuyente (búsqueda parcial)"
+                                example="/api/rnc/search?economic_activity=comercio"
+                                :is-exact="false"
+                            />
 
-                                <div
-                                    id="param-economic-activity"
-                                    class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200"
-                                >
-                                    <div class="flex items-center gap-2 mb-2">
-                                        <span
-                                            class="bg-blue-200 text-gray-800 px-2 py-1 rounded text-xs font-semibold"
-                                            >string</span
-                                        >
-                                        <code
-                                            class="text-gray-700 font-mono font-semibold"
-                                            >economic_activity</code
-                                        >
-                                    </div>
-                                    <p class="text-gray-600 text-sm mb-2">
-                                        Actividad económica del contribuyente
-                                        (búsqueda parcial)
-                                    </p>
-                                    <div
-                                        class="bg-gray-100 border border-gray-300 rounded p-2"
-                                    >
-                                        <code
-                                            class="text-gray-800 font-mono text-xs"
-                                            >GET
-                                            /api/rnc/search?economic_activity=comercio</code
-                                        >
-                                    </div>
-                                </div>
+                            <ParamCard
+                                param-id="param-status"
+                                type="string"
+                                name="status"
+                                description="Estado del contribuyente (ej: Activo, Inactivo, Cancelado)"
+                                example="/api/rnc/search?status=Activo"
+                                :is-exact="true"
+                            />
 
-                                <div
-                                    id="param-status"
-                                    class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200"
-                                >
-                                    <div class="flex items-center gap-2 mb-2">
-                                        <span
-                                            class="bg-blue-200 text-gray-800 px-2 py-1 rounded text-xs font-semibold"
-                                            >string</span
-                                        >
-                                        <code
-                                            class="text-gray-700 font-mono font-semibold"
-                                            >status</code
-                                        >
-                                    </div>
-                                    <p class="text-gray-600 text-sm mb-2">
-                                        Estado del contribuyente (ej: Activo,
-                                        Inactivo, Cancelado)
-                                    </p>
-                                    <div
-                                        class="bg-gray-100 border border-gray-300 rounded p-2"
-                                    >
-                                        <code
-                                            class="text-gray-800 font-mono text-xs"
-                                            >GET
-                                            /api/rnc/search?status=Activo</code
-                                        >
-                                    </div>
-                                </div>
+                            <ParamCard
+                                param-id="param-payment-regime"
+                                type="string"
+                                name="payment_regime"
+                                description="Régimen de pago (ej: General, Pequeño Contribuyente)"
+                                example="/api/rnc/search?payment_regime=General"
+                                :is-exact="true"
+                            />
 
-                                <div
-                                    id="param-payment-regime"
-                                    class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200"
-                                >
-                                    <div class="flex items-center gap-2 mb-2">
-                                        <span
-                                            class="bg-blue-200 text-gray-800 px-2 py-1 rounded text-xs font-semibold"
-                                            >string</span
-                                        >
-                                        <code
-                                            class="text-gray-700 font-mono font-semibold"
-                                            >payment_regime</code
-                                        >
-                                    </div>
-                                    <p class="text-gray-600 text-sm mb-2">
-                                        Régimen de pago (ej: General, Pequeño
-                                        Contribuyente)
-                                    </p>
-                                    <div
-                                        class="bg-gray-100 border border-gray-300 rounded p-2"
-                                    >
-                                        <code
-                                            class="text-gray-800 font-mono text-xs"
-                                            >GET
-                                            /api/rnc/search?payment_regime=General</code
-                                        >
-                                    </div>
-                                </div>
+                            <ParamCard
+                                param-id="param-start-date"
+                                type="date"
+                                name="start_date_from"
+                                description="Fecha de inicio de operaciones desde (formato: YYYY-MM-DD)"
+                                example="/api/rnc/search?start_date_from=2020-01-01"
+                                :is-exact="true"
+                            />
+                        </div>
 
-                                <div
-                                    id="param-start-date"
-                                    class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200"
+                        <h5 class="font-semibold mb-2 mt-6 text-gray-700">
+                            Ejemplos de uso:
+                        </h5>
+                        <div class="space-y-2">
+                            <div
+                                class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
+                            >
+                                <h6
+                                    class="text-sm font-medium text-gray-700 mb-2"
                                 >
-                                    <div class="flex items-center gap-2 mb-2">
-                                        <span
-                                            class="bg-blue-200 text-gray-800 px-2 py-1 rounded text-xs font-semibold"
-                                            >date</span
-                                        >
-                                        <code
-                                            class="text-gray-700 font-mono font-semibold"
-                                            >start_date_from</code
-                                        >
-                                    </div>
-                                    <p class="text-gray-600 text-sm mb-2">
-                                        Fecha de inicio de operaciones desde
-                                        (formato: YYYY-MM-DD)
-                                    </p>
-                                    <div
-                                        class="bg-gray-100 border border-gray-300 rounded p-2"
+                                    Búsqueda de empresas por nombre
+                                </h6>
+                                <code class="text-zinc-900 font-mono text-sm">
+                                    GET /api/rnc/search?<span
+                                        class="font-semibold"
+                                        >business_name</span
+                                    >=<span class="text-red-600 font-semibold"
+                                        >empresa</span
                                     >
-                                        <code
-                                            class="text-gray-800 font-mono text-xs"
-                                            >GET
-                                            /api/rnc/search?start_date_from=2020-01-01</code
-                                        >
-                                    </div>
-                                </div>
-
-                                <div
-                                    class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200"
-                                >
-                                    <div class="flex items-center gap-2 mb-2">
-                                        <span
-                                            class="bg-blue-200 text-gray-800 px-2 py-1 rounded text-xs font-semibold"
-                                            >date</span
-                                        >
-                                        <code
-                                            class="text-gray-700 font-mono font-semibold"
-                                            >start_date_to</code
-                                        >
-                                    </div>
-                                    <p class="text-gray-600 text-sm mb-2">
-                                        Fecha de inicio de operaciones hasta
-                                        (formato: YYYY-MM-DD)
-                                    </p>
-                                    <div
-                                        class="bg-gray-100 border border-gray-300 rounded p-2"
-                                    >
-                                        <code
-                                            class="text-gray-800 font-mono text-xs"
-                                            >GET
-                                            /api/rnc/search?start_date_to=2024-12-31</code
-                                        >
-                                    </div>
-                                </div>
+                                </code>
                             </div>
-
-                            <h5 class="font-semibold mb-2 mt-6 text-gray-700">
-                                Ejemplos de uso:
-                            </h5>
-                            <div class="space-y-2">
-                                <div
-                                    class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
+                            <div
+                                class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
+                            >
+                                <h6
+                                    class="text-sm font-medium text-gray-700 mb-2"
                                 >
-                                    <h6
-                                        class="text-sm font-medium text-gray-700 mb-2"
+                                    Búsqueda de contribuyente por RNC
+                                </h6>
+                                <code class="text-zinc-900 font-mono text-sm">
+                                    GET /api/rnc/search?<span
+                                        class="font-semibold"
+                                        >rnc</span
+                                    >=<span class="text-red-600 font-semibold"
+                                        >123456789</span
                                     >
-                                        Búsqueda de empresas por nombre
-                                    </h6>
-                                    <code
-                                        class="text-zinc-900 font-mono text-sm"
-                                    >
-                                        GET /api/rnc/search?<span
-                                            class="font-semibold"
-                                            >business_name</span
-                                        >=<span
-                                            class="text-red-600 font-semibold"
-                                            >empresa</span
-                                        >
-                                    </code>
-                                </div>
-                                <div
-                                    class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
-                                >
-                                    <h6
-                                        class="text-sm font-medium text-gray-700 mb-2"
-                                    >
-                                        Búsqueda de contribuyente por RNC
-                                    </h6>
-                                    <code
-                                        class="text-zinc-900 font-mono text-sm"
-                                    >
-                                        GET /api/rnc/search?<span
-                                            class="font-semibold"
-                                            >rnc</span
-                                        >=<span
-                                            class="text-red-600 font-semibold"
-                                            >123456789</span
-                                        >
-                                    </code>
-                                </div>
-                                <div
-                                    class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
-                                >
-                                    <h6
-                                        class="text-sm font-medium text-gray-700 mb-2"
-                                    >
-                                        Búsqueda por actividad económica
-                                    </h6>
-                                    <code
-                                        class="text-zinc-900 font-mono text-sm"
-                                    >
-                                        GET /api/rnc/search?<span
-                                            class="font-semibold"
-                                            >economic_activity</span
-                                        >=<span
-                                            class="text-red-600 font-semibold"
-                                            >comercio</span
-                                        >
-                                    </code>
-                                </div>
-                                <div
-                                    class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
-                                >
-                                    <h6
-                                        class="text-sm font-medium text-gray-700 mb-2"
-                                    >
-                                        Búsqueda con múltiples filtros
-                                    </h6>
-                                    <code
-                                        class="text-zinc-900 font-mono text-sm"
-                                    >
-                                        GET /api/rnc/search?<span
-                                            class="font-semibold"
-                                            >status</span
-                                        >=<span
-                                            class="text-red-600 font-semibold"
-                                            >Activo</span
-                                        >&<span class="font-semibold"
-                                            >payment_regime</span
-                                        >=<span
-                                            class="text-red-600 font-semibold"
-                                            >General</span
-                                        >
-                                    </code>
-                                </div>
+                                </code>
                             </div>
+                            <div
+                                class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
+                            >
+                                <h6
+                                    class="text-sm font-medium text-gray-700 mb-2"
+                                >
+                                    Búsqueda por actividad económica
+                                </h6>
+                                <code class="text-zinc-900 font-mono text-sm">
+                                    GET /api/rnc/search?<span
+                                        class="font-semibold"
+                                        >economic_activity</span
+                                    >=<span class="text-red-600 font-semibold"
+                                        >comercio</span
+                                    >
+                                </code>
+                            </div>
+                            <div
+                                class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
+                            >
+                                <h6
+                                    class="text-sm font-medium text-gray-700 mb-2"
+                                >
+                                    Búsqueda con múltiples filtros
+                                </h6>
+                                <code class="text-zinc-900 font-mono text-sm">
+                                    GET /api/rnc/search?<span
+                                        class="font-semibold"
+                                        >status</span
+                                    >=<span class="text-red-600 font-semibold"
+                                        >Activo</span
+                                    >&<span class="font-semibold"
+                                        >payment_regime</span
+                                    >=<span class="text-red-600 font-semibold"
+                                        >General</span
+                                    >
+                                </code>
+                            </div>
+                        </div>
 
-                            <h5 class="font-semibold mb-2 text-gray-700 mt-6">
-                                Ejemplos de combinaciones:
-                            </h5>
-                            <div class="space-y-2">
-                                <div
-                                    class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
+                        <h5 class="font-semibold mb-2 text-gray-700 mt-6">
+                            Ejemplos de combinaciones:
+                        </h5>
+                        <div class="space-y-2">
+                            <div
+                                class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
+                            >
+                                <h6
+                                    class="text-sm font-medium text-gray-700 mb-2"
                                 >
-                                    <h6
-                                        class="text-sm font-medium text-gray-700 mb-2"
+                                    Búsqueda de empresas activas por nombre
+                                </h6>
+                                <code class="text-zinc-900 font-mono text-sm">
+                                    GET /api/rnc/search?<span
+                                        class="font-semibold"
+                                        >business_name</span
+                                    >=<span class="text-red-600 font-semibold"
+                                        >empresa</span
+                                    >&<span class="font-semibold">status</span
+                                    >=<span class="text-red-600 font-semibold"
+                                        >Activo</span
                                     >
-                                        Búsqueda de empresas activas por nombre
-                                    </h6>
-                                    <code
-                                        class="text-zinc-900 font-mono text-sm"
-                                    >
-                                        GET /api/rnc/search?<span
-                                            class="font-semibold"
-                                            >business_name</span
-                                        >=<span
-                                            class="text-red-600 font-semibold"
-                                            >empresa</span
-                                        >&<span class="font-semibold"
-                                            >status</span
-                                        >=<span
-                                            class="text-red-600 font-semibold"
-                                            >Activo</span
-                                        >
-                                    </code>
-                                    <p class="text-gray-600 text-xs mt-1">
-                                        Buscar empresas activas con "empresa" en
-                                        el nombre
-                                    </p>
-                                </div>
-                                <div
-                                    class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
+                                </code>
+                                <p class="text-gray-600 text-xs mt-1">
+                                    Buscar empresas activas con "empresa" en el
+                                    nombre
+                                </p>
+                            </div>
+                            <div
+                                class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
+                            >
+                                <h6
+                                    class="text-sm font-medium text-gray-700 mb-2"
                                 >
-                                    <h6
-                                        class="text-sm font-medium text-gray-700 mb-2"
+                                    Búsqueda de comercios con régimen general
+                                </h6>
+                                <code class="text-zinc-900 font-mono text-sm">
+                                    GET /api/rnc/search?<span
+                                        class="font-semibold"
+                                        >economic_activity</span
+                                    >=<span class="text-red-600 font-semibold"
+                                        >comercio</span
+                                    >&<span class="font-semibold"
+                                        >payment_regime</span
+                                    >=<span class="text-red-600 font-semibold"
+                                        >General</span
                                     >
-                                        Búsqueda de comercios con régimen
-                                        general
-                                    </h6>
-                                    <code
-                                        class="text-zinc-900 font-mono text-sm"
-                                    >
-                                        GET /api/rnc/search?<span
-                                            class="font-semibold"
-                                            >economic_activity</span
-                                        >=<span
-                                            class="text-red-600 font-semibold"
-                                            >comercio</span
-                                        >&<span class="font-semibold"
-                                            >payment_regime</span
-                                        >=<span
-                                            class="text-red-600 font-semibold"
-                                            >General</span
-                                        >
-                                    </code>
-                                    <p class="text-gray-600 text-xs mt-1">
-                                        Buscar comercios con régimen general
-                                    </p>
-                                </div>
-                                <div
-                                    class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
+                                </code>
+                                <p class="text-gray-600 text-xs mt-1">
+                                    Buscar comercios con régimen general
+                                </p>
+                            </div>
+                            <div
+                                class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
+                            >
+                                <h6
+                                    class="text-sm font-medium text-gray-700 mb-2"
                                 >
-                                    <h6
-                                        class="text-sm font-medium text-gray-700 mb-2"
+                                    Búsqueda de contribuyentes activos por rango
+                                    de fechas
+                                </h6>
+                                <code class="text-zinc-900 font-mono text-sm">
+                                    GET /api/rnc/search?<span
+                                        class="font-semibold"
+                                        >start_date_from</span
+                                    >=<span class="text-red-600 font-semibold"
+                                        >2020-01-01</span
+                                    >&<span class="font-semibold"
+                                        >start_date_to</span
+                                    >=<span class="text-red-600 font-semibold"
+                                        >2024-12-31</span
+                                    >&<span class="font-semibold">status</span
+                                    >=<span class="text-red-600 font-semibold"
+                                        >Activo</span
                                     >
-                                        Búsqueda de contribuyentes activos por
-                                        rango de fechas
-                                    </h6>
-                                    <code
-                                        class="text-zinc-900 font-mono text-sm"
-                                    >
-                                        GET /api/rnc/search?<span
-                                            class="font-semibold"
-                                            >start_date_from</span
-                                        >=<span
-                                            class="text-red-600 font-semibold"
-                                            >2020-01-01</span
-                                        >&<span class="font-semibold"
-                                            >start_date_to</span
-                                        >=<span
-                                            class="text-red-600 font-semibold"
-                                            >2024-12-31</span
-                                        >&<span class="font-semibold"
-                                            >status</span
-                                        >=<span
-                                            class="text-red-600 font-semibold"
-                                            >Activo</span
-                                        >
-                                    </code>
-                                    <p class="text-gray-600 text-xs mt-1">
-                                        Buscar contribuyentes activos
-                                        registrados entre 2020 y 2024
-                                    </p>
-                                </div>
+                                </code>
+                                <p class="text-gray-600 text-xs mt-1">
+                                    Buscar contribuyentes activos registrados
+                                    entre 2020 y 2024
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -929,8 +750,10 @@
 </template>
 
 <script setup>
+import FeatureCard from "@/Components/FeatureCard.vue"; // Added FeatureCard import
 import Footer from "@/Components/Footer.vue";
 import Navigation from "@/Components/Navigation.vue";
+import ParamCard from "@/Components/ParamCard.vue";
 import { Head } from "@inertiajs/vue3";
 import { onMounted, onUnmounted, ref } from "vue";
 
