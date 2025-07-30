@@ -271,10 +271,10 @@
 
                             <ParamCard
                                 param-id="param-start-date"
-                                type="date"
-                                name="start_date_from"
-                                description="Fecha de inicio de operaciones desde (formato: YYYY-MM-DD)"
-                                example="/api/rnc/search?start_date_from=2020-01-01"
+                                type="date | array"
+                                name="start_date"
+                                description="Fecha de inicio de operaciones. Puedes enviar un único valor (YYYY-MM-DD) para coincidencia exacta o un arreglo de dos fechas \[desde, hasta\] para filtrar por rango."
+                                example="/api/rnc/search?start_date[]=2020-01-01&start_date[]=2024-12-31"
                                 :is-exact="true"
                             />
                         </div>
