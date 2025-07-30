@@ -110,44 +110,16 @@
                             Somos desarrolladores apasionados por la tecnología,
                             comprometidos con ofrecer soluciones innovadoras y
                             fáciles de implementar que generen un impacto
-                            positivo en la sociedad dominicana.
+                            positivo en la sociedad dominicana. Nos motiva la
+                            curiosidad y la búsqueda constante de aprendizaje,
+                            <b>
+                                transformando ideas en herramientas que
+                                simplifican la vida de las personas.</b
+                            >
+                            Creemos firmemente en el trabajo colaborativo y en
+                            el poder de la comunidad para impulsar la creación
+                            de software de calidad.
                         </p>
-
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <!-- Miembro 1 -->
-                            <a
-                                href="https://www.linkedin.com/in/jorgerincon-dev/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="block transition-transform duration-300 hover:scale-105 h-full"
-                            >
-                                <FeatureCard
-                                    title="Jorge D. Rincón"
-                                    subtitle="Full Stack Developer"
-                                    description="Desarrollador web apasionado con más de 3 años de experiencia, especializado en desarrollo Full-Stack. Ha colaborado con equipos internacionales, especialmente en España, mientras trabaja desde República Dominicana. Su experiencia incluye el desarrollo de aplicaciones web de alta calidad utilizando frameworks como Vue.js, Angular, Spring y Laravel para crear soluciones eficientes y escalables."
-                                    icon="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                                    color="blue"
-                                    iconSize="w-12 h-12"
-                                />
-                            </a>
-
-                            <!-- Miembro 2 -->
-                            <a
-                                href="https://www.linkedin.com/in/sherlingdev"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="block transition-transform duration-300 hover:scale-105 h-full"
-                            >
-                                <FeatureCard
-                                    title="Sherling Rodríguez Estrella"
-                                    subtitle="Full Stack Developer"
-                                    description="Desarrollador Full Stack con 3 años de experiencia construyendo aplicaciones web escalables y centradas en el usuario. Especializado en Laravel para backends robustos y Vue.js para interfaces frontend intuitivas, complementada con fuertes habilidades en MySQL. Apasionado por aprovechar la tecnología para impulsar la eficiencia y entregar soluciones impactantes a través de código mantenible y de alta calidad y mantenible."
-                                    icon="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                                    color="green"
-                                    iconSize="w-12 h-12"
-                                />
-                            </a>
-                        </div>
 
                         <p class="text-gray-700 mt-6">
                             Nuestro compromiso es mejorar y mantener
