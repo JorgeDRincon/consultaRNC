@@ -31,6 +31,7 @@
                             Bienvenido a la plataforma de consulta tributaria
                         </p>
                     </div>
+
                     <p class="text-xl text-gray-600 mb-8 relative z-10">
                         Una plataforma moderna para consultar información
                         tributaria y de RNC en República Dominicana
@@ -62,8 +63,7 @@
                                         Respuestas Rápidas
                                     </h3>
                                     <p class="text-sm opacity-90">
-                                        Obtén resultados en segundos, no en
-                                        horas
+                                        Obtén resultados en segundos
                                     </p>
                                 </div>
                                 <div>
