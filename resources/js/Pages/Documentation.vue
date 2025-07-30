@@ -96,66 +96,95 @@
                                 >
                                     • Fecha de Inicio
                                 </a>
+                                <a
+                                    href="#ejemplos-uso"
+                                    :class="[
+                                        'block px-3 py-2 text-sm rounded transition',
+                                        activeSection === 'ejemplos-uso'
+                                            ? 'text-blue-600 bg-blue-50 font-medium'
+                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                    ]"
+                                >
+                                    • Ejemplos de Uso
+                                </a>
+                                <a
+                                    href="#ejemplos-combinaciones"
+                                    :class="[
+                                        'block px-3 py-2 text-sm rounded transition',
+                                        activeSection ===
+                                        'ejemplos-combinaciones'
+                                            ? 'text-blue-600 bg-blue-50 font-medium'
+                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                    ]"
+                                >
+                                    • Ejemplos de Combinaciones
+                                </a>
                             </div>
                         </div>
-                        <a
-                            href="#tipos-respuestas"
-                            :class="[
-                                'block px-3 py-2 text-sm rounded-lg transition font-medium',
-                                activeSection === 'tipos-respuestas'
-                                    ? 'text-blue-600 bg-blue-50'
-                                    : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50',
-                            ]"
-                        >
-                            Tipos de Respuestas
-                        </a>
-                        <!-- Sub-opciones de tipos de respuestas -->
-                        <div class="ml-4 mt-2 space-y-1">
+
+                        <div>
                             <a
-                                href="#respuesta-exitosa"
+                                href="#tipos-respuestas"
                                 :class="[
-                                    'block px-3 py-2 text-sm rounded transition',
-                                    activeSection === 'respuesta-exitosa'
-                                        ? 'text-blue-600 bg-blue-50 font-medium'
-                                        : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                    'block px-3 py-2 text-sm rounded-lg transition font-medium',
+                                    activeSection === 'tipos-respuestas'
+                                        ? 'text-blue-600 bg-blue-50'
+                                        : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50',
                                 ]"
                             >
-                                • Respuesta Exitosa
+                                Tipos de Respuestas
                             </a>
+                            <!-- Sub-opciones de tipos de respuestas -->
+                            <div class="ml-4 mt-2 space-y-1">
+                                <a
+                                    href="#respuesta-exitosa"
+                                    :class="[
+                                        'block px-3 py-2 text-sm rounded transition',
+                                        activeSection === 'respuesta-exitosa'
+                                            ? 'text-blue-600 bg-blue-50 font-medium'
+                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                    ]"
+                                >
+                                    • Respuesta Exitosa
+                                </a>
+                                <a
+                                    href="#respuesta-error"
+                                    :class="[
+                                        'block px-3 py-2 text-sm rounded transition',
+                                        activeSection === 'respuesta-error'
+                                            ? 'text-blue-600 bg-blue-50 font-medium'
+                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                    ]"
+                                >
+                                    • Respuesta de Error
+                                </a>
+                                <a
+                                    href="#codigos-estado"
+                                    :class="[
+                                        'block px-3 py-2 text-sm rounded transition',
+                                        activeSection === 'codigos-estado'
+                                            ? 'text-blue-600 bg-blue-50 font-medium'
+                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                    ]"
+                                >
+                                    • Códigos de Estado
+                                </a>
+                            </div>
+                        </div>
+
+                        <div>
                             <a
-                                href="#respuesta-error"
+                                href="#ejemplos-integracion"
                                 :class="[
-                                    'block px-3 py-2 text-sm rounded transition',
-                                    activeSection === 'respuesta-error'
-                                        ? 'text-blue-600 bg-blue-50 font-medium'
-                                        : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                    'block px-3 py-2 text-sm rounded-lg transition font-medium',
+                                    activeSection === 'ejemplos-integracion'
+                                        ? 'text-blue-600 bg-blue-50'
+                                        : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50',
                                 ]"
                             >
-                                • Respuesta de Error
-                            </a>
-                            <a
-                                href="#codigos-estado"
-                                :class="[
-                                    'block px-3 py-2 text-sm rounded transition',
-                                    activeSection === 'codigos-estado'
-                                        ? 'text-blue-600 bg-blue-50 font-medium'
-                                        : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
-                                ]"
-                            >
-                                • Códigos de Estado
+                                Ejemplos de Integración
                             </a>
                         </div>
-                        <a
-                            href="#ejemplos-integracion"
-                            :class="[
-                                'block px-3 py-2 text-sm rounded-lg transition',
-                                activeSection === 'ejemplos-integracion'
-                                    ? 'text-blue-600 bg-blue-50 font-medium'
-                                    : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50',
-                            ]"
-                        >
-                            Ejemplos de Integración
-                        </a>
                     </nav>
                 </div>
             </div>
@@ -250,7 +279,10 @@
                             />
                         </div>
 
-                        <h5 class="font-semibold mb-2 mt-6 text-gray-700">
+                        <h5
+                            id="ejemplos-uso"
+                            class="font-semibold mb-2 mt-6 text-gray-700"
+                        >
                             Ejemplos de uso:
                         </h5>
                         <div class="space-y-2">
@@ -328,7 +360,10 @@
                             </div>
                         </div>
 
-                        <h5 class="font-semibold mb-2 text-gray-700 mt-6">
+                        <h5
+                            id="ejemplos-combinaciones"
+                            class="font-semibold mb-2 text-gray-700 mt-6"
+                        >
                             Ejemplos de combinaciones:
                         </h5>
                         <div class="space-y-2">
@@ -767,6 +802,8 @@ const sections = [
     "param-status",
     "param-payment-regime",
     "param-start-date",
+    "ejemplos-uso",
+    "ejemplos-combinaciones",
     "tipos-respuestas",
     "respuesta-exitosa",
     "respuesta-error",
