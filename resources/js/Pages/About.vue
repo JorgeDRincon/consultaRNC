@@ -6,7 +6,7 @@
         <!-- Header con navegación -->
         <Navigation />
 
-        <div class="flex w-full max-w-7xl mt-16 mb-8 mx-auto flex-1">
+        <div class="flex w-full max-w-7xl mt-24 mb-8 mx-auto flex-1">
             <div class="flex-1">
                 <div class="bg-white rounded-2xl shadow-lg p-10 text-center">
                     <h1 class="text-3xl font-bold mb-2 text-gray-900">

@@ -7,7 +7,7 @@
         <Navigation />
 
         <!-- Contenido principal con sidebar -->
-        <div class="flex w-full max-w-7xl mt-16 mb-8 mx-auto flex-1">
+        <div class="flex w-full max-w-7xl mt-24 mb-8 mx-auto flex-1">
             <!-- Sidebar -->
             <div class="w-64 flex-shrink-0 mr-8">
                 <div class="bg-white rounded-2xl shadow-lg p-6 sticky top-8">
@@ -427,11 +427,11 @@
                                 <code class="text-zinc-900 font-mono text-sm">
                                     GET /api/rnc/search?<span
                                         class="font-semibold"
-                                        >start_date_from</span
+                                        >start_date[]</span
                                     >=<span class="text-red-600 font-semibold"
                                         >2020-01-01</span
                                     >&<span class="font-semibold"
-                                        >start_date_to</span
+                                        >start_date[]</span
                                     >=<span class="text-red-600 font-semibold"
                                         >2024-12-31</span
                                     >&<span class="font-semibold">status</span

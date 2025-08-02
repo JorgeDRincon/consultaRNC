@@ -1,5 +1,5 @@
 <template>
-    <Head title="Bienvenido - ConsultaRNC" />
+    <Head title="Bienvenido" />
     <div
         class="min-h-screen flex flex-col items-center bg-gradient-to-br from-slate-50 to-slate-200"
     >
@@ -7,38 +7,26 @@
         <Navigation />
 
         <!-- Contenido principal -->
-        <div class="flex w-full max-w-7xl mt-16 mb-8 mx-auto flex-1">
+        <div class="flex w-full max-w-7xl mt-24 mb-6 mx-auto flex-1">
             <div class="flex-1">
                 <div
                     class="bg-white rounded-2xl shadow-lg px-10 py-8 text-center relative overflow-hidden"
                 >
-                    <!-- Background decoration -->
-                    <div
-                        class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-50 to-red-50 rounded-full -translate-y-16 translate-x-16 opacity-50"
-                    ></div>
-                    <div
-                        class="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-red-50 to-blue-50 rounded-full translate-y-12 -translate-x-12 opacity-50"
-                    ></div>
+                    <div class="flex flex-col items-center relative z-10 mb-4">
+                        <img src="/images/logo.png" alt="Logo" width="400" />
 
-                    <div class="relative z-10 mb-8">
-                        <h1 class="text-6xl font-bold mb-3">
-                            <span
-                                class="bg-gradient-to-r from-blue-700 from-50% via-blue-600 to-red-600 to-70% bg-clip-text text-transparent"
-                                >ConsultaRNC</span
-                            >
-                        </h1>
                         <p class="text-lg text-gray-500 font-medium">
                             Bienvenido a la plataforma de consulta tributaria
                         </p>
                     </div>
 
-                    <p class="text-xl text-gray-600 mb-8 relative z-10">
+                    <p class="text-xl text-gray-600 mb-6 relative z-10">
                         Una plataforma moderna para consultar información
                         tributaria y de RNC en República Dominicana
                     </p>
 
                     <!-- Hero section -->
-                    <div class="mb-12">
+                    <div class="mb-8">
                         <div class="bg-blue-700 text-white p-8 rounded-xl">
                             <h2 class="text-2xl font-semibold mb-4">
                                 ¿Qué puedes hacer con nuestra API?
@@ -81,8 +69,8 @@
                     </div>
 
                     <!-- Estadísticas -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                        <div class="bg-gray-100 p-6 rounded-lg">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-gray-100 p-6 rounded -lg">
                             <div class="text-3xl font-bold text-blue-600 mb-2">
                                 24/7
                             </div>
@@ -96,15 +84,17 @@
                         </div>
                         <div class="bg-gray-100 p-6 rounded-lg">
                             <div class="text-3xl font-bold text-blue-600 mb-2">
-                                99.9%
+                                ≤ 7 días
                             </div>
-                            <div class="text-gray-600">Uptime</div>
+                            <div class="text-gray-600">
+                                Frecuencia de actualización
+                            </div>
                         </div>
                     </div>
 
                     <!-- Call to Action -->
                     <div class="space-y-4">
-                        <p class="text-gray-600 mb-6">
+                        <p class="text-gray-600 mb-4">
                             ¿Listo para empezar? Explora nuestra documentación
                             completa y comienza a integrar la API en tus
                             proyectos.
@@ -122,7 +112,7 @@
                                 href="/documentation/about"
                                 class="inline-block bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-8 rounded-lg transition"
                             >
-                                Conoce Más
+                                Conocer Más
                             </Link>
                         </div>
                     </div>
