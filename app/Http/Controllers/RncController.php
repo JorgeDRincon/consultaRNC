@@ -16,28 +16,33 @@ class RncController extends Controller
    *
    * @param Request $request
    * @return JsonResponse
-   */
+  */
   public function advancedSearch(Request $request): JsonResponse
   {
     $allowedParams = Rnc::getAllowedSearchParams();
 
     $inputParams = array_keys($request->all());
+
     $invalidParams = array_diff($inputParams, $allowedParams);
 
     if (count($inputParams) > 0 && count($invalidParams) > 0) {
       return response()->json([
         'message' => 'Invalid parameter(s): ' . implode(', ', $invalidParams),
-        'allowed_parameters' => array_values($allowedParams)
-      ], 422); 
+        'allowed_parameters' => array_values($allowedParams),
+      ], 422);
     }
 
     $params = $request->only($allowedParams);
+
     $result = Rnc::filterByParams($params);
+
     $query = $result['query'];
+
     $hasFilter = $result['hasFilter'];
 
-    $results = $query->limit(30)->get();
-    $count = $results->count();
+    $paginator = $query->paginate(30);
+
+    $count = $paginator->getCollection()->count();
 
     if ($count === 0) {
       return response()->json([
@@ -46,10 +51,12 @@ class RncController extends Controller
       ], 404);
     }
 
-    return response()->json([
-      'message' => $hasFilter ? 'Advanced search completed.' : 'No filters provided. Showing first 50 records.',
-      'count' => $results->count(),
-      'data' => $results,
-    ], 200);
+    $pagination = $paginator->toArray();
+
+    $pagination['message'] = $hasFilter ? 'Advanced search completed.' : 'No filters provided. Showing first page of 30 records.';
+
+    $pagination['count'] = $count;
+
+    return response()->json($pagination, 200);
   }
 }
