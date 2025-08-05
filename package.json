@@ -2,8 +2,10 @@
     "private": true,
     "type": "module",
     "scripts": {
+        "prebuild": "ssh root@consultarnc.com.do 'mkdir -p /home/consultarnc/public_html/consultaRNC/public/build && rm -rf /home/consultarnc/public_html/consultaRNC/public/build/*'",
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "postbuild": "scp -r public/build/* root@consultarnc.com.do:/home/consultarnc/public_html/consultaRNC/public/build"
     },
     "devDependencies": {
         "@inertiajs/vue3": "^2.0.0",
