@@ -25,6 +25,12 @@ class Rnc extends Model
     'payment_regime',
   ];
 
+  protected $hidden = [
+    'id',
+    'created_at',
+    'updated_at',
+  ];
+
   public static function importCsv(string $csvFilePath, int $limit = 0): int
   {
     // Configuration for the RNC CSV import (directly within the method)

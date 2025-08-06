@@ -28,7 +28,7 @@ class RncController extends Controller
       return response()->json([
         'message' => 'Invalid parameter(s): ' . implode(', ', $invalidParams),
         'allowed_parameters' => array_values($allowedParams)
-      ], 422); 
+      ], 422);
     }
 
     $params = $request->only($allowedParams);
@@ -36,7 +36,7 @@ class RncController extends Controller
     $query = $result['query'];
     $hasFilter = $result['hasFilter'];
 
-    $results = $query->limit(30)->get();
+    $results = $query->limit(100)->get();
     $count = $results->count();
 
     if ($count === 0) {
@@ -47,7 +47,7 @@ class RncController extends Controller
     }
 
     return response()->json([
-      'message' => $hasFilter ? 'Advanced search completed.' : 'No filters provided. Showing first 50 records.',
+      'message' => $hasFilter ? 'Search completed.' : 'No filters provided. Showing first 100 records.',
       'count' => $results->count(),
       'data' => $results,
     ], 200);

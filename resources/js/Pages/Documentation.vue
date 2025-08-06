@@ -17,6 +17,19 @@
                     <nav class="space-y-2">
                         <div>
                             <a
+                                href="#url-base"
+                                :class="[
+                                    'block px-3 py-2 text-sm rounded-lg transition font-medium',
+                                    activeSection === 'url-base'
+                                        ? 'text-blue-600 bg-blue-50'
+                                        : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50',
+                                ]"
+                            >
+                                URL Base
+                            </a>
+                        </div>
+                        <div>
+                            <a
                                 href="#busqueda-rnc"
                                 :class="[
                                     'block px-3 py-2 text-sm rounded-lg transition font-medium',
@@ -132,7 +145,7 @@
                                         : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50',
                                 ]"
                             >
-                                Tipos de Respuestas
+                                Formato de Respuesta y Códigos HTTP
                             </a>
                             <!-- Sub-opciones de tipos de respuestas -->
                             <div class="ml-4 mt-2 space-y-1">
@@ -146,17 +159,6 @@
                                     ]"
                                 >
                                     • Respuesta Exitosa
-                                </a>
-                                <a
-                                    href="#respuesta-error"
-                                    :class="[
-                                        'block px-3 py-2 text-sm rounded transition',
-                                        activeSection === 'respuesta-error'
-                                            ? 'text-blue-600 bg-blue-50 font-medium'
-                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
-                                    ]"
-                                >
-                                    • Respuesta de Error
                                 </a>
                                 <a
                                     href="#codigos-estado"
@@ -203,6 +205,30 @@
                         consulta tributaria.
                     </p>
 
+                    <!-- URL Base -->
+                    <div id="url-base" class="mb-12 text-left">
+                        <h2 class="text-2xl font-semibold mb-6 text-gray-800">
+                            URL Base de la API
+                        </h2>
+                        <div
+                            class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg"
+                        >
+                            <div class="flex items-start">
+                                <div>
+                                    <p class="text-gray-700 mb-2">
+                                        Todas las peticiones deben realizarse a
+                                        la siguiente URL:
+                                    </p>
+                                    <code
+                                        class="text-blue-700 font-mono text-sm bg-white px-3 py-2 rounded-lg shadow-sm"
+                                    >
+                                        https://consultarnc.com.do/api
+                                    </code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Búsqueda Avanzada RNC -->
                     <div id="busqueda-rnc" class="mb-12 text-left">
                         <h2 class="text-2xl font-semibold mb-6 text-gray-800">
@@ -229,7 +255,7 @@
                                 type="string"
                                 name="rnc"
                                 description="Número de RNC específico del contribuyente"
-                                example="/api/rnc/search?rnc=123456789"
+                                example="/api/search?rnc=123456789"
                                 :is-exact="true"
                             />
 
@@ -238,7 +264,7 @@
                                 type="string"
                                 name="business_name"
                                 description="Nombre o razón social de la empresa (búsqueda parcial)"
-                                example="/api/rnc/search?business_name=empresa"
+                                example="/api/search?business_name=empresa"
                                 :is-exact="false"
                             />
 
@@ -247,7 +273,7 @@
                                 type="string"
                                 name="economic_activity"
                                 description="Actividad económica del contribuyente (búsqueda parcial)"
-                                example="/api/rnc/search?economic_activity=comercio"
+                                example="/api/search?economic_activity=comercio"
                                 :is-exact="false"
                             />
 
@@ -256,7 +282,7 @@
                                 type="string"
                                 name="status"
                                 description="Estado del contribuyente (ej: Activo, Inactivo, Cancelado)"
-                                example="/api/rnc/search?status=Activo"
+                                example="/api/search?status=Activo"
                                 :is-exact="true"
                             />
 
@@ -265,7 +291,7 @@
                                 type="string"
                                 name="payment_regime"
                                 description="Régimen de pago (ej: General, Pequeño Contribuyente)"
-                                example="/api/rnc/search?payment_regime=General"
+                                example="/api/search?payment_regime=General"
                                 :is-exact="true"
                             />
 
@@ -274,7 +300,7 @@
                                 type="date | array"
                                 name="start_date"
                                 description="Fecha de inicio de operaciones. Puedes enviar un único valor (YYYY-MM-DD) para coincidencia exacta o un arreglo de dos fechas \[desde, hasta\] para filtrar por rango."
-                                example="/api/rnc/search?start_date[]=2020-01-01&start_date[]=2024-12-31"
+                                example="/api/search?start_date[]=2020-01-01&start_date[]=2024-12-31"
                                 :is-exact="true"
                             />
                         </div>
@@ -295,8 +321,7 @@
                                     Búsqueda de empresas por nombre
                                 </h6>
                                 <code class="text-zinc-900 font-mono text-sm">
-                                    GET /api/rnc/search?<span
-                                        class="font-semibold"
+                                    GET /api/search?<span class="font-semibold"
                                         >business_name</span
                                     >=<span class="text-red-600 font-semibold"
                                         >empresa</span
@@ -312,8 +337,7 @@
                                     Búsqueda de contribuyente por RNC
                                 </h6>
                                 <code class="text-zinc-900 font-mono text-sm">
-                                    GET /api/rnc/search?<span
-                                        class="font-semibold"
+                                    GET /api/search?<span class="font-semibold"
                                         >rnc</span
                                     >=<span class="text-red-600 font-semibold"
                                         >123456789</span
@@ -329,8 +353,7 @@
                                     Búsqueda por actividad económica
                                 </h6>
                                 <code class="text-zinc-900 font-mono text-sm">
-                                    GET /api/rnc/search?<span
-                                        class="font-semibold"
+                                    GET /api/search?<span class="font-semibold"
                                         >economic_activity</span
                                     >=<span class="text-red-600 font-semibold"
                                         >comercio</span
@@ -346,8 +369,7 @@
                                     Búsqueda con múltiples filtros
                                 </h6>
                                 <code class="text-zinc-900 font-mono text-sm">
-                                    GET /api/rnc/search?<span
-                                        class="font-semibold"
+                                    GET /api/search?<span class="font-semibold"
                                         >status</span
                                     >=<span class="text-red-600 font-semibold"
                                         >Activo</span
@@ -376,8 +398,7 @@
                                     Búsqueda de empresas activas por nombre
                                 </h6>
                                 <code class="text-zinc-900 font-mono text-sm">
-                                    GET /api/rnc/search?<span
-                                        class="font-semibold"
+                                    GET /api/search?<span class="font-semibold"
                                         >business_name</span
                                     >=<span class="text-red-600 font-semibold"
                                         >empresa</span
@@ -400,8 +421,7 @@
                                     Búsqueda de comercios con régimen general
                                 </h6>
                                 <code class="text-zinc-900 font-mono text-sm">
-                                    GET /api/rnc/search?<span
-                                        class="font-semibold"
+                                    GET /api/search?<span class="font-semibold"
                                         >economic_activity</span
                                     >=<span class="text-red-600 font-semibold"
                                         >comercio</span
@@ -425,8 +445,7 @@
                                     de fechas
                                 </h6>
                                 <code class="text-zinc-900 font-mono text-sm">
-                                    GET /api/rnc/search?<span
-                                        class="font-semibold"
+                                    GET /api/search?<span class="font-semibold"
                                         >start_date[]</span
                                     >=<span class="text-red-600 font-semibold"
                                         >2020-01-01</span
@@ -450,7 +469,7 @@
                     <!-- TIPOS DE RESPUESTAS -->
                     <div id="tipos-respuestas" class="mb-12 text-left">
                         <h2 class="text-2xl font-semibold mb-6 text-gray-800">
-                            Tipos de Respuestas
+                            Formato de Respuesta y Códigos HTTP
                         </h2>
 
                         <!-- Respuesta Exitosa -->
@@ -470,43 +489,17 @@
                                     class="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm"
                                 >
 {
-    "success": true,
-    "data": {
-        "rnc": "123456789",
-        "nombre": "Empresa Ejemplo",
-        "tipo": "Persona Jurídica",
-        "estado": "Activo",
-        "fecha_registro": "2024-01-01"
-    },
-    "message": "Consulta exitosa"
-}</pre
-                                >
-                            </div>
-                        </div>
-
-                        <!-- Respuesta de Error -->
-                        <div id="respuesta-error" class="mb-8">
-                            <h3
-                                class="text-xl font-semibold mb-4 text-gray-800"
-                            >
-                                Respuesta de Error
-                            </h3>
-                            <div class="bg-gray-100 p-6 rounded-lg">
-                                <h4
-                                    class="text-lg font-medium mb-3 text-gray-700"
-                                >
-                                    Estructura
-                                </h4>
-                                <pre
-                                    class="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm"
-                                >
-{
-    "success": false,
-    "error": {
-        "code": "RNC_NOT_FOUND",
-        "message": "El RNC especificado no existe",
-        "details": "No se encontró ningún registro con el RNC 123456789"
-    }
+    "message": "Consulta exitosa",
+    "count": 1,
+    "data": [
+        {
+            "rnc": "123456789",
+            "nombre": "Empresa Ejemplo",
+            "tipo": "Persona Jurídica",
+            "estado": "Activo",
+            "fecha_registro": "2024-01-01"
+        },
+    ]
 }</pre
                                 >
                             </div>
@@ -586,7 +579,7 @@
                                         <span class="text-yellow-400">(</span>
                                         <span class="text-blue-300 font-mono"
                                             >'<span class="text-blue-200"
-                                                >https://consultarnc.com.do/api/rnc/search?<span
+                                                >https://consultarnc.com.do/api/search?<span
                                                     class="text-blue-400 font-semibold"
                                                     >business_name</span
                                                 >=<span class="text-blue-300"
@@ -677,7 +670,7 @@
                                     </div>
                                     <div class="ml-4 mb-2">
                                         <span class="text-blue-200 font-mono"
-                                            >'https://consultarnc.com.do/api/rnc/search?<span
+                                            >'https://consultarnc.com.do/api/search?<span
                                                 class="text-blue-400 font-semibold"
                                                 >rnc</span
                                             >=<span class="text-blue-300"
@@ -781,6 +774,15 @@
             </div>
         </div>
         <Footer />
+
+        <!-- Toast notification -->
+        <div
+            v-if="showToast"
+            class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 flex items-center gap-2 transition-all duration-300"
+        >
+            <i class="fa-solid fa-check"></i>
+            <span>URL copiada en el portapapeles</span>
+        </div>
     </div>
 </template>
 
@@ -794,7 +796,26 @@ import { onMounted, onUnmounted, ref } from "vue";
 
 const activeSection = ref("busqueda-rnc");
 
+// Copiar URL base al portapapeles
+const showToast = ref(false);
+
+const copyBaseUrl = () => {
+    navigator.clipboard
+        .writeText("https://consultarnc.com.do/api")
+        .then(() => {
+            showToast.value = true;
+            setTimeout(() => {
+                showToast.value = false;
+            }, 2000);
+        })
+        .catch(() => {
+            // En caso de error, mantener funcionalidad básica
+            alert("No se pudo copiar la URL");
+        });
+};
+
 const sections = [
+    "url-base",
     "busqueda-rnc",
     "param-rnc",
     "param-business-name",
