@@ -219,11 +219,20 @@
                                         Todas las peticiones deben realizarse a
                                         la siguiente URL:
                                     </p>
-                                    <code
-                                        class="text-blue-700 font-mono text-sm bg-white px-3 py-2 rounded-lg shadow-sm"
-                                    >
-                                        https://consultarnc.com.do/api
-                                    </code>
+                                    <div class="flex items-center gap-2">
+                                        <code
+                                            class="text-blue-700 font-mono text-sm bg-white px-3 py-2 rounded-lg shadow-sm flex-1"
+                                        >
+                                            https://consultarnc.com.do/api/search?
+                                        </code>
+                                        <button
+                                            @click="copyBaseUrl"
+                                            class="bg-white hover:bg-blue-50 text-blue-600 hover:text-blue-700 p-2 rounded-lg shadow-sm transition-colors duration-200 flex items-center justify-center"
+                                            title="Copiar URL"
+                                        >
+                                            <i class="fa-regular fa-copy"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -801,7 +810,7 @@ const showToast = ref(false);
 
 const copyBaseUrl = () => {
     navigator.clipboard
-        .writeText("https://consultarnc.com.do/api")
+        .writeText("https://consultarnc.com.do/api/search?")
         .then(() => {
             showToast.value = true;
             setTimeout(() => {
