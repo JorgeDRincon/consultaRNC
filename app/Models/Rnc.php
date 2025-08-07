@@ -322,9 +322,40 @@ class Rnc extends Model
 
   public static function getAllowedSearchParams()
   {
-    $columns = Schema::getColumnListing((new self)->getTable());
-    $special = ['start_date_from', 'start_date_to'];
-    // Exclude 'id'
-    return array_diff(array_merge($columns, $special), ['id']);
+    return [
+      'rnc',
+      'business_name',
+      'economic_activity',
+      'status',
+      'payment_regime',
+      'start_date'
+    ];
+  }
+
+  /**
+   * Validates if the given status is allowed.
+   * 
+   * @param string|null $status The status to validate
+   * @return array Returns validation result with 'valid' boolean and optional 'error' data
+   */
+  public static function validateStatusValue(?string $status): array
+  {
+    if (!$status) {
+      return ['valid' => true];
+    }
+
+    $allowedStatuses = ['Activo', 'Inactivo', 'Cancelado'];
+
+    if (!in_array(strtolower($status), array_map('strtolower', $allowedStatuses))) {
+      return [
+        'valid' => false,
+        'error' => [
+          'message' => 'Invalid status: ' . $status,
+          'allowed_statuses' => $allowedStatuses
+        ]
+      ];
+    }
+
+    return ['valid' => true];
   }
 }
