@@ -278,7 +278,7 @@ class Rnc extends Model
       $query->where('payment_regime', $params['payment_regime']);
     }
 
-    if (!empty($params['start_date'])) {
+    if (!empty($params['start_date'])) { 
       if (is_string($params['start_date'])) {
         $query->where('start_date', $params['start_date']);
       } elseif (is_array($params['start_date']) && count($params['start_date']) === 2) {
@@ -292,7 +292,15 @@ class Rnc extends Model
       }
     }
 
-    # Determine if any filters are applied
+    // if (!empty($params['start_date_from']) && !empty($params['start_date_to'])) {
+    //   $query->whereBetween('start_date', [$params['start_date_from'], $params['start_date_to']]);
+    // } elseif (!empty($params['start_date_from'])) {
+    //   $query->where('start_date', '>=', $params['start_date_from']);
+    // } elseif (!empty($params['start_date_to'])) {
+    //   $query->where('start_date', '<=', $params['start_date_to']);
+    // }
+
+    // Determina si hay algún filtro aplicado
     $hasFilter = !empty(array_filter([
       isset($params['rnc']) && $params['rnc'] !== '' ? $params['rnc'] : null,
       $params['business_name'] ?? null,
@@ -300,6 +308,8 @@ class Rnc extends Model
       $params['status'] ?? null,
       $params['payment_regime'] ?? null,
       $params['start_date'] ?? null,
+      // $params['start_date_from'] ?? null,
+      // $params['start_date_to'] ?? null,
     ], function ($v) {
       return $v !== null && $v !== '';
     }));
@@ -310,65 +320,11 @@ class Rnc extends Model
     ];
   }
 
-  /**
-   * Gets the list of allowed parameters for advanced search.
-   * 
-   * This function returns an array with the names of the RNC table columns
-   * that can be used as search parameters in the API.
-   * The allowed parameters are: rnc, business_name, economic_activity, 
-   * status, payment_regime and start_date.
-   *
-   * @return array List of allowed parameters for search
-   */
-  public static function getAllowedSearchParams(): array
+  public static function getAllowedSearchParams()
   {
-    return [
-      'rnc',
-      'business_name',
-      'economic_activity',
-      'status',
-      'payment_regime',
-      'start_date'
-    ];
-  }
-
-  /**
-   * Gets the list of allowed status values.
-   * 
-   * This function returns an array with the valid status values
-   * that can be used for filtering RNC records.
-   *
-   * @return array List of allowed status values
-   */
-  public static function getAllowedStatuses(): array
-  {
-    return ['Activo', 'Inactivo', 'Cancelado'];
-  }
-
-  /**
-   * Validates if the given status is allowed.
-   * 
-   * @param string|null $status The status to validate
-   * @return array Returns validation result with 'valid' boolean and optional 'error' data
-   */
-  public static function validateStatusValue(?string $status): array
-  {
-    if (!$status) {
-      return ['valid' => true];
-    }
-
-    $allowedStatuses = self::getAllowedStatuses();
-
-    if (!in_array($status, $allowedStatuses)) {
-      return [
-        'valid' => false,
-        'error' => [
-          'message' => 'Invalid status: ' . $status,
-          'allowed_statuses' => $allowedStatuses
-        ]
-      ];
-    }
-
-    return ['valid' => true];
+    $columns = Schema::getColumnListing((new self)->getTable());
+    $special = ['start_date_from', 'start_date_to'];
+    // Exclude 'id'
+    return array_diff(array_merge($columns, $special), ['id']);
   }
 }
