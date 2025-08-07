@@ -256,7 +256,7 @@
                             Búsqueda Avanzada RNC
                         </h2>
                         <!-- Leyenda de Badges con FeatureCard -->
-                        <div class="grid gap-4 mb-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                             <FeatureCard
                                 title="Exacta"
                                 description="Coincidencia 100&nbsp;% del valor enviado. El parámetro debe coincidir exactamente con el valor almacenado en la base de datos, sin mayúsculas/minúsculas extra ni espacios."
