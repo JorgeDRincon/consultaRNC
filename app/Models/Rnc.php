@@ -359,7 +359,7 @@ class Rnc extends Model
 
     $allowedStatuses = self::getAllowedStatuses();
 
-    if (!in_array($status, $allowedStatuses)) {
+    if (!in_array(strtolower($status), array_map('strtolower', $allowedStatuses))) {
       return [
         'valid' => false,
         'error' => [
