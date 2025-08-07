@@ -31,6 +31,13 @@ class RncController extends Controller
       ], 422);
     }
 
+    if ($request->status) {
+      $statusValidation = Rnc::validateStatusValue($request->status);
+      if (!$statusValidation['valid']) {
+        return response()->json($statusValidation['error'], 422);
+      }
+    }
+
     $params = $request->only($allowedParams);
     $result = Rnc::filterByParams($params);
     $query = $result['query'];
