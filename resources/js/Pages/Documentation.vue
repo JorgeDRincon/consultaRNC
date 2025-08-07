@@ -7,9 +7,11 @@
         <Navigation />
 
         <!-- Contenido principal con sidebar -->
-        <div class="flex w-full max-w-7xl mt-24 mb-8 mx-auto flex-1">
-            <!-- Sidebar -->
-            <div class="w-64 flex-shrink-0 mr-8">
+        <div
+            class="flex w-full max-w-7xl mt-24 mb-8 mx-auto flex-1 px-4 lg:px-0"
+        >
+            <!-- Sidebar - Hidden on mobile, visible on large screens -->
+            <div class="hidden lg:block w-64 flex-shrink-0 lg:mr-8">
                 <div class="bg-white rounded-2xl shadow-lg p-6 sticky top-8">
                     <h3 class="text-lg font-semibold text-gray-800 mb-4">
                         Contenido
@@ -192,42 +194,50 @@
             </div>
 
             <!-- Contenido principal -->
-            <div class="flex-1">
-                <div class="bg-white rounded-2xl shadow-lg p-10 text-center">
+            <div class="flex-1 w-full">
+                <div
+                    class="bg-white rounded-2xl shadow-lg p-6 lg:p-10 text-center"
+                >
                     <h1
                         id="introduccion"
-                        class="text-3xl font-bold mb-2 text-gray-900"
+                        class="text-2xl lg:text-3xl font-bold mb-2 text-gray-900"
                     >
                         Documentación de ConsultaRNC
                     </h1>
-                    <p class="text-gray-500 mb-6">
+                    <p class="text-gray-500 mb-6 text-sm lg:text-base">
                         Guía completa para integrar y utilizar nuestra API de
                         consulta tributaria.
                     </p>
 
                     <!-- URL Base -->
                     <div id="url-base" class="mb-12 text-left">
-                        <h2 class="text-2xl font-semibold mb-6 text-gray-800">
+                        <h2
+                            class="text-xl lg:text-2xl font-semibold mb-6 text-gray-800"
+                        >
                             URL Base de la API
                         </h2>
                         <div
-                            class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg"
+                            class="bg-blue-50 border-l-4 border-blue-400 p-4 lg:p-6 rounded-lg"
                         >
                             <div class="flex items-start">
-                                <div>
-                                    <p class="text-gray-700 mb-2">
+                                <div class="w-full">
+                                    <p
+                                        class="text-gray-700 mb-2 text-sm lg:text-base"
+                                    >
                                         Todas las peticiones deben realizarse a
                                         la siguiente URL:
                                     </p>
-                                    <div class="flex items-center gap-2">
+                                    <div
+                                        class="flex flex-col sm:flex-row items-start sm:items-center gap-2"
+                                    >
                                         <code
-                                            class="text-blue-700 font-mono text-sm bg-white px-3 py-2 rounded-lg shadow-sm flex-1"
+                                            class="text-blue-700 font-mono text-xs lg:text-sm bg-white px-3 py-2 rounded-lg shadow-sm flex-1 break-all"
                                         >
                                             https://consultarnc.com.do/api/search?
                                         </code>
                                         <button
                                             @click="copyBaseUrl"
-                                            class="bg-white hover:bg-blue-50 text-blue-600 hover:text-blue-700 p-2 rounded-lg shadow-sm transition-colors duration-200 flex items-center justify-center"
+                                            class="bg-white hover:bg-blue-50 text-blue-600 hover:text-blue-700 p-2 rounded-lg shadow-sm transition-colors duration-200 flex items-center justify-center flex-shrink-0"
                                             title="Copiar URL"
                                         >
                                             <i class="fa-regular fa-copy"></i>
@@ -240,11 +250,13 @@
 
                     <!-- Búsqueda Avanzada RNC -->
                     <div id="busqueda-rnc" class="mb-12 text-left">
-                        <h2 class="text-2xl font-semibold mb-6 text-gray-800">
+                        <h2
+                            class="text-xl lg:text-2xl font-semibold mb-6 text-gray-800"
+                        >
                             Búsqueda Avanzada RNC
                         </h2>
                         <!-- Leyenda de Badges con FeatureCard -->
-                        <div class="grid md:grid-cols-2 gap-4 mb-6">
+                        <div class="grid gap-4 mb-6">
                             <FeatureCard
                                 title="Exacta"
                                 description="Coincidencia 100&nbsp;% del valor enviado. El parámetro debe coincidir exactamente con el valor almacenado en la base de datos, sin mayúsculas/minúsculas extra ni espacios."
@@ -329,7 +341,9 @@
                                 >
                                     Búsqueda de empresas por nombre
                                 </h6>
-                                <code class="text-zinc-900 font-mono text-sm">
+                                <code
+                                    class="text-zinc-900 font-mono text-xs lg:text-sm break-all"
+                                >
                                     GET /api/search?<span class="font-semibold"
                                         >business_name</span
                                     >=<span class="text-red-600 font-semibold"
@@ -345,7 +359,9 @@
                                 >
                                     Búsqueda de contribuyente por RNC
                                 </h6>
-                                <code class="text-zinc-900 font-mono text-sm">
+                                <code
+                                    class="text-zinc-900 font-mono text-xs lg:text-sm break-all"
+                                >
                                     GET /api/search?<span class="font-semibold"
                                         >rnc</span
                                     >=<span class="text-red-600 font-semibold"
@@ -361,7 +377,9 @@
                                 >
                                     Búsqueda por actividad económica
                                 </h6>
-                                <code class="text-zinc-900 font-mono text-sm">
+                                <code
+                                    class="text-zinc-900 font-mono text-xs lg:text-sm break-all"
+                                >
                                     GET /api/search?<span class="font-semibold"
                                         >economic_activity</span
                                     >=<span class="text-red-600 font-semibold"
@@ -377,7 +395,9 @@
                                 >
                                     Búsqueda con múltiples filtros
                                 </h6>
-                                <code class="text-zinc-900 font-mono text-sm">
+                                <code
+                                    class="text-zinc-900 font-mono text-xs lg:text-sm break-all"
+                                >
                                     GET /api/search?<span class="font-semibold"
                                         >status</span
                                     >=<span class="text-red-600 font-semibold"
@@ -477,25 +497,27 @@
 
                     <!-- TIPOS DE RESPUESTAS -->
                     <div id="tipos-respuestas" class="mb-12 text-left">
-                        <h2 class="text-2xl font-semibold mb-6 text-gray-800">
+                        <h2
+                            class="text-xl lg:text-2xl font-semibold mb-6 text-gray-800"
+                        >
                             Formato de Respuesta y Códigos HTTP
                         </h2>
 
                         <!-- Respuesta Exitosa -->
                         <div id="respuesta-exitosa" class="mb-8">
                             <h3
-                                class="text-xl font-semibold mb-4 text-gray-800"
+                                class="text-lg lg:text-xl font-semibold mb-4 text-gray-800"
                             >
                                 Respuesta Exitosa
                             </h3>
-                            <div class="bg-gray-100 p-6 rounded-lg">
+                            <div class="bg-gray-100 p-4 lg:p-6 rounded-lg">
                                 <h4
-                                    class="text-lg font-medium mb-3 text-gray-700"
+                                    class="text-base lg:text-lg font-medium mb-3 text-gray-700"
                                 >
                                     Estructura
                                 </h4>
                                 <pre
-                                    class="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm"
+                                    class="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto text-xs lg:text-sm"
                                 >
 {
     "message": "Consulta exitosa",
@@ -517,11 +539,11 @@
                         <!-- Códigos de Estado HTTP -->
                         <div id="codigos-estado" class="mb-8">
                             <h3
-                                class="text-xl font-semibold mb-4 text-gray-800"
+                                class="text-lg lg:text-xl font-semibold mb-4 text-gray-800"
                             >
                                 Códigos de Estado HTTP
                             </h3>
-                            <div class="bg-gray-100 p-6 rounded-lg">
+                            <div class="bg-gray-100 p-4 lg:p-6 rounded-lg">
                                 <ul class="space-y-4">
                                     <li class="flex items-start">
                                         <span
@@ -569,16 +591,20 @@
 
                     <!-- Ejemplos de Integración -->
                     <div id="ejemplos-integracion" class="mb-8 text-left">
-                        <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+                        <h2
+                            class="text-xl lg:text-2xl font-semibold mb-4 text-gray-800"
+                        >
                             Ejemplos de Integración
                         </h2>
                         <div class="space-y-6">
-                            <div class="bg-gray-100 p-6 rounded-lg">
-                                <h3 class="font-semibold text-gray-700 mb-3">
+                            <div class="bg-gray-100 p-4 lg:p-6 rounded-lg">
+                                <h3
+                                    class="font-semibold text-gray-700 mb-3 text-sm lg:text-base"
+                                >
                                     JavaScript (Fetch) - Búsqueda
                                 </h3>
                                 <div
-                                    class="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm"
+                                    class="bg-gray-800 text-gray-100 p-3 lg:p-4 rounded-lg overflow-x-auto text-xs lg:text-sm"
                                 >
                                     <div class="mb-2">
                                         <span
@@ -650,12 +676,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="bg-gray-100 p-6 rounded-lg">
-                                <h3 class="font-semibold text-gray-700 mb-3">
+                            <div class="bg-gray-100 p-4 lg:p-6 rounded-lg">
+                                <h3
+                                    class="font-semibold text-gray-700 mb-3 text-sm lg:text-base"
+                                >
                                     PHP (cURL) - Búsqueda
                                 </h3>
                                 <div
-                                    class="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm"
+                                    class="bg-gray-800 text-gray-100 p-3 lg:p-4 rounded-lg overflow-x-auto text-xs lg:text-sm"
                                 >
                                     <div class="mb-2">
                                         <span class="text-purple-400">$ch</span>
@@ -749,7 +777,9 @@
 
                     <!-- Información Adicional -->
                     <div id="informacion-adicional" class="mb-8 text-left">
-                        <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+                        <h2
+                            class="text-xl lg:text-2xl font-semibold mb-4 text-gray-800"
+                        >
                             Información Adicional
                         </h2>
                         <div class="bg-blue-50 border-l-4 border-blue-400 p-4">
@@ -787,10 +817,12 @@
         <!-- Toast notification -->
         <div
             v-if="showToast"
-            class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 flex items-center gap-2 transition-all duration-300"
+            class="fixed top-4 left-4 right-4 sm:left-1/2 sm:right-auto sm:transform sm:-translate-x-1/2 sm:w-auto bg-blue-500 text-white px-4 lg:px-6 py-3 lg:py-4 rounded-lg shadow-lg z-50 flex items-center gap-2 transition-all duration-300"
         >
-            <i class="fa-solid fa-check"></i>
-            <span>URL copiada en el portapapeles</span>
+            <i class="fa-solid fa-check flex-shrink-0"></i>
+            <span class="text-sm lg:text-base"
+                >URL copiada en el portapapeles</span
+            >
         </div>
     </div>
 </template>
