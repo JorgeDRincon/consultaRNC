@@ -278,7 +278,7 @@ class Rnc extends Model
       $query->where('payment_regime', $params['payment_regime']);
     }
 
-    if (!empty($params['start_date'])) { 
+    if (!empty($params['start_date'])) {
       if (is_string($params['start_date'])) {
         $query->where('start_date', $params['start_date']);
       } elseif (is_array($params['start_date']) && count($params['start_date']) === 2) {
@@ -344,7 +344,7 @@ class Rnc extends Model
       return ['valid' => true];
     }
 
-    $allowedStatuses = ['Activo', 'Inactivo', 'Cancelado'];
+    $allowedStatuses = ['Activo', 'Anulado', 'Rechazado', 'Suspendido', 'Dado de Baja', 'Cese Temporal'];
 
     if (!in_array(strtolower($status), array_map('strtolower', $allowedStatuses))) {
       return [
