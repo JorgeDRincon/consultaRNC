@@ -51,15 +51,13 @@ class RncController extends Controller
       ], 404);
     }
 
-    $response = [
+    return response()->json([
       'message' => $hasFilter ? 'Search completed.' : 'No filters provided. Showing first page of 100 records.',
       'pages' => $paginator->lastPage(),
       'next' => $paginator->nextPageUrl(),
       'prev' => $paginator->previousPageUrl(),
       'total' => $paginator->total(),
       'data' => $paginator->items(),
-    ];
-
-    return response()->json($response, 200);
+    ], 200);
   }
 }
