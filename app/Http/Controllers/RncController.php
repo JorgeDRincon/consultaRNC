@@ -20,7 +20,6 @@ class RncController extends Controller
   public function advancedSearch(Request $request): JsonResponse
   {
     $allowedParams = Rnc::getAllowedSearchParams();
-
     $inputParams = array_keys($request->all());
     $invalidParams = array_diff($inputParams, $allowedParams);
 
@@ -43,20 +42,24 @@ class RncController extends Controller
     $query = $result['query'];
     $hasFilter = $result['hasFilter'];
 
-    $results = $query->limit(100)->get();
-    $count = $results->count();
+    $paginator = $query->paginate(100);
 
-    if ($count === 0) {
+    if ($paginator->total() === 0) {
       return response()->json([
         'message' => 'No records found.',
-        'count' => $count,
+        'total' => 0,
       ], 404);
     }
 
-    return response()->json([
-      'message' => $hasFilter ? 'Search completed.' : 'No filters provided. Showing first 100 records.',
-      'count' => $results->count(),
-      'data' => $results,
-    ], 200);
+    $response = [
+      'message' => $hasFilter ? 'Search completed.' : 'No filters provided. Showing first page of 100 records.',
+      'pages' => $paginator->lastPage(),
+      'next' => $paginator->nextPageUrl(),
+      'prev' => $paginator->previousPageUrl(),
+      'total' => $paginator->total(),
+      'data' => $paginator->items(),
+    ];
+
+    return response()->json($response, 200);
   }
 }
