@@ -42,7 +42,7 @@ class RncController extends Controller
     $query = $result['query'];
     $hasFilter = $result['hasFilter'];
 
-    $paginator = $query->paginate(100);
+    $paginator = $query->paginate(100)->appends(request()->query());
 
     if ($paginator->total() === 0) {
       return response()->json([

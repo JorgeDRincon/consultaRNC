@@ -328,7 +328,8 @@ class Rnc extends Model
       'economic_activity',
       'status',
       'payment_regime',
-      'start_date'
+      'start_date',
+      'page',
     ];
   }
 
