@@ -2,10 +2,11 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "prebuild": "ssh consultarnc@consultarnc.com.do \"mkdir -p /home/consultarnc/public_html/consultaRNC/public/build && rm -rf /home/consultarnc/public_html/consultaRNC/public/build/*\"",
-        "build": "vite build",
-        "dev": "vite",
-        "postbuild": "scp -r public/build/* consultarnc@consultarnc.com.do:/home/consultarnc/public_html/consultaRNC/public/build"
+      "prebuild": "ssh consultarnc@consultarnc.com.do \"mkdir -p /home/consultarnc/public_html/consultaRNC/public/build && rm -rf /home/consultarnc/public_html/consultaRNC/public/build/*\"",
+      "build": "vite build",
+      "postbuild": "scp -r public/build/* consultarnc@consultarnc.com.do:/home/consultarnc/public_html/consultaRNC/public/build",
+      "postdeploy": "ssh consultarnc@consultarnc.com.do \"set -e; ln -sfn /home/consultarnc/public_html/consultaRNC/public/build /home/consultarnc/public_html/build; find /home/consultarnc/public_html/consultaRNC/public/build -type d -exec chmod 755 {} \\; ; find /home/consultarnc/public_html/consultaRNC/public/build -type f -exec chmod 644 {} \\; ; pkill -u consultarnc php-fpm || true\"",
+      "deploy": "npm run build && npm run postdeploy"
     },
     "devDependencies": {
         "@inertiajs/vue3": "^2.0.0",
