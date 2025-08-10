@@ -520,19 +520,104 @@
                                     class="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto text-xs lg:text-sm"
                                 >
 {
-    "message": "Consulta exitosa",
-    "count": 1,
+    "message": "Search completed.",
+    "pages": 5,
+    "next": "https://consultarnc.com.do/api/search?page=2",
+    "prev": null,
+    "total": 450,
     "data": [
         {
             "rnc": "123456789",
-            "nombre": "Empresa Ejemplo",
+            "nombre": "Empresa Ejemplo S.A.",
             "tipo": "Persona Jurídica",
             "estado": "Activo",
-            "fecha_registro": "2024-01-01"
+            "actividad_economica": "Comercio al por menor",
+            "regimen_pago": "General",
+            "fecha_inicio": "2020-01-15"
         },
+        {
+            "rnc": "987654321",
+            "nombre": "Comercial ABC",
+            "tipo": "Persona Jurídica", 
+            "estado": "Activo",
+            "actividad_economica": "Servicios profesionales",
+            "regimen_pago": "Pequeño Contribuyente",
+            "fecha_inicio": "2021-03-10"
+        }
+        // ... más registros
     ]
 }</pre
                                 >
+                                <div class="mt-4 space-y-3">
+                                    <h4
+                                        class="text-base font-medium text-gray-700"
+                                    >
+                                        Descripción de campos:
+                                    </h4>
+                                    <ul class="space-y-2 text-sm text-gray-600">
+                                        <li class="flex items-start">
+                                            <span
+                                                class="font-semibold text-gray-900 mr-2 text-base"
+                                                >message:</span
+                                            >
+                                            <span
+                                                >Mensaje descriptivo del
+                                                resultado de la búsqueda</span
+                                            >
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span
+                                                class="font-semibold text-gray-900 mr-2 text-base"
+                                                >pages:</span
+                                            >
+                                            <span
+                                                >Número total de páginas
+                                                disponibles</span
+                                            >
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span
+                                                class="font-semibold text-gray-900 mr-2 text-base"
+                                                >next:</span
+                                            >
+                                            <span
+                                                >URL de la siguiente página
+                                                (null si es la última)</span
+                                            >
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span
+                                                class="font-semibold text-gray-900 mr-2 text-base"
+                                                >prev:</span
+                                            >
+                                            <span
+                                                >URL de la página anterior (null
+                                                si es la primera)</span
+                                            >
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span
+                                                class="font-semibold text-gray-900 mr-2 text-base"
+                                                >total:</span
+                                            >
+                                            <span
+                                                >Número total de registros
+                                                encontrados</span
+                                            >
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span
+                                                class="font-semibold text-gray-900 mr-2 text-base"
+                                                >data:</span
+                                            >
+                                            <span
+                                                >Array con los registros RNC
+                                                encontrados (máximo 100 por
+                                                página)</span
+                                            >
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
 
