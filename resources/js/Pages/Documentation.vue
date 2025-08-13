@@ -520,19 +520,223 @@
                                     class="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto text-xs lg:text-sm"
                                 >
 {
-    "message": "Consulta exitosa",
-    "count": 1,
+    "message": "Search completed.",
+    "pages": 5,
+    "next": "https://consultarnc.com.do/api/search?page=2",
+    "prev": null,
+    "total": 450,
     "data": [
         {
             "rnc": "123456789",
-            "nombre": "Empresa Ejemplo",
+            "nombre": "Empresa Ejemplo S.A.",
             "tipo": "Persona Jurídica",
             "estado": "Activo",
-            "fecha_registro": "2024-01-01"
+            "actividad_economica": "Comercio al por menor",
+            "regimen_pago": "General",
+            "fecha_inicio": "2020-01-15"
         },
+        {
+            "rnc": "987654321",
+            "nombre": "Comercial ABC",
+            "tipo": "Persona Jurídica", 
+            "estado": "Activo",
+            "actividad_economica": "Servicios profesionales",
+            "regimen_pago": "Pequeño Contribuyente",
+            "fecha_inicio": "2021-03-10"
+        }
+        // ... más registros
     ]
 }</pre
                                 >
+                                <div class="mt-4 space-y-3">
+                                    <h4
+                                        class="text-base font-medium text-gray-700"
+                                    >
+                                        Descripción de campos:
+                                    </h4>
+                                    <div class="overflow-x-auto">
+                                        <table
+                                            class="min-w-full bg-white border border-gray-200 rounded-lg"
+                                        >
+                                            <thead class="bg-gray-50">
+                                                <tr>
+                                                    <th
+                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200"
+                                                    >
+                                                        Campo
+                                                    </th>
+                                                    <th
+                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200"
+                                                    >
+                                                        Tipo de Dato
+                                                    </th>
+                                                    <th
+                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200"
+                                                    >
+                                                        Descripción
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody
+                                                class="bg-white divide-y divide-gray-200"
+                                            >
+                                                <tr class="hover:bg-gray-50">
+                                                    <td
+                                                        class="px-6 py-4 whitespace-nowrap"
+                                                    >
+                                                        <code
+                                                            class="text-sm font-semibold text-gray-900 bg-gray-100 px-2 py-1 rounded"
+                                                            >message</code
+                                                        >
+                                                    </td>
+                                                    <td
+                                                        class="px-6 py-4 whitespace-nowrap"
+                                                    >
+                                                        <span
+                                                            class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200"
+                                                        >
+                                                            string
+                                                        </span>
+                                                    </td>
+                                                    <td
+                                                        class="px-6 py-4 text-sm text-gray-600"
+                                                    >
+                                                        Mensaje descriptivo del
+                                                        resultado de la búsqueda
+                                                    </td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50">
+                                                    <td
+                                                        class="px-6 py-4 whitespace-nowrap"
+                                                    >
+                                                        <code
+                                                            class="text-sm font-semibold text-gray-900 bg-gray-100 px-2 py-1 rounded"
+                                                            >pages</code
+                                                        >
+                                                    </td>
+                                                    <td
+                                                        class="px-6 py-4 whitespace-nowrap"
+                                                    >
+                                                        <span
+                                                            class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200"
+                                                        >
+                                                            number
+                                                        </span>
+                                                    </td>
+                                                    <td
+                                                        class="px-6 py-4 text-sm text-gray-600"
+                                                    >
+                                                        Número total de páginas
+                                                        disponibles
+                                                    </td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50">
+                                                    <td
+                                                        class="px-6 py-4 whitespace-nowrap"
+                                                    >
+                                                        <code
+                                                            class="text-sm font-semibold text-gray-900 bg-gray-100 px-2 py-1 rounded"
+                                                            >next</code
+                                                        >
+                                                    </td>
+                                                    <td
+                                                        class="px-6 py-4 whitespace-nowrap"
+                                                    >
+                                                        <span
+                                                            class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200"
+                                                        >
+                                                            string | null
+                                                        </span>
+                                                    </td>
+                                                    <td
+                                                        class="px-6 py-4 text-sm text-gray-600"
+                                                    >
+                                                        URL de la siguiente
+                                                        página (null si es la
+                                                        última)
+                                                    </td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50">
+                                                    <td
+                                                        class="px-6 py-4 whitespace-nowrap"
+                                                    >
+                                                        <code
+                                                            class="text-sm font-semibold text-gray-900 bg-gray-100 px-2 py-1 rounded"
+                                                            >prev</code
+                                                        >
+                                                    </td>
+                                                    <td
+                                                        class="px-6 py-4 whitespace-nowrap"
+                                                    >
+                                                        <span
+                                                            class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200"
+                                                        >
+                                                            string | null
+                                                        </span>
+                                                    </td>
+                                                    <td
+                                                        class="px-6 py-4 text-sm text-gray-600"
+                                                    >
+                                                        URL de la página
+                                                        anterior (null si es la
+                                                        primera)
+                                                    </td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50">
+                                                    <td
+                                                        class="px-6 py-4 whitespace-nowrap"
+                                                    >
+                                                        <code
+                                                            class="text-sm font-semibold text-gray-900 bg-gray-100 px-2 py-1 rounded"
+                                                            >total</code
+                                                        >
+                                                    </td>
+                                                    <td
+                                                        class="px-6 py-4 whitespace-nowrap"
+                                                    >
+                                                        <span
+                                                            class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200"
+                                                        >
+                                                            number
+                                                        </span>
+                                                    </td>
+                                                    <td
+                                                        class="px-6 py-4 text-sm text-gray-600"
+                                                    >
+                                                        Número total de
+                                                        registros encontrados
+                                                    </td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50">
+                                                    <td
+                                                        class="px-6 py-4 whitespace-nowrap"
+                                                    >
+                                                        <code
+                                                            class="text-sm font-semibold text-gray-900 bg-gray-100 px-2 py-1 rounded"
+                                                            >data</code
+                                                        >
+                                                    </td>
+                                                    <td
+                                                        class="px-6 py-4 whitespace-nowrap"
+                                                    >
+                                                        <span
+                                                            class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200"
+                                                        >
+                                                            array
+                                                        </span>
+                                                    </td>
+                                                    <td
+                                                        class="px-6 py-4 text-sm text-gray-600"
+                                                    >
+                                                        Array con los registros
+                                                        RNC encontrados (máximo
+                                                        100 por página)
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
