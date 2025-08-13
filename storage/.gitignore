@@ -1,0 +1,19 @@
+# Ignore all files and directories in storage except...
+*
+
+# Keep the directory structure
+!.gitignore
+!app/
+!app/.gitignore
+!framework/
+!framework/.gitignore
+!framework/cache/
+!framework/cache/.gitignore
+!framework/sessions/
+!framework/sessions/.gitignore
+!framework/testing/
+!framework/testing/.gitignore
+!framework/views/
+!framework/views/.gitignore
+!logs/
+!logs/.gitignore 
