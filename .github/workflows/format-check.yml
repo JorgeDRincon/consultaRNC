@@ -1,0 +1,83 @@
+name: Format Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    # No branches specified = runs on PRs to ANY branch
+
+jobs:
+  check-formatting:
+    name: Check Code Formatting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          # Fetch full history for better diff detection
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          tools: composer
+          coverage: none
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-dev --no-progress
+
+      - name: Run ESLint format check
+        run: |
+          echo "🔍 Checking JavaScript/Vue formatting..."
+          npm run lint
+
+      - name: Run Laravel Pint format check
+        run: |
+          echo "🔍 Checking PHP formatting..."
+          # Run Pint in test mode (dry-run)
+          ./vendor/bin/pint --test
+
+      - name: Check for formatting issues
+        run: |
+          echo "🧹 Running formatters to detect issues..."
+
+          # Run formatters
+          npm run lint:fix
+          composer run lint
+
+          # Check if any files were changed
+          if [ -n "$(git diff --name-only)" ]; then
+            echo ""
+            echo "❌ Code formatting issues detected!"
+            echo ""
+            echo "📁 Files that need formatting:"
+            git diff --name-only | sed 's/^/  - /'
+            echo ""
+            echo "🔧 To fix these issues locally, run:"
+            echo "  npm run lint:fix"
+            echo "  composer run lint"
+            echo ""
+            echo "📋 Diff preview:"
+            git diff --stat
+            exit 1
+          else
+            echo "✅ All code is properly formatted!"
+          fi
+
+      - name: Format check summary
+        if: failure()
+        run: |
+          echo ""
+          echo "💡 This PR contains code formatting issues."
+          echo "   Please run the suggested commands locally and push the changes."
+          echo ""
