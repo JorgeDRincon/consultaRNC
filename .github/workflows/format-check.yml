@@ -12,23 +12,29 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          # Fetch full history for better diff detection
-          fetch-depth: 0
+        uses: actions/checkout@v4 # 📥 Descarga el código del repositorio a la máquina virtual
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4 # 🟢 Instala Node.js en la versión especificada + cache automático
         with:
           node-version: "20"
           cache: "npm"
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@v2 # 🐘 Instala PHP + extensiones + herramientas como Composer
         with:
           php-version: "8.2"
           tools: composer
           coverage: none
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v4 # 💾 Maneja cache inteligente para acelerar builds
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
 
       - name: Install Node dependencies
         run: npm ci
@@ -60,15 +66,33 @@ jobs:
             echo ""
             echo "❌ Code formatting issues detected!"
             echo ""
-            echo "📁 Files that need formatting:"
-            git diff --name-only | sed 's/^/  - /'
+            echo "❌ Formatting issues found in these files:"
             echo ""
-            echo "🔧 To fix these issues locally, run:"
-            echo "  npm run lint:fix"
-            echo "  composer run lint"
-            echo ""
-            echo "📋 Diff preview:"
-            git diff --stat
+            
+            # Show each file with specific changes
+            git diff --name-only | while read -r file; do
+              echo "📁 File: $file"
+              
+              # Extract line-by-line changes
+              git diff "$file" | awk '
+                /^@@/ { 
+                  match($0, /\+([0-9]+)/, arr)
+                  line_num = arr[1]
+                }
+                /^-/ && !/^---/ { 
+                  old_line = substr($0, 2)
+                }
+                /^\+/ && !/^\+++/ { 
+                  new_line = substr($0, 2)
+                  printf "📍 Line ~%s: '\''%s'\'' → '\''%s'\''\n", line_num, old_line, new_line
+                  line_num++
+                }
+              '
+              echo ""
+            done
+            
+            echo "🔧 To fix all issues, run:"
+            echo "  npm run lint:fix && composer run lint"
             exit 1
           else
             echo "✅ All code is properly formatted!"
