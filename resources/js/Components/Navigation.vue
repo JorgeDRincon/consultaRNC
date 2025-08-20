@@ -33,11 +33,11 @@
 </template>
 
 <script setup>
-import { Link, usePage } from "@inertiajs/vue3";
+import { Link, usePage } from '@inertiajs/vue3'
 
-const page = usePage();
+const page = usePage()
 
 const isActive = (path) => {
-    return page.url === path;
-};
+    return page.url === path
+}
 </script>
