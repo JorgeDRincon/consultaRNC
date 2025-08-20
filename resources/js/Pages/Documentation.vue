@@ -14,7 +14,7 @@
             <div class="hidden lg:block w-64 flex-shrink-0 lg:mr-8">
                 <div class="bg-white rounded-2xl shadow-lg p-6 sticky top-8">
                     <h3 class="text-lg font-semibold text-gray-800 mb-4">
-                        Contenido
+                        Contenido 
                     </h3>
                     <nav class="space-y-2">
                         <div>
@@ -71,7 +71,7 @@
                                     :class="[
                                         'block px-3 py-2 text-sm rounded transition',
                                         activeSection ===
-                                        'param-economic-activity'
+                                            'param-economic-activity'
                                             ? 'text-blue-600 bg-blue-50 font-medium'
                                             : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
                                     ]"
@@ -127,7 +127,7 @@
                                     :class="[
                                         'block px-3 py-2 text-sm rounded transition',
                                         activeSection ===
-                                        'ejemplos-combinaciones'
+                                            'ejemplos-combinaciones'
                                             ? 'text-blue-600 bg-blue-50 font-medium'
                                             : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
                                     ]"
@@ -236,11 +236,11 @@
                                             https://consultarnc.com.do/api/search?
                                         </code>
                                         <button
-                                            @click="copyBaseUrl"
                                             class="bg-white hover:bg-blue-50 text-blue-600 hover:text-blue-700 p-2 rounded-lg shadow-sm transition-colors duration-200 flex items-center justify-center flex-shrink-0"
                                             title="Copiar URL"
+                                            @click="copyBaseUrl"
                                         >
-                                            <i class="fa-regular fa-copy"></i>
+                                            <i class="fa-regular fa-copy" />
                                         </button>
                                     </div>
                                 </div>
@@ -344,11 +344,7 @@
                                 <code
                                     class="text-zinc-900 font-mono text-xs lg:text-sm break-all"
                                 >
-                                    GET /api/search?<span class="font-semibold"
-                                        >business_name</span
-                                    >=<span class="text-red-600 font-semibold"
-                                        >empresa</span
-                                    >
+                                    GET /api/search?<span class="font-semibold">business_name</span>=<span class="text-red-600 font-semibold">empresa</span>
                                 </code>
                             </div>
                             <div
@@ -362,11 +358,7 @@
                                 <code
                                     class="text-zinc-900 font-mono text-xs lg:text-sm break-all"
                                 >
-                                    GET /api/search?<span class="font-semibold"
-                                        >rnc</span
-                                    >=<span class="text-red-600 font-semibold"
-                                        >123456789</span
-                                    >
+                                    GET /api/search?<span class="font-semibold">rnc</span>=<span class="text-red-600 font-semibold">123456789</span>
                                 </code>
                             </div>
                             <div
@@ -380,11 +372,7 @@
                                 <code
                                     class="text-zinc-900 font-mono text-xs lg:text-sm break-all"
                                 >
-                                    GET /api/search?<span class="font-semibold"
-                                        >economic_activity</span
-                                    >=<span class="text-red-600 font-semibold"
-                                        >comercio</span
-                                    >
+                                    GET /api/search?<span class="font-semibold">economic_activity</span>=<span class="text-red-600 font-semibold">comercio</span>
                                 </code>
                             </div>
                             <div
@@ -398,15 +386,7 @@
                                 <code
                                     class="text-zinc-900 font-mono text-xs lg:text-sm break-all"
                                 >
-                                    GET /api/search?<span class="font-semibold"
-                                        >status</span
-                                    >=<span class="text-red-600 font-semibold"
-                                        >Activo</span
-                                    >&<span class="font-semibold"
-                                        >payment_regime</span
-                                    >=<span class="text-red-600 font-semibold"
-                                        >General</span
-                                    >
+                                    GET /api/search?<span class="font-semibold">status</span>=<span class="text-red-600 font-semibold">Activo</span>&<span class="font-semibold">payment_regime</span>=<span class="text-red-600 font-semibold">General</span>
                                 </code>
                             </div>
                         </div>
@@ -427,14 +407,7 @@
                                     Búsqueda de empresas activas por nombre
                                 </h6>
                                 <code class="text-zinc-900 font-mono text-sm">
-                                    GET /api/search?<span class="font-semibold"
-                                        >business_name</span
-                                    >=<span class="text-red-600 font-semibold"
-                                        >empresa</span
-                                    >&<span class="font-semibold">status</span
-                                    >=<span class="text-red-600 font-semibold"
-                                        >Activo</span
-                                    >
+                                    GET /api/search?<span class="font-semibold">business_name</span>=<span class="text-red-600 font-semibold">empresa</span>&<span class="font-semibold">status</span>=<span class="text-red-600 font-semibold">Activo</span>
                                 </code>
                                 <p class="text-gray-600 text-xs mt-1">
                                     Buscar empresas activas con "empresa" en el
@@ -450,15 +423,7 @@
                                     Búsqueda de comercios con régimen general
                                 </h6>
                                 <code class="text-zinc-900 font-mono text-sm">
-                                    GET /api/search?<span class="font-semibold"
-                                        >economic_activity</span
-                                    >=<span class="text-red-600 font-semibold"
-                                        >comercio</span
-                                    >&<span class="font-semibold"
-                                        >payment_regime</span
-                                    >=<span class="text-red-600 font-semibold"
-                                        >General</span
-                                    >
+                                    GET /api/search?<span class="font-semibold">economic_activity</span>=<span class="text-red-600 font-semibold">comercio</span>&<span class="font-semibold">payment_regime</span>=<span class="text-red-600 font-semibold">General</span>
                                 </code>
                                 <p class="text-gray-600 text-xs mt-1">
                                     Buscar comercios con régimen general
@@ -474,18 +439,7 @@
                                     de fechas
                                 </h6>
                                 <code class="text-zinc-900 font-mono text-sm">
-                                    GET /api/search?<span class="font-semibold"
-                                        >start_date[]</span
-                                    >=<span class="text-red-600 font-semibold"
-                                        >2020-01-01</span
-                                    >&<span class="font-semibold"
-                                        >start_date[]</span
-                                    >=<span class="text-red-600 font-semibold"
-                                        >2024-12-31</span
-                                    >&<span class="font-semibold">status</span
-                                    >=<span class="text-red-600 font-semibold"
-                                        >Activo</span
-                                    >
+                                    GET /api/search?<span class="font-semibold">start_date[]</span>=<span class="text-red-600 font-semibold">2020-01-01</span>&<span class="font-semibold">start_date[]</span>=<span class="text-red-600 font-semibold">2024-12-31</span>&<span class="font-semibold">status</span>=<span class="text-red-600 font-semibold">Activo</span>
                                 </code>
                                 <p class="text-gray-600 text-xs mt-1">
                                     Buscar contribuyentes activos registrados
@@ -546,8 +500,7 @@
         }
         // ... más registros
     ]
-}</pre
-                                >
+}</pre>
                                 <div class="mt-4 space-y-3">
                                     <h4
                                         class="text-base font-medium text-gray-700"
@@ -586,8 +539,7 @@
                                                     >
                                                         <code
                                                             class="text-sm font-semibold text-gray-900 bg-gray-100 px-2 py-1 rounded"
-                                                            >message</code
-                                                        >
+                                                        >message</code>
                                                     </td>
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap"
@@ -611,8 +563,7 @@
                                                     >
                                                         <code
                                                             class="text-sm font-semibold text-gray-900 bg-gray-100 px-2 py-1 rounded"
-                                                            >pages</code
-                                                        >
+                                                        >pages</code>
                                                     </td>
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap"
@@ -636,8 +587,7 @@
                                                     >
                                                         <code
                                                             class="text-sm font-semibold text-gray-900 bg-gray-100 px-2 py-1 rounded"
-                                                            >next</code
-                                                        >
+                                                        >next</code>
                                                     </td>
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap"
@@ -662,8 +612,7 @@
                                                     >
                                                         <code
                                                             class="text-sm font-semibold text-gray-900 bg-gray-100 px-2 py-1 rounded"
-                                                            >prev</code
-                                                        >
+                                                        >prev</code>
                                                     </td>
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap"
@@ -688,8 +637,7 @@
                                                     >
                                                         <code
                                                             class="text-sm font-semibold text-gray-900 bg-gray-100 px-2 py-1 rounded"
-                                                            >total</code
-                                                        >
+                                                        >total</code>
                                                     </td>
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap"
@@ -713,8 +661,7 @@
                                                     >
                                                         <code
                                                             class="text-sm font-semibold text-gray-900 bg-gray-100 px-2 py-1 rounded"
-                                                            >data</code
-                                                        >
+                                                        >data</code>
                                                     </td>
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap"
@@ -752,41 +699,29 @@
                                     <li class="flex items-start">
                                         <span
                                             class="font-semibold text-green-600 mr-2"
-                                            >200 OK:</span
-                                        >
-                                        <span class="text-gray-600"
-                                            >La solicitud se procesó
-                                            correctamente</span
-                                        >
+                                        >200 OK:</span>
+                                        <span class="text-gray-600">La solicitud se procesó
+                                            correctamente</span>
                                     </li>
                                     <li class="flex items-start">
                                         <span
                                             class="font-semibold text-yellow-600 mr-2"
-                                            >400 Bad Request:</span
-                                        >
-                                        <span class="text-gray-600"
-                                            >La solicitud contiene parámetros
-                                            inválidos</span
-                                        >
+                                        >400 Bad Request:</span>
+                                        <span class="text-gray-600">La solicitud contiene parámetros
+                                            inválidos</span>
                                     </li>
                                     <li class="flex items-start">
                                         <span
                                             class="font-semibold text-red-600 mr-2"
-                                            >404 Not Found:</span
-                                        >
-                                        <span class="text-gray-600"
-                                            >El recurso solicitado no
-                                            existe</span
-                                        >
+                                        >404 Not Found:</span>
+                                        <span class="text-gray-600">El recurso solicitado no
+                                            existe</span>
                                     </li>
                                     <li class="flex items-start">
                                         <span
                                             class="font-semibold text-red-600 mr-2"
-                                            >500 Internal Server Error:</span
-                                        >
-                                        <span class="text-gray-600"
-                                            >Error interno del servidor</span
-                                        >
+                                        >500 Internal Server Error:</span>
+                                        <span class="text-gray-600">Error interno del servidor</span>
                                     </li>
                                 </ul>
                             </div>
@@ -813,49 +748,31 @@
                                     <div class="mb-2">
                                         <span
                                             class="text-green-400 font-semibold"
-                                            >fetch</span
-                                        >
+                                        >fetch</span>
                                         <span class="text-yellow-400">(</span>
-                                        <span class="text-blue-300 font-mono"
-                                            >'<span class="text-blue-200"
-                                                >https://consultarnc.com.do/api/search?<span
-                                                    class="text-blue-400 font-semibold"
-                                                    >business_name</span
-                                                >=<span class="text-blue-300"
-                                                    >empresa</span
-                                                ></span
-                                            >'</span
-                                        >
+                                        <span class="text-blue-300 font-mono">'<span class="text-blue-200">https://consultarnc.com.do/api/search?<span
+                                            class="text-blue-400 font-semibold"
+                                        >business_name</span>=<span class="text-blue-300">empresa</span></span>'</span>
                                         <span class="text-yellow-400">)</span>
                                     </div>
                                     <div class="ml-4">
-                                        <span class="text-purple-400"
-                                            >.then</span
-                                        >
+                                        <span class="text-purple-400">.then</span>
                                         <span class="text-yellow-400">(</span>
-                                        <span class="text-blue-300"
-                                            >response</span
-                                        >
+                                        <span class="text-blue-300">response</span>
                                         <span class="text-yellow-400"> =></span>
                                         <span class="text-blue-300">
-                                            response</span
-                                        >
+                                            response</span>
                                         <span class="text-yellow-400">.</span>
-                                        <span class="text-purple-400"
-                                            >json</span
-                                        >
+                                        <span class="text-purple-400">json</span>
                                         <span class="text-yellow-400">())</span>
                                     </div>
                                     <div class="ml-4">
-                                        <span class="text-purple-400"
-                                            >.then</span
-                                        >
+                                        <span class="text-purple-400">.then</span>
                                         <span class="text-yellow-400">(</span>
                                         <span class="text-blue-300">data</span>
                                         <span class="text-yellow-400"> =></span>
                                         <span class="text-purple-400">
-                                            console</span
-                                        >
+                                            console</span>
                                         <span class="text-yellow-400">.</span>
                                         <span class="text-purple-400">log</span>
                                         <span class="text-yellow-400">(</span>
@@ -863,15 +780,12 @@
                                         <span class="text-yellow-400">))</span>
                                     </div>
                                     <div class="ml-4">
-                                        <span class="text-purple-400"
-                                            >.catch</span
-                                        >
+                                        <span class="text-purple-400">.catch</span>
                                         <span class="text-yellow-400">(</span>
                                         <span class="text-blue-300">error</span>
                                         <span class="text-yellow-400"> =></span>
                                         <span class="text-purple-400">
-                                            console</span
-                                        >
+                                            console</span>
                                         <span class="text-yellow-400">.</span>
                                         <span class="text-red-400">error</span>
                                         <span class="text-yellow-400">(</span>
@@ -893,85 +807,61 @@
                                         <span class="text-purple-400">$ch</span>
                                         <span class="text-yellow-400"> =</span>
                                         <span class="text-green-400">
-                                            curl_init</span
-                                        >
+                                            curl_init</span>
                                         <span class="text-yellow-400">();</span>
                                     </div>
                                     <div class="mb-2">
-                                        <span class="text-green-400"
-                                            >curl_setopt</span
-                                        >
+                                        <span class="text-green-400">curl_setopt</span>
                                         <span class="text-yellow-400">(</span>
                                         <span class="text-purple-400">$ch</span>
                                         <span class="text-yellow-400">,</span>
                                         <span class="text-blue-300">
-                                            CURLOPT_URL</span
-                                        >
+                                            CURLOPT_URL</span>
                                         <span class="text-yellow-400">,</span>
                                     </div>
                                     <div class="ml-4 mb-2">
-                                        <span class="text-blue-200 font-mono"
-                                            >'https://consultarnc.com.do/api/search?<span
-                                                class="text-blue-400 font-semibold"
-                                                >rnc</span
-                                            >=<span class="text-blue-300"
-                                                >123456789</span
-                                            >'</span
-                                        >
+                                        <span class="text-blue-200 font-mono">'https://consultarnc.com.do/api/search?<span
+                                            class="text-blue-400 font-semibold"
+                                        >rnc</span>=<span class="text-blue-300">123456789</span>'</span>
                                         <span class="text-yellow-400">);</span>
                                     </div>
                                     <div class="mb-2">
-                                        <span class="text-green-400"
-                                            >curl_setopt</span
-                                        >
+                                        <span class="text-green-400">curl_setopt</span>
                                         <span class="text-yellow-400">(</span>
                                         <span class="text-purple-400">$ch</span>
                                         <span class="text-yellow-400">,</span>
                                         <span class="text-blue-300">
-                                            CURLOPT_RETURNTRANSFER</span
-                                        >
+                                            CURLOPT_RETURNTRANSFER</span>
                                         <span class="text-yellow-400">,</span>
                                         <span class="text-green-400">
-                                            true</span
-                                        >
+                                            true</span>
                                         <span class="text-yellow-400">);</span>
                                     </div>
                                     <div class="mb-2">
-                                        <span class="text-purple-400"
-                                            >$response</span
-                                        >
+                                        <span class="text-purple-400">$response</span>
                                         <span class="text-yellow-400"> =</span>
                                         <span class="text-green-400">
-                                            curl_exec</span
-                                        >
+                                            curl_exec</span>
                                         <span class="text-yellow-400">(</span>
                                         <span class="text-purple-400">$ch</span>
                                         <span class="text-yellow-400">);</span>
                                     </div>
                                     <div class="mb-2">
-                                        <span class="text-green-400"
-                                            >curl_close</span
-                                        >
+                                        <span class="text-green-400">curl_close</span>
                                         <span class="text-yellow-400">(</span>
                                         <span class="text-purple-400">$ch</span>
                                         <span class="text-yellow-400">);</span>
                                     </div>
                                     <div>
-                                        <span class="text-purple-400"
-                                            >$data</span
-                                        >
+                                        <span class="text-purple-400">$data</span>
                                         <span class="text-yellow-400"> =</span>
                                         <span class="text-green-400">
-                                            json_decode</span
-                                        >
+                                            json_decode</span>
                                         <span class="text-yellow-400">(</span>
-                                        <span class="text-purple-400"
-                                            >$response</span
-                                        >
+                                        <span class="text-purple-400">$response</span>
                                         <span class="text-yellow-400">,</span>
                                         <span class="text-green-400">
-                                            true</span
-                                        >
+                                            true</span>
                                         <span class="text-yellow-400">);</span>
                                     </div>
                                 </div>
@@ -1023,102 +913,100 @@
             v-if="showToast"
             class="fixed top-4 left-4 right-4 sm:left-1/2 sm:right-auto sm:transform sm:-translate-x-1/2 sm:w-auto bg-blue-500 text-white px-4 lg:px-6 py-3 lg:py-4 rounded-lg shadow-lg z-50 flex items-center gap-2 transition-all duration-300"
         >
-            <i class="fa-solid fa-check flex-shrink-0"></i>
-            <span class="text-sm lg:text-base"
-                >URL copiada en el portapapeles</span
-            >
+            <i class="fa-solid fa-check flex-shrink-0" />
+            <span class="text-sm lg:text-base">URL copiada en el portapapeles</span>
         </div>
     </div>
 </template>
 
 <script setup>
-import FeatureCard from "@/Components/FeatureCard.vue"; // Added FeatureCard import
-import Footer from "@/Components/Footer.vue";
-import Navigation from "@/Components/Navigation.vue";
-import ParamCard from "@/Components/ParamCard.vue";
-import { Head } from "@inertiajs/vue3";
-import { onMounted, onUnmounted, ref } from "vue";
+import FeatureCard from '@/Components/FeatureCard.vue' // Added FeatureCard import
+import Footer from '@/Components/Footer.vue'
+import Navigation from '@/Components/Navigation.vue'
+import ParamCard from '@/Components/ParamCard.vue'
+import { Head } from '@inertiajs/vue3'
+import { onMounted, onUnmounted, ref } from 'vue'
 
-const activeSection = ref("busqueda-rnc");
+const activeSection = ref('busqueda-rnc')
 
 // Copiar URL base al portapapeles
-const showToast = ref(false);
+const showToast = ref(false)
 
 const copyBaseUrl = () => {
     navigator.clipboard
-        .writeText("https://consultarnc.com.do/api/search?")
+        .writeText('https://consultarnc.com.do/api/search?')
         .then(() => {
-            showToast.value = true;
+            showToast.value = true
             setTimeout(() => {
-                showToast.value = false;
-            }, 2000);
+                showToast.value = false
+            }, 2000)
         })
         .catch(() => {
             // En caso de error, mantener funcionalidad básica
-            alert("No se pudo copiar la URL");
-        });
-};
+            alert('No se pudo copiar la URL')
+        })
+}
 
 const sections = [
-    "url-base",
-    "busqueda-rnc",
-    "param-rnc",
-    "param-business-name",
-    "param-economic-activity",
-    "param-status",
-    "param-payment-regime",
-    "param-start-date",
-    "ejemplos-uso",
-    "ejemplos-combinaciones",
-    "tipos-respuestas",
-    "respuesta-exitosa",
-    "respuesta-error",
-    "codigos-estado",
-    "ejemplos-integracion",
-    "informacion-adicional",
-];
+    'url-base',
+    'busqueda-rnc',
+    'param-rnc',
+    'param-business-name',
+    'param-economic-activity',
+    'param-status',
+    'param-payment-regime',
+    'param-start-date',
+    'ejemplos-uso',
+    'ejemplos-combinaciones',
+    'tipos-respuestas',
+    'respuesta-exitosa',
+    'respuesta-error',
+    'codigos-estado',
+    'ejemplos-integracion',
+    'informacion-adicional'
+]
 
 const updateActiveSection = () => {
-    const scrollPosition = window.scrollY + 50; // Offset for header
+    const scrollPosition = window.scrollY + 50 // Offset for header
 
     // Check parameter subsections first (they have priority when within their bounds)
     const paramSections = sections.filter((section) =>
-        section.startsWith("param-")
-    );
+        section.startsWith('param-')
+    )
     for (let i = paramSections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(paramSections[i]);
+        const section = document.getElementById(paramSections[i])
         if (section) {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
+            const sectionTop = section.offsetTop
+            const sectionHeight = section.offsetHeight
 
             if (
                 scrollPosition >= sectionTop &&
                 scrollPosition < sectionTop + sectionHeight
             ) {
-                activeSection.value = paramSections[i];
-                return;
+                activeSection.value = paramSections[i]
+                return
             }
         }
     }
 
     // Check response type subsections
     const responseSections = [
-        "respuesta-exitosa",
-        "respuesta-error",
-        "codigos-estado",
-    ];
+        'respuesta-exitosa',
+        'respuesta-error',
+        'codigos-estado'
+    ]
     for (let i = responseSections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(responseSections[i]);
+        const section = document.getElementById(responseSections[i])
         if (section) {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
+            const sectionTop = section.offsetTop
+            const sectionHeight = section.offsetHeight
 
             if (
                 scrollPosition >= sectionTop &&
                 scrollPosition < sectionTop + sectionHeight
             ) {
-                activeSection.value = responseSections[i];
-                return;
+                activeSection.value = responseSections[i]
+                return
             }
         }
     }
@@ -1126,31 +1014,31 @@ const updateActiveSection = () => {
     // If no parameter or response section is active, check main sections
     const mainSections = sections.filter(
         (section) =>
-            !section.startsWith("param-") && !responseSections.includes(section)
-    );
+            !section.startsWith('param-') && !responseSections.includes(section)
+    )
     for (let i = mainSections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(mainSections[i]);
+        const section = document.getElementById(mainSections[i])
         if (section) {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
+            const sectionTop = section.offsetTop
+            const sectionHeight = section.offsetHeight
 
             if (
                 scrollPosition >= sectionTop &&
                 scrollPosition < sectionTop + sectionHeight
             ) {
-                activeSection.value = mainSections[i];
-                break;
+                activeSection.value = mainSections[i]
+                break
             }
         }
     }
-};
+}
 
 onMounted(() => {
-    window.addEventListener("scroll", updateActiveSection);
-    updateActiveSection(); // Initial check
-});
+    window.addEventListener('scroll', updateActiveSection)
+    updateActiveSection() // Initial check
+})
 
 onUnmounted(() => {
-    window.removeEventListener("scroll", updateActiveSection);
-});
+    window.removeEventListener('scroll', updateActiveSection)
+})
 </script>

@@ -59,9 +59,10 @@ class DownloadFile extends Command
             $response = Http::timeout(600)->withoutVerifying()->get($fileUrl);
 
             // Verificar si la descarga fue exitosa
-            if (!$response->successful()) {
-                $this->error("Failed to download ZIP file. HTTP Status Code: " . $response->status());
-                $this->error("Response body on failure: " . $response->body());
+            if (! $response->successful()) {
+                $this->error('Failed to download ZIP file. HTTP Status Code: '.$response->status());
+                $this->error('Response body on failure: '.$response->body());
+
                 return Command::FAILURE;
             }
 
@@ -72,13 +73,15 @@ class DownloadFile extends Command
             // Verificar si el tamaño de descarga coincide con el Content-Length
             if ($expectedSize !== null && $downloadedSize != $expectedSize) {
                 $this->error("Downloaded file size mismatch. Expected: {$expectedSize} bytes, Downloaded: {$downloadedSize} bytes.");
-                $this->error("This indicates an incomplete download.");
+                $this->error('This indicates an incomplete download.');
+
                 return Command::FAILURE;
             }
 
             // Verificar la firma 'PK' de un archivo ZIP válido
             if (substr($zipContent, 0, 4) !== "PK\x03\x04") {
                 $this->error("Downloaded file does not appear to be a valid ZIP file (missing 'PK' signature).");
+
                 return Command::FAILURE;
             }
 
@@ -86,31 +89,34 @@ class DownloadFile extends Command
             // Esto garantiza que se guarde en storage/app/temp/
             Storage::disk('local')->put($tempZipPath, $zipContent);
             $fullTempZipPath = Storage::disk('local')->path($tempZipPath); // Obtener la ruta absoluta real
-            $this->info("ZIP file downloaded temporarily to: " . $fullTempZipPath);
+            $this->info('ZIP file downloaded temporarily to: '.$fullTempZipPath);
 
             // 2. Abrir el archivo ZIP.
             $zip = new ZipArchive;
             $openResult = $zip->open($fullTempZipPath);
-            if ($openResult !== TRUE) {
-                $this->error("Could not open the downloaded ZIP file: " . $openResult . " (See ZipArchive::ER_ constants for details).");
-                $this->error("This often means the downloaded file is not a valid ZIP or is corrupted.");
+            if ($openResult !== true) {
+                $this->error('Could not open the downloaded ZIP file: '.$openResult.' (See ZipArchive::ER_ constants for details).');
+                $this->error('This often means the downloaded file is not a valid ZIP or is corrupted.');
+
                 // Mantener el ZIP para inspección manual si falla
                 return Command::FAILURE;
             }
 
             // 3. Verificar y extraer el primer (y único) archivo.
             if ($zip->numFiles !== 1) {
-                $this->error("The ZIP file contains " . $zip->numFiles . " files. Expected exactly 1 file.");
+                $this->error('The ZIP file contains '.$zip->numFiles.' files. Expected exactly 1 file.');
                 $zip->close();
                 Storage::disk('local')->delete($tempZipPath);
+
                 return Command::FAILURE;
             }
 
             $innerFileName = $zip->getNameIndex(0);
             if ($innerFileName === false) {
-                $this->error("Could not get the name of the file inside the ZIP archive.");
+                $this->error('Could not get the name of the file inside the ZIP archive.');
                 $zip->close();
                 Storage::disk('local')->delete($tempZipPath);
+
                 return Command::FAILURE;
             }
 
@@ -119,19 +125,20 @@ class DownloadFile extends Command
                 $this->error("Could not read content of '{$innerFileName}' from the ZIP file.");
                 $zip->close();
                 Storage::disk('local')->delete($tempZipPath);
+
                 return Command::FAILURE;
             }
 
             // 4. Guardar el archivo extraído en su destino final (storage/app/downloads/).
             // Laravel creará la carpeta 'downloads' si no existe dentro de storage/app/
-            Storage::disk('local')->put($finalDestinationBaseDir . $innerFileName, $extractedFileContent);
-            $fullExtractedFilePathAbsolute = Storage::disk('local')->path($finalDestinationBaseDir . $innerFileName);
-            $this->info("Single file '{$innerFileName}' extracted and saved to: " . $fullExtractedFilePathAbsolute);
+            Storage::disk('local')->put($finalDestinationBaseDir.$innerFileName, $extractedFileContent);
+            $fullExtractedFilePathAbsolute = Storage::disk('local')->path($finalDestinationBaseDir.$innerFileName);
+            $this->info("Single file '{$innerFileName}' extracted and saved to: ".$fullExtractedFilePathAbsolute);
 
             // 5. Cerrar el archivo ZIP y eliminar el temporal.
             $zip->close();
             Storage::disk('local')->delete($tempZipPath);
-            $this->info("Temporary ZIP file deleted: " . $fullTempZipPath);
+            $this->info('Temporary ZIP file deleted: '.$fullTempZipPath);
 
             // 6. Llamar a la nueva función de procesamiento.
             // Pasa la ruta absoluta del archivo CSV extraído al comando de procesamiento.
@@ -139,16 +146,17 @@ class DownloadFile extends Command
                 'csvFilePath' => $fullExtractedFilePathAbsolute,
             ]);
 
-            $this->info("File processing completed successfully.");
+            $this->info('File processing completed successfully.');
 
         } catch (\Exception $e) {
-            $this->error("An error occurred: " . $e->getMessage());
+            $this->error('An error occurred: '.$e->getMessage());
             if ($e instanceof \GuzzleHttp\Exception\RequestException && $e->hasResponse()) {
-                $this->error("HTTP client error response: " . $e->getResponse()->getBody()->getContents());
+                $this->error('HTTP client error response: '.$e->getResponse()->getBody()->getContents());
             }
             if (Storage::disk('local')->exists($tempZipPath)) {
-                $this->warn("Temporary ZIP file was not deleted due to error. You can inspect it at: " . Storage::disk('local')->path($tempZipPath));
+                $this->warn('Temporary ZIP file was not deleted due to error. You can inspect it at: '.Storage::disk('local')->path($tempZipPath));
             }
+
             return Command::FAILURE;
         }
 

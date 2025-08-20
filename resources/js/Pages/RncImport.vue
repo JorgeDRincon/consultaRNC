@@ -92,7 +92,7 @@
                     </div>
 
                     <!-- Upload Form -->
-                    <form @submit.prevent="submitForm" class="space-y-6">
+                    <form class="space-y-6" @submit.prevent="submitForm">
                         <!-- Upload Area -->
                         <div
                             class="relative border-2 border-dashed border-gray-300 rounded-lg p-12 text-center hover:border-blue-400 transition-colors duration-200"
@@ -184,8 +184,8 @@
                                 </div>
                                 <button
                                     type="button"
-                                    @click="removeFile"
                                     class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                                    @click="removeFile"
                                 >
                                     <svg
                                         class="mr-1 h-4 w-4"
@@ -225,7 +225,7 @@
                                 <div
                                     class="bg-blue-600 h-2 rounded-full transition-all duration-300"
                                     :style="{ width: uploadProgress + '%' }"
-                                ></div>
+                                />
                             </div>
                         </div>
 
@@ -249,12 +249,12 @@
                                         r="10"
                                         stroke="currentColor"
                                         stroke-width="4"
-                                    ></circle>
+                                    />
                                     <path
                                         class="opacity-75"
                                         fill="currentColor"
                                         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                    ></path>
+                                    />
                                 </svg>
                                 <svg
                                     v-else
@@ -333,119 +333,119 @@
 </template>
 
 <script>
-import { Head } from "@inertiajs/vue3";
-import { ref } from "vue";
+import { Head } from '@inertiajs/vue3'
+import { ref } from 'vue'
 
 export default {
     components: {
-        Head,
+        Head
     },
     props: {
         flash: {
             type: Object,
-            default: () => ({}),
-        },
+            default: () => ({})
+        }
     },
     setup() {
-        const selectedFile = ref(null);
-        const isDragOver = ref(false);
-        const uploading = ref(false);
-        const uploadProgress = ref(0);
-        const fileInput = ref(null);
+        const selectedFile = ref(null)
+        const isDragOver = ref(false)
+        const uploading = ref(false)
+        const uploadProgress = ref(0)
+        const fileInput = ref(null)
 
         const handleFileSelect = (event) => {
-            const file = event.target.files[0];
+            const file = event.target.files[0]
             if (file && validateFile(file)) {
-                selectedFile.value = file;
+                selectedFile.value = file
             }
-        };
+        }
 
         const handleFileDrop = (event) => {
-            isDragOver.value = false;
-            const files = event.dataTransfer.files;
+            isDragOver.value = false
+            const files = event.dataTransfer.files
             if (files.length > 0) {
-                const file = files[0];
+                const file = files[0]
                 if (validateFile(file)) {
-                    selectedFile.value = file;
+                    selectedFile.value = file
                 }
             }
-        };
+        }
 
         const validateFile = (file) => {
-            if (!file.name.toLowerCase().endsWith(".csv")) {
-                alert("Por favor selecciona un archivo CSV válido.");
-                return false;
+            if (!file.name.toLowerCase().endsWith('.csv')) {
+                alert('Por favor selecciona un archivo CSV válido.')
+                return false
             }
 
-            const maxSize = 200 * 1024 * 1024; // 200MB
+            const maxSize = 200 * 1024 * 1024 // 200MB
             if (file.size > maxSize) {
                 alert(
-                    "El archivo es demasiado grande. El tamaño máximo es 200MB."
-                );
-                return false;
+                    'El archivo es demasiado grande. El tamaño máximo es 200MB.'
+                )
+                return false
             }
 
-            return true;
-        };
+            return true
+        }
 
         const removeFile = () => {
-            selectedFile.value = null;
+            selectedFile.value = null
             if (fileInput.value) {
-                fileInput.value.value = "";
+                fileInput.value.value = ''
             }
-        };
+        }
 
         const formatFileSize = (bytes) => {
-            if (bytes === 0) return "0 Bytes";
-            const k = 1024;
-            const sizes = ["Bytes", "KB", "MB", "GB"];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            if (bytes === 0) return '0 Bytes'
+            const k = 1024
+            const sizes = ['Bytes', 'KB', 'MB', 'GB']
+            const i = Math.floor(Math.log(bytes) / Math.log(k))
             return (
-                parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i]
-            );
-        };
+                parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
+            )
+        }
 
         const submitForm = async () => {
-            if (!selectedFile.value) return;
+            if (!selectedFile.value) return
 
-            uploading.value = true;
-            uploadProgress.value = 0;
+            uploading.value = true
+            uploadProgress.value = 0
 
-            const formData = new FormData();
-            formData.append("file", selectedFile.value);
+            const formData = new FormData()
+            formData.append('file', selectedFile.value)
 
             try {
-                const response = await fetch("/rnc/import", {
-                    method: "POST",
+                const response = await fetch('/rnc/import', {
+                    method: 'POST',
                     body: formData,
                     headers: {
-                        "X-CSRF-TOKEN": document
+                        'X-CSRF-TOKEN': document
                             .querySelector('meta[name="csrf-token"]')
-                            .getAttribute("content"),
-                    },
-                });
+                            .getAttribute('content')
+                    }
+                })
 
                 if (response.ok) {
                     // Simulate progress for better UX
                     const interval = setInterval(() => {
-                        uploadProgress.value += Math.random() * 10;
+                        uploadProgress.value += Math.random() * 10
                         if (uploadProgress.value >= 100) {
-                            clearInterval(interval);
-                            uploadProgress.value = 100;
+                            clearInterval(interval)
+                            uploadProgress.value = 100
                             setTimeout(() => {
-                                window.location.reload();
-                            }, 500);
+                                window.location.reload()
+                            }, 500)
                         }
-                    }, 100);
+                    }, 100)
                 } else {
-                    throw new Error("Error al subir el archivo");
+                    throw new Error('Error al subir el archivo')
                 }
             } catch (error) {
-                alert("Error al subir el archivo: " + error.message);
-                uploading.value = false;
-                uploadProgress.value = 0;
+                alert('Error al subir el archivo: ' + error.message)
+                uploading.value = false
+                uploadProgress.value = 0
             }
-        };
+        }
 
         return {
             selectedFile,
@@ -457,8 +457,8 @@ export default {
             handleFileDrop,
             removeFile,
             formatFileSize,
-            submitForm,
-        };
-    },
-};
+            submitForm
+        }
+    }
+}
 </script>

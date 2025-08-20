@@ -29,8 +29,7 @@
         "fecha_registro": "2024-01-01"
     },
     "message": "Consulta exitosa"
-}</pre
-                        >
+}</pre>
                     </div>
                 </div>
 
@@ -53,8 +52,7 @@
         "message": "El RNC especificado no existe",
         "details": "No se encontró ningún registro con el RNC 123456789"
     }
-}</pre
-                        >
+}</pre>
                     </div>
                 </div>
 
@@ -66,37 +64,21 @@
                     <div class="bg-gray-100 p-6 rounded-lg">
                         <ul class="space-y-4">
                             <li class="flex items-start">
-                                <span class="font-semibold text-green-600 mr-2"
-                                    >200 OK:</span
-                                >
-                                <span class="text-gray-600"
-                                    >La solicitud se procesó correctamente</span
-                                >
+                                <span class="font-semibold text-green-600 mr-2">200 OK:</span>
+                                <span class="text-gray-600">La solicitud se procesó correctamente</span>
                             </li>
                             <li class="flex items-start">
-                                <span class="font-semibold text-yellow-600 mr-2"
-                                    >400 Bad Request:</span
-                                >
-                                <span class="text-gray-600"
-                                    >La solicitud contiene parámetros
-                                    inválidos</span
-                                >
+                                <span class="font-semibold text-yellow-600 mr-2">400 Bad Request:</span>
+                                <span class="text-gray-600">La solicitud contiene parámetros
+                                    inválidos</span>
                             </li>
                             <li class="flex items-start">
-                                <span class="font-semibold text-red-600 mr-2"
-                                    >404 Not Found:</span
-                                >
-                                <span class="text-gray-600"
-                                    >El recurso solicitado no existe</span
-                                >
+                                <span class="font-semibold text-red-600 mr-2">404 Not Found:</span>
+                                <span class="text-gray-600">El recurso solicitado no existe</span>
                             </li>
                             <li class="flex items-start">
-                                <span class="font-semibold text-red-600 mr-2"
-                                    >500 Internal Server Error:</span
-                                >
-                                <span class="text-gray-600"
-                                    >Error interno del servidor</span
-                                >
+                                <span class="font-semibold text-red-600 mr-2">500 Internal Server Error:</span>
+                                <span class="text-gray-600">Error interno del servidor</span>
                             </li>
                         </ul>
                     </div>
@@ -123,5 +105,5 @@
 </template>
 
 <script setup>
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link } from '@inertiajs/vue3'
 </script>
