@@ -13,7 +13,16 @@ export default [
                 console: 'readonly',
                 process: 'readonly',
                 window: 'readonly',
-                document: 'readonly'
+                document: 'readonly',
+                navigator: 'readonly',
+                setTimeout: 'readonly',
+                setInterval: 'readonly',
+                clearInterval: 'readonly',
+                alert: 'readonly',
+                FormData: 'readonly',
+                fetch: 'readonly',
+                HTMLElement: 'readonly',
+                global: 'readonly'
             }
         },
         rules: {
@@ -30,6 +39,9 @@ export default [
             'comma-dangle': ['error', 'never'],
 
             // Reglas específicas de Vue
+            'vue/multi-word-component-names': 'off',  // Permitir nombres de una palabra
+            'vue/no-reserved-component-names': 'off',  // Permitir componentes con nombres reservados (como Head de Inertia)
+            'vue/require-default-prop': 'error',  // Requerir valores por defecto en props
             'vue/html-indent': ['error', 4],
             'vue/max-attributes-per-line': [
                 'error',
