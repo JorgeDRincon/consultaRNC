@@ -127,11 +127,11 @@ jobs:
       - name: Run migrations
         run: php artisan migrate --force
 
-      - name: Run PHP tests
-        run: php artisan test
-
       - name: Build frontend assets
         run: npm run build
+
+      - name: Run PHP tests
+        run: php artisan test
 
       - name: Run frontend tests
         run: npm run test:run
