@@ -1,0 +1,107 @@
+name: Format Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    # No branches specified = runs on PRs to ANY branch
+
+jobs:
+  check-formatting:
+    name: Check Code Formatting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # 📥 Descarga el código del repositorio a la máquina virtual
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4 # 🟢 Instala Node.js en la versión especificada + cache automático
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2 # 🐘 Instala PHP + extensiones + herramientas como Composer
+        with:
+          php-version: "8.2"
+          tools: composer
+          coverage: none
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v4 # 💾 Maneja cache inteligente para acelerar builds
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: Run ESLint format check
+        run: |
+          echo "🔍 Checking JavaScript/Vue formatting..."
+          npm run lint
+
+      - name: Run Laravel Pint format check
+        run: |
+          echo "🔍 Checking PHP formatting..."
+          # Run Pint in test mode (dry-run)
+          ./vendor/bin/pint --test
+
+      - name: Check for formatting issues
+        run: |
+          echo "🧹 Running formatters to detect issues..."
+
+          # Run formatters
+          npm run lint:fix
+          composer run lint
+
+          # Check if any files were changed
+          if [ -n "$(git diff --name-only)" ]; then
+            echo ""
+            echo "❌ Code formatting issues detected!"
+            echo ""
+            echo "❌ Formatting issues found in these files:"
+            echo ""
+            
+            # Show each file with specific changes
+            git diff --name-only | while read -r file; do
+              echo "📁 File: $file"
+              
+              # Extract line-by-line changes
+              git diff "$file" | awk '
+                /^@@/ { 
+                  match($0, /\+([0-9]+)/, arr)
+                  line_num = arr[1]
+                }
+                /^-/ && !/^---/ { 
+                  old_line = substr($0, 2)
+                }
+                /^\+/ && !/^\+++/ { 
+                  new_line = substr($0, 2)
+                  printf "📍 Line ~%s: '\''%s'\'' → '\''%s'\''\n", line_num, old_line, new_line
+                  line_num++
+                }
+              '
+              echo ""
+            done
+            
+            echo "🔧 To fix all issues, run:"
+            echo "  npm run lint:fix && composer run lint"
+            exit 1
+          else
+            echo "✅ All code is properly formatted!"
+          fi
+
+      - name: Format check summary
+        if: failure()
+        run: |
+          echo ""
+          echo "💡 This PR contains code formatting issues."
+          echo "   Please run the suggested commands locally and push the changes."
+          echo ""

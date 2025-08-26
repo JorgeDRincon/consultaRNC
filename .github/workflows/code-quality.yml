@@ -1,0 +1,137 @@
+name: Code Quality Check
+
+on:
+  pull_request:
+    branches: ["**"]
+  push:
+    branches: ["main"]
+
+jobs:
+  frontend-lint:
+    name: Frontend Code Quality
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint check
+        run: npm run lint
+
+      - name: Check if code is properly formatted
+        run: |
+          npm run lint:fix
+          if [ -n "$(git diff --name-only)" ]; then
+            echo "❌ Code formatting issues found. Please run 'npm run lint:fix' locally."
+            echo "Files that need formatting:"
+            git diff --name-only
+            exit 1
+          else
+            echo "✅ All frontend code is properly formatted!"
+          fi
+
+  backend-lint:
+    name: Backend Code Quality
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, mysql
+          coverage: none
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: Run Laravel Pint check
+        run: |
+          composer run lint
+          if [ -n "$(git diff --name-only)" ]; then
+            echo "❌ PHP code formatting issues found. Please run 'composer run lint' locally."
+            echo "Files that need formatting:"
+            git diff --name-only
+            exit 1
+          else
+            echo "✅ All backend code is properly formatted!"
+          fi
+
+  tests:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs: [frontend-lint, backend-lint]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, mysql
+          coverage: none
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install PHP dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Copy environment file
+        run: cp .env.example .env
+
+      - name: Generate application key
+        run: php artisan key:generate
+
+      - name: Create SQLite database
+        run: touch database/database.sqlite
+
+      - name: Run migrations
+        run: php artisan migrate --force
+
+      - name: Build frontend assets
+        run: npm run build
+
+      - name: Run PHP tests
+        run: php artisan test
+
+      - name: Run frontend tests
+        run: npm run test:run

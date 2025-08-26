@@ -40,10 +40,8 @@
                                 datos.
                             </p>
                             <p>
-                                <strong
-                                    >Nuestros objetivos principales
-                                    incluyen:</strong
-                                >
+                                <strong>Nuestros objetivos principales
+                                    incluyen:</strong>
                             </p>
                             <div
                                 class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6"
@@ -114,8 +112,7 @@
                             curiosidad y la búsqueda constante de aprendizaje,
                             <b>
                                 transformando ideas en herramientas que
-                                simplifican la vida de las personas.</b
-                            >
+                                simplifican la vida de las personas.</b>
                             Creemos firmemente en el trabajo colaborativo y en
                             el poder de la comunidad para impulsar la creación
                             de software de calidad.
@@ -170,8 +167,8 @@
 </template>
 
 <script setup>
-import FeatureCard from "@/Components/FeatureCard.vue";
-import Footer from "@/Components/Footer.vue";
-import Navigation from "@/Components/Navigation.vue";
-import { Head, Link } from "@inertiajs/vue3";
+import FeatureCard from '@/Components/FeatureCard.vue'
+import Footer from '@/Components/Footer.vue'
+import Navigation from '@/Components/Navigation.vue'
+import { Head, Link } from '@inertiajs/vue3'
 </script>

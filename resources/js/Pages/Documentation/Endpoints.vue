@@ -35,8 +35,7 @@
                         <pre
                             class="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm"
                         >
-GET /api/v1/rnc/123456789</pre
-                        >
+GET /api/v1/rnc/123456789</pre>
                     </div>
                 </div>
 
@@ -73,8 +72,7 @@ GET /api/v1/rnc/123456789</pre
                         <pre
                             class="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto"
                         >
-GET /api/v1/search?q=empresa&page=1&per_page=20</pre
-                        >
+GET /api/v1/search?q=empresa&page=1&per_page=20</pre>
                     </div>
                 </div>
 
@@ -99,5 +97,5 @@ GET /api/v1/search?q=empresa&page=1&per_page=20</pre
 </template>
 
 <script setup>
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link } from '@inertiajs/vue3'
 </script>

@@ -36,7 +36,9 @@
                                 class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center"
                             >
                                 <div>
-                                    <div class="text-3xl mb-2">🔍</div>
+                                    <div class="text-3xl mb-2">
+                                        🔍
+                                    </div>
                                     <h3 class="font-semibold mb-2">
                                         Buscar RNC
                                     </h3>
@@ -46,7 +48,9 @@
                                     </p>
                                 </div>
                                 <div>
-                                    <div class="text-3xl mb-2">⚡</div>
+                                    <div class="text-3xl mb-2">
+                                        ⚡
+                                    </div>
                                     <h3 class="font-semibold mb-2">
                                         Respuestas Rápidas
                                     </h3>
@@ -55,7 +59,9 @@
                                     </p>
                                 </div>
                                 <div>
-                                    <div class="text-3xl mb-2">🔗</div>
+                                    <div class="text-3xl mb-2">
+                                        🔗
+                                    </div>
                                     <h3 class="font-semibold mb-2">
                                         Fácil Integración
                                     </h3>
@@ -74,13 +80,17 @@
                             <div class="text-3xl font-bold text-blue-600 mb-2">
                                 24/7
                             </div>
-                            <div class="text-gray-600">Disponibilidad</div>
+                            <div class="text-gray-600">
+                                Disponibilidad
+                            </div>
                         </div>
                         <div class="bg-gray-100 p-6 rounded-lg">
                             <div class="text-3xl font-bold text-red-600 mb-2">
                                 &lt;3s
                             </div>
-                            <div class="text-gray-600">Tiempo de Respuesta</div>
+                            <div class="text-gray-600">
+                                Tiempo de Respuesta
+                            </div>
                         </div>
                         <div class="bg-gray-100 p-6 rounded-lg">
                             <div class="text-3xl font-bold text-blue-600 mb-2">
@@ -126,7 +136,7 @@
 </template>
 
 <script setup>
-import Footer from "@/Components/Footer.vue";
-import Navigation from "@/Components/Navigation.vue";
-import { Head, Link } from "@inertiajs/vue3";
+import Footer from '@/Components/Footer.vue'
+import Navigation from '@/Components/Navigation.vue'
+import { Head, Link } from '@inertiajs/vue3'
 </script>

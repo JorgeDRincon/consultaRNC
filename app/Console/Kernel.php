@@ -14,9 +14,9 @@ class Kernel extends ConsoleKernel
     {
         // Tu comando existente
         $schedule->command('app:download-file')
-                 ->everySecond()
-                 ->withoutOverlapping()
-                 ->appendOutputTo(storage_path('logs/download_and_process.log')); 
+            ->everySecond()
+            ->withoutOverlapping()
+            ->appendOutputTo(storage_path('logs/download_and_process.log'));
     }
 
     /**

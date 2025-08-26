@@ -11,15 +11,122 @@
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   [Simple, fast routing engine](https://laravel.com/docs/routing).
+-   [Powerful dependency injection container](https://laravel.com/docs/container).
+-   Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+-   Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+-   Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+-   [Robust background job processing](https://laravel.com/docs/queues).
+-   [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
+
+## 🚀 Development Setup
+
+This project includes automatic linting and formatting configuration. For an optimal development experience, install the following VS Code extensions:
+
+### 📋 Required Extensions
+
+#### JavaScript/Vue.js:
+
+-   **ESLint** (`dbaeumer.vscode-eslint`) - Linting and auto-fix for JavaScript/Vue
+-   **Vue Language Features (Volar)** (`Vue.volar`) - Complete Vue 3 support
+
+#### PHP/Laravel:
+
+-   **PHP Intelephense** (`bmewburn.vscode-intelephense-client`) - IntelliSense and error detection
+-   **Laravel Pint** (`open-southeners.laravel-pint`) - Automatic PHP formatting
+-   **Laravel Blade Snippets** (`onecentlin.laravel-blade`) - Blade template support
+
+#### Utilities:
+
+-   **Tailwind CSS IntelliSense** (`bradlc.vscode-tailwindcss`) - CSS class autocompletion
+
+### ⚙️ Automatic Configuration
+
+The project includes pre-defined configuration that:
+
+✅ **Automatically formats** code on save (Ctrl+S)  
+✅ **Detects errors** in real-time while you type  
+✅ **Applies consistent** code standards  
+✅ **Uses 4-space** indentation
+
+### 🛠️ Available Scripts
+
+#### Frontend (JavaScript/Vue):
+
+```bash
+npm run lint        # Check linting errors
+npm run lint:fix    # Fix errors automatically
+```
+
+#### Backend (PHP):
+
+```bash
+composer run lint   # Format PHP code with Laravel Pint
+```
+
+### 🔧 Quick Installation
+
+1. **Clone the repository**
+2. **Install dependencies**: `composer install && npm install`
+3. **Install the extensions** listed above in VS Code
+4. **Restart VS Code**
+5. **Start developing!** Code will be formatted automatically
+
+### 📏 Code Standards
+
+-   **Indentation**: 4 spaces
+-   **Quotes**: Single (`'`) in JavaScript/Vue
+-   **PHP**: Laravel standards (PSR-12)
+-   **Vue**: Multi-word component names recommended
+
+## 🤖 Continuous Integration
+
+This project uses GitHub Actions to automatically enforce code quality standards on every pull request.
+
+### 🔍 Automated Checks
+
+**Format Check** (Fast - runs on every PR):
+
+-   ✅ ESLint formatting for JavaScript/Vue files
+-   ✅ Laravel Pint formatting for PHP files
+-   ❌ **Blocks merge if formatting issues are found**
+
+**Code Quality Check** (Comprehensive - runs on main branches):
+
+-   ✅ Full linting and formatting verification
+-   ✅ Frontend and backend tests
+-   ✅ Build verification
+-   ✅ Database migrations test
+
+### 🚫 Pull Request Requirements
+
+Your PR will be **automatically blocked** if:
+
+-   Code is not properly formatted
+-   ESLint errors are present
+-   Laravel Pint formatting is needed
+-   Tests are failing
+
+### 🔧 Fixing CI Failures
+
+If the Format Check fails:
+
+```bash
+# Fix JavaScript/Vue formatting
+npm run lint:fix
+
+# Fix PHP formatting
+composer run lint
+
+# Commit and push changes
+git add .
+git commit -m "fix: apply code formatting"
+git push
+```
+
+The GitHub Action will automatically re-run and should pass! ✅
 
 ## Learning Laravel
 
@@ -35,14 +142,14 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 
 ### Premium Partners
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+-   **[Vehikl](https://vehikl.com)**
+-   **[Tighten Co.](https://tighten.co)**
+-   **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+-   **[64 Robots](https://64robots.com)**
+-   **[Curotec](https://www.curotec.com/services/technologies/laravel)**
+-   **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+-   **[Redberry](https://redberry.international/laravel-development)**
+-   **[Active Logic](https://activelogic.com)**
 
 ## Contributing
 
