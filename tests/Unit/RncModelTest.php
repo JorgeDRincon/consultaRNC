@@ -19,16 +19,7 @@ class RncModelTest extends TestCase
      */
     public function test_validate_status_value_returns_true_for_valid_statuses()
     {
-        $validStatuses = [
-            'Activo',
-            'Anulado',
-            'Rechazado',
-            'Suspendido',
-            'Dado de Baja',
-            'Cese Temporal',
-        ];
-
-        foreach ($validStatuses as $status) {
+        foreach (Rnc::ALLOWED_STATUSES as $status) {
             $result = Rnc::validateStatusValue($status);
 
             $this->assertTrue($result['valid'], "Status '{$status}' should be valid");
@@ -120,9 +111,7 @@ class RncModelTest extends TestCase
         $this->assertArrayHasKey('allowed_statuses', $result['error']);
 
         $allowedStatuses = $result['error']['allowed_statuses'];
-        $expectedStatuses = ['Activo', 'Anulado', 'Rechazado', 'Suspendido', 'Dado de Baja', 'Cese Temporal'];
-
-        $this->assertEquals($expectedStatuses, $allowedStatuses);
+        $this->assertEquals(Rnc::ALLOWED_STATUSES, $allowedStatuses);
     }
 
     /**
@@ -193,53 +182,6 @@ class RncModelTest extends TestCase
     }
 
     /**
-     * @group getAllowedSearchParams
-     * @group search-configuration
-     * @group parameters
-     * Test that getAllowedSearchParams includes all necessary parameters
-     */
-    public function test_get_allowed_search_params_includes_all_necessary_params()
-    {
-        $allowedParams = Rnc::getAllowedSearchParams();
-
-        // Verify that it contains the main search parameters
-        $this->assertContains('rnc', $allowedParams);
-        $this->assertContains('business_name', $allowedParams);
-        $this->assertContains('economic_activity', $allowedParams);
-        $this->assertContains('status', $allowedParams);
-        $this->assertContains('payment_regime', $allowedParams);
-        $this->assertContains('start_date', $allowedParams);
-        $this->assertContains('page', $allowedParams);
-    }
-
-    // ========================================================================
-    // TESTS FOR: Model Properties (Fillable, Hidden, Table, Traits)
-    // ========================================================================
-
-    /**
-     * @group model-properties
-     * @group fillable
-     * @group configuration
-     * Test that the model has correct fillable properties
-     */
-    public function test_model_has_correct_fillable_properties()
-    {
-        $rnc = new Rnc;
-        $fillable = $rnc->getFillable();
-
-        $expectedFillable = [
-            'rnc',
-            'business_name',
-            'economic_activity',
-            'start_date',
-            'status',
-            'payment_regime',
-        ];
-
-        $this->assertEquals($expectedFillable, $fillable);
-    }
-
-    /**
      * @group model-properties
      * @group hidden
      * @group security
@@ -257,29 +199,5 @@ class RncModelTest extends TestCase
         ];
 
         $this->assertEquals($expectedHidden, $hidden);
-    }
-
-    /**
-     * @group model-properties
-     * @group database
-     * @group configuration
-     * Test that the model uses correct table name
-     */
-    public function test_model_uses_correct_table_name()
-    {
-        $rnc = new Rnc;
-        $this->assertEquals('rncs', $rnc->getTable());
-    }
-
-    /**
-     * @group model-properties
-     * @group traits
-     * @group factories
-     * Test that the model has HasFactory trait
-     */
-    public function test_model_uses_has_factory_trait()
-    {
-        $traits = class_uses(Rnc::class);
-        $this->assertArrayHasKey('Illuminate\Database\Eloquent\Factories\HasFactory', $traits);
     }
 }

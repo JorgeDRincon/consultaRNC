@@ -12,6 +12,18 @@ class Rnc extends Model
 {
     use HasFactory;
 
+    /**
+     * Allowed status values for RNC records.
+     */
+    public const ALLOWED_STATUSES = [
+        'Activo',
+        'Anulado',
+        'Rechazado',
+        'Suspendido',
+        'Dado de Baja',
+        'Cese Temporal',
+    ];
+
     protected $table = 'rncs';
 
     protected $fillable = [
@@ -341,9 +353,18 @@ class Rnc extends Model
     }
 
     /**
+     * Get the allowed status values for RNC records.
+     */
+    public static function getAllowedStatuses(): array
+    {
+        return self::ALLOWED_STATUSES;
+    }
+
+    /**
      * Validates if the given status is allowed.
      *
      * @param  string|null  $status  The status to validate
+     *
      * @return array Returns validation result with 'valid' boolean and optional 'error' data
      */
     public static function validateStatusValue(?string $status): array
@@ -352,14 +373,12 @@ class Rnc extends Model
             return ['valid' => true];
         }
 
-        $allowedStatuses = ['Activo', 'Anulado', 'Rechazado', 'Suspendido', 'Dado de Baja', 'Cese Temporal'];
-
-        if (! in_array(strtolower($status), array_map('strtolower', $allowedStatuses))) {
+        if (! in_array(strtolower($status), array_map('strtolower', self::ALLOWED_STATUSES))) {
             return [
                 'valid' => false,
                 'error' => [
                     'message' => 'Invalid status: '.$status,
-                    'allowed_statuses' => $allowedStatuses,
+                    'allowed_statuses' => self::ALLOWED_STATUSES,
                 ],
             ];
         }
