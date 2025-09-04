@@ -24,7 +24,6 @@
         "phpdoc_no_package": true,
         "phpdoc_order": true,
         "phpdoc_scalar": true,
-        "phpdoc_separation": true,
         "phpdoc_summary": true,
         "return_type_declaration": true,
         "blank_lines_before_namespace": {
@@ -39,6 +38,30 @@
         "trailing_comma_in_multiline": true,
         "trim_array_spaces": true,
         "unary_operator_spaces": true,
-        "whitespace_after_comma_in_array": true
+        "whitespace_after_comma_in_array": true,
+        "phpdoc_align": {
+            "align": "left"
+        },
+        "phpdoc_line_span": {
+            "const": "single",
+            "method": "multi",
+            "property": "single"
+        },
+        "phpdoc_separation": {
+            "groups": [
+                ["deprecated", "link", "see", "since"],
+                ["author", "copyright", "license"],
+                ["category", "package", "subpackage"],
+                ["property", "property-read", "property-write"],
+                ["param", "param-out"],
+                ["return"],
+                ["throws"]
+            ]
+        },
+        "phpdoc_tag_type": {
+            "tags": {
+                "inheritDoc": "inline"
+            }
+        }
     }
 }

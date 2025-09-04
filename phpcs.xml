@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<ruleset name="ConsultaRNC PHP Coding Standards">
+    <description>Custom coding standard for ConsultaRNC project</description>
+
+    <!-- Files to analyze -->
+    <file>app</file>
+    <file>tests</file>
+
+    <!-- Exclude vendor and other directories -->
+    <exclude-pattern>vendor/*</exclude-pattern>
+    <exclude-pattern>bootstrap/cache/*</exclude-pattern>
+    <exclude-pattern>storage/*</exclude-pattern>
+    <exclude-pattern>node_modules/*</exclude-pattern>
+
+    <!-- Use PSR-12 as base standard with some exclusions -->
+    <rule ref="PSR12">
+        <!-- Ignore operator spacing for now -->
+        <exclude name="PSR12.Operators.OperatorSpacing"/>
+        <!-- Allow long lines for now -->
+        <exclude name="Generic.Files.LineLength"/>
+    </rule>
+
+    <!-- Only PHPDoc critical rules -->
+    <rule ref="Generic.Commenting.DocComment.NonParamGroup"/>
+    <rule ref="Generic.Commenting.DocComment.SpacingBeforeTags">
+        <message>There must be exactly one blank line before tags like @return in a DocBlock</message>
+    </rule>
+    
+    <!-- Exclude overly strict rules for now -->
+    <rule ref="Squiz.Commenting.FunctionComment">
+        <exclude name="Squiz.Commenting.FunctionComment.Missing"/>
+        <exclude name="Squiz.Commenting.FunctionComment.MissingParamComment"/>
+        <exclude name="Squiz.Commenting.FunctionComment.MissingReturn"/>
+        <exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop"/>
+        <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"/>
+        <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamName"/>
+    </rule>
+    
+    <!-- Exclude variable comment type strictness -->
+    <rule ref="Squiz.Commenting.VariableComment">
+        <exclude name="Squiz.Commenting.VariableComment.IncorrectVarType"/>
+        <exclude name="Squiz.Commenting.VariableComment.WrongStyle"/>
+        <exclude name="Squiz.Commenting.VariableComment.Missing"/>
+        <exclude name="Squiz.Commenting.VariableComment.MissingVar"/>
+    </rule>
+    
+    <!-- Exclude inline comments strictness -->
+    <rule ref="Squiz.Commenting.PostStatementComment">
+        <exclude name="Squiz.Commenting.PostStatementComment.Found"/>
+    </rule>
+
+    <!-- Show progress -->
+    <arg name="colors"/>
+    <arg value="sp"/>
+    
+    <!-- Parallel processing -->
+    <arg name="parallel" value="8"/>
+</ruleset>
