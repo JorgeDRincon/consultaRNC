@@ -64,7 +64,7 @@ class rnc extends Command
                     'payment_regime' => isset($row[5]) ? trim($row[5]) : null,
                 ]);
             } catch (\Exception $e) {
-                $this->warn('Advertencia: No se pudo importar la fila: '.implode(', ', $row).' - Mensaje: '.$e->getMessage());
+                $this->warn('Advertencia: No se pudo importar la fila: '.implode(', ', array_map('strval', $row)).' - Mensaje: '.$e->getMessage());
             }
         }
 

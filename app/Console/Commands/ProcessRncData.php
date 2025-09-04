@@ -238,7 +238,6 @@ class ProcessRncData extends Command
             }
 
             $this->info('Data processing completed successfully.');
-
         } catch (\Exception $e) {
             $this->error('An error occurred during CSV processing: '.$e->getMessage());
             $this->error('Stack trace: '.$e->getTraceAsString());
@@ -253,8 +252,9 @@ class ProcessRncData extends Command
      * Construye un mapeo de encabezados, usando los encabezados originales del CSV
      * como claves y los nombres de columna normalizados como valores.
      *
-     * @param  array  $rawHeaders  Los encabezados tal como League\Csv los leyó (antes de cualquier conversión).
-     * @param  array  $convertedRawHeaders  Los encabezados ya convertidos a UTF-8.
+     * @param array $rawHeaders Los encabezados tal como League\Csv los leyó (antes de cualquier conversión).
+     * @param array $convertedRawHeaders Los encabezados ya convertidos a UTF-8.
+     *
      * @return array Un array asociativo donde la clave es el encabezado crudo original y el valor es el encabezado normalizado.
      */
     protected function buildHeaderMapping(array $rawHeaders, array $convertedRawHeaders): array

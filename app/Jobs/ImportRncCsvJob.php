@@ -12,14 +12,18 @@ use Illuminate\Support\Facades\Log;
 
 class ImportRncCsvJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
-    protected $filePath;
+    /** The file path to import. */
+    protected string $filePath;
 
     /**
      * Create a new job instance.
      */
-    public function __construct($filePath)
+    public function __construct(string $filePath)
     {
         $this->filePath = $filePath;
     }
@@ -29,16 +33,17 @@ class ImportRncCsvJob implements ShouldQueue
      */
     public function handle()
     {
+        $fullPath = storage_path('app/private/imports/'.basename($this->filePath));
+
         try {
             Log::info('Job: Iniciando importación de CSV', ['file' => $this->filePath]);
-            $fullPath = storage_path('app/private/imports/'.basename($this->filePath));
             $count = Rnc::importCsv($fullPath);
 
             Log::info("Job: Importación completada. Registros procesados: $count");
         } catch (\Exception $e) {
             Log::error('Job: Error al importar el archivo CSV', ['error' => $e->getMessage()]);
         } finally {
-            if (file_exists($fullPath)) {
+            if ($fullPath && file_exists($fullPath)) {
                 unlink($fullPath);
             }
         }

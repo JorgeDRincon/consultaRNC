@@ -1,0 +1,22 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    # Nivel de análisis (0-10, donde 10 es el más estricto)
+    level: 5
+    
+    # Directorios a analizar
+    paths:
+        - app
+        - tests
+    
+    # Archivos/directorios a ignorar
+    excludePaths:
+        - app/Console/Kernel.php
+        - storage/*
+        - bootstrap/cache/*
+    
+    # Reglas adicionales para mejor calidad de código
+    checkUninitializedProperties: true
+    checkMissingCallableSignature: true
+    checkTooWideReturnTypesInProtectedAndPublicMethods: true

@@ -69,9 +69,8 @@ class DownloadFile extends Command
             $zipContent = $response->body();
             $downloadedSize = strlen($zipContent);
             $expectedSize = $response->header('Content-Length');
-
             // Verificar si el tamaño de descarga coincide con el Content-Length
-            if ($expectedSize !== null && $downloadedSize != $expectedSize) {
+            if ($expectedSize && $downloadedSize != $expectedSize) {
                 $this->error("Downloaded file size mismatch. Expected: {$expectedSize} bytes, Downloaded: {$downloadedSize} bytes.");
                 $this->error('This indicates an incomplete download.');
 
@@ -147,7 +146,6 @@ class DownloadFile extends Command
             ]);
 
             $this->info('File processing completed successfully.');
-
         } catch (\Exception $e) {
             $this->error('An error occurred: '.$e->getMessage());
             if ($e instanceof \GuzzleHttp\Exception\RequestException && $e->hasResponse()) {
