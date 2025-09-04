@@ -12,7 +12,7 @@ class VerifyEmailController extends Controller
 {
     /**
      * @param EmailVerificationRequest $request
-     * Mark the authenticated user's email address as verified.
+     *                                          Mark the authenticated user's email address as verified.
      */
     public function __invoke(EmailVerificationRequest $request): RedirectResponse
     {

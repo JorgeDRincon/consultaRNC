@@ -18,6 +18,8 @@
         <exclude name="PSR12.Operators.OperatorSpacing"/>
         <!-- Allow long lines for now -->
         <exclude name="Generic.Files.LineLength"/>
+        <!-- Allow instantiation without parentheses -->
+        <exclude name="PSR12.Classes.ClassInstantiation.MissingParentheses"/>
     </rule>
 
     <!-- Only PHPDoc critical rules -->

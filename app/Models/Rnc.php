@@ -12,9 +12,7 @@ class Rnc extends Model
 {
     use HasFactory;
 
-    /**
-     * Allowed status values for RNC records.
-     */
+    /** Allowed status values for RNC records. */
     public const ALLOWED_STATUSES = [
         'Activo',
         'Anulado',
@@ -363,7 +361,7 @@ class Rnc extends Model
     /**
      * Validates if the given status is allowed.
      *
-     * @param  string|null  $status  The status to validate
+     * @param string|null $status The status to validate
      *
      * @return array Returns validation result with 'valid' boolean and optional 'error' data
      */

@@ -17,13 +17,10 @@ class ImportRncCsvJob implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    /**
-     * The file path to import.
-     */
+    /** The file path to import. */
     protected string $filePath;
 
     /**
-     * @param string $filePath
      * Create a new job instance.
      */
     public function __construct(string $filePath)

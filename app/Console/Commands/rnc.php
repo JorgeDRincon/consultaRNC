@@ -59,7 +59,7 @@ class rnc extends Command
                     'rnc' => trim($row[0]), // Columna 0 de tu CSV
                     'business_name' => trim($row[1]), // Columna 1 de tu CSV
                     'economic_activity' => isset($row[2]) ? trim($row[2]) : null, // Columna 2 de tu CSV (opcional)
-                    'start_date' => (new DateTime())->format('Y-m-d'), // Columna 3 de tu CSV (opcional)
+                    'start_date' => (new DateTime)->format('Y-m-d'), // Columna 3 de tu CSV (opcional)
                     'status' => isset($row[4]) ? trim($row[4]) : null, // Corregido: asumimos que es columna 4
                     'payment_regime' => isset($row[5]) ? trim($row[5]) : null,
                 ]);

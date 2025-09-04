@@ -91,7 +91,7 @@ class DownloadFile extends Command
             $this->info('ZIP file downloaded temporarily to: '.$fullTempZipPath);
 
             // 2. Abrir el archivo ZIP.
-            $zip = new ZipArchive();
+            $zip = new ZipArchive;
             $openResult = $zip->open($fullTempZipPath);
             if ($openResult !== true) {
                 $this->error('Could not open the downloaded ZIP file: '.$openResult.' (See ZipArchive::ER_ constants for details).');
