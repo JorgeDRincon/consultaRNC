@@ -2,8 +2,6 @@ name: Test Deployment (Dry Run)
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ deployment-test ]
 
 jobs:
   test-build:
