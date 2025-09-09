@@ -29,16 +29,20 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 
-const props = defineProps({
-    paramId: { type: String, required: true },
-    type: { type: String, required: true },
-    name: { type: String, required: true },
-    description: { type: String, required: true },
-    example: { type: String, required: true },
-    isExact: { type: Boolean, default: false }
+interface Props {
+    paramId: string
+    type: string
+    name: string
+    description: string
+    example: string
+    isExact?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+    isExact: false
 })
 
 const badgeClasses = computed(() => {

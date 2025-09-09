@@ -1,12 +1,11 @@
-<script setup>
+<script setup lang="ts">
 import { Link } from '@inertiajs/vue3'
 
-defineProps({
-    href: {
-        type: String,
-        required: true
-    }
-})
+interface Props {
+    href: string
+}
+
+defineProps<Props>()
 </script>
 
 <template>

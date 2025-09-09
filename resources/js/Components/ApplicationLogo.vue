@@ -5,3 +5,7 @@
         />
     </svg>
 </template>
+
+<script setup lang="ts">
+// ApplicationLogo component - Simple SVG logo with no props
+</script>
