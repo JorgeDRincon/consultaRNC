@@ -24,14 +24,14 @@ jobs:
         node-version: '20'
         cache: 'npm'
     
+    - name: Install PHP dependencies
+      run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+    
     - name: Copy environment file
       run: cp .env.example .env
     
     - name: Generate app key
       run: php artisan key:generate
-    
-    - name: Install PHP dependencies
-      run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
     
     - name: Install Node dependencies
       run: npm ci
