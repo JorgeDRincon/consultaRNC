@@ -1,0 +1,62 @@
+# Deployment ignore file
+# Similar to .gitignore but for deployment
+
+# Development files
+.git/
+.github/
+node_modules/
+tests/
+.env.example
+.env.testing
+
+# Development tools
+phpunit.xml
+phpcs.xml
+phpstan.neon
+pint.json
+eslint.config.js
+jsconfig.json
+vite.config.js
+tailwind.config.js
+postcss.config.js
+package-lock.json
+
+# Documentation
+README.md
+SPA_SETUP.md
+*.md
+
+# Development scripts
+scripts/
+deployment-scripts/
+
+# Logs and temporary files
+storage/logs/*
+!storage/logs/.gitkeep
+error_log
+*.log
+
+# Cache (will be rebuilt)
+bootstrap/cache/*
+!bootstrap/cache/.gitkeep
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Development dependencies (already excluded via composer install --no-dev)
+vendor/bin/phpunit
+vendor/bin/pint
+vendor/bin/phpstan

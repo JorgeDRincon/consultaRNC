@@ -1,0 +1,74 @@
+name: Test Deployment (Dry Run)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-build:
+    name: Test Build Process
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, dom, filter, gd, iconv, json, mbstring, pdo
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+    
+    - name: Copy environment file
+      run: cp .env.example .env
+    
+    - name: Generate app key
+      run: php artisan key:generate
+    
+    - name: Install PHP dependencies
+      run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+    
+    - name: Install Node dependencies
+      run: npm ci
+    
+    - name: Build assets
+      run: npm run build
+    
+    - name: Test Laravel installation
+      run: |
+        php artisan --version
+        php artisan route:list > /dev/null
+        echo "✅ Laravel installation test passed"
+    
+    - name: Test deployment package creation
+      run: |
+        mkdir -p deployment
+        rsync -av --exclude-from='.deployignore' . deployment/
+        tar -czf deployment.tar.gz -C deployment .
+        echo "✅ Deployment package created successfully"
+        ls -lah deployment.tar.gz
+    
+    - name: Validate deployment scripts
+      run: |
+        echo "✅ Checking deployment scripts syntax..."
+        bash -n deployment-scripts/deploy.sh
+        bash -n deployment-scripts/health-check.sh  
+        bash -n deployment-scripts/rollback.sh
+        bash -n deployment-scripts/setup-server.sh
+        echo "✅ All scripts have valid syntax"
+    
+    - name: Test Summary
+      run: |
+        echo "🎉 All tests passed!"
+        echo "✅ PHP dependencies installed"
+        echo "✅ Node assets built"
+        echo "✅ Laravel application working"
+        echo "✅ Deployment package created"
+        echo "✅ Scripts syntax validated"
+        echo ""
+        echo "Ready for production deployment! 🚀"
