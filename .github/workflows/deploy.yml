@@ -105,13 +105,15 @@ jobs:
     - name: Execute deployment
       run: |
         ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+          export LC_ALL=C
           chmod +x /tmp/deploy.sh /tmp/health-check.sh /tmp/rollback.sh
-          /tmp/deploy.sh
+          ls -la /tmp/deploy.sh
+          bash /tmp/deploy.sh
         "
     
     - name: Health check
       run: |
-        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "/tmp/health-check.sh"
+        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "bash /tmp/health-check.sh"
     
     - name: Cleanup temporary files
       if: always()
