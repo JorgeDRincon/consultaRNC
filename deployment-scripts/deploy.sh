@@ -143,9 +143,18 @@ fi
 
 # Atomic switch - this is the zero-downtime moment
 log "Performing atomic switch..."
+log "Creating symlink: ${CURRENT_PATH} -> ${RELEASE_PATH}"
 ln -sfn "${RELEASE_PATH}" "${CURRENT_PATH}"
 
-success "Atomic switch completed successfully!"
+# Verify the symlink was created
+if [ -L "${CURRENT_PATH}" ] && [ -e "${CURRENT_PATH}" ]; then
+    success "Atomic switch completed successfully!"
+    log "Symlink verification: $(ls -la ${CURRENT_PATH})"
+else
+    error "Symlink creation failed!"
+    ls -la "$(dirname ${CURRENT_PATH})"
+    exit 1
+fi
 
 # Restart PHP-FPM gracefully
 log "Restarting PHP-FPM..."
