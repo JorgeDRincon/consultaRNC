@@ -144,9 +144,17 @@ fi
 # Atomic switch - this is the zero-downtime moment
 log "Performing atomic switch..."
 log "Creating symlink: ${CURRENT_PATH} -> ${RELEASE_PATH}"
+
+# Handle existing directory (not symlink)
+if [ -d "${CURRENT_PATH}" ] && [ ! -L "${CURRENT_PATH}" ]; then
+    warning "Found existing directory (not symlink): ${CURRENT_PATH}"
+    log "Moving existing directory to backup"
+    mv "${CURRENT_PATH}" "${CURRENT_PATH}.backup.$(date +%s)"
+fi
+
 ln -sfn "${RELEASE_PATH}" "${CURRENT_PATH}"
 
-# Verify the symlink was created
+# Verify the symlink was created 
 if [ -L "${CURRENT_PATH}" ] && [ -e "${CURRENT_PATH}" ]; then
     success "Atomic switch completed successfully!"
     log "Symlink verification: $(ls -la ${CURRENT_PATH})"
