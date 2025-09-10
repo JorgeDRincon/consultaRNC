@@ -126,11 +126,11 @@
                             al mismo tiempo que continuamos desarrollando nuevas
                             soluciones que impulsen el crecimiento y
                             modernización del ecosistema tecnológico del país
-                            <img
+                            <!-- <img
                                 src="/images/dominican-republic-flag.png"
                                 alt="Bandera de República Dominicana"
                                 class="inline-block w-5 h-4"
-                            />
+                            /> -->
                         </p>
                     </div>
 
