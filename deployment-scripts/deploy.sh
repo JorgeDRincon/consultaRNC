@@ -170,7 +170,7 @@ fi
 log "Running final verification..."
 if [ -f "/tmp/health-check.sh" ]; then
     chmod +x /tmp/health-check.sh
-    if /tmp/health-check.sh; then
+    if bash /tmp/health-check.sh; then
         success "Deployment completed successfully!"
         success "Release: ${RELEASE_NAME}"
         success "Path: ${RELEASE_PATH}"
