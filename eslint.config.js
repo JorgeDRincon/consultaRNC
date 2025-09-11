@@ -7,9 +7,11 @@ import pluginTypeScript from '@typescript-eslint/eslint-plugin'
 export default [
     js.configs.recommended,
     ...pluginVue.configs['flat/recommended'],
-    ...pluginTypeScript.configs.recommended,
     {
         files: ['**/*.{js,vue}'],
+        plugins: {
+            '@typescript-eslint': pluginTypeScript
+        },
         languageOptions: {
             ecmaVersion: 'latest',
             sourceType: 'module',
@@ -77,7 +79,11 @@ export default [
                     }
                 }
             ],
-            'vue/component-name-in-template-casing': ['error', 'PascalCase']
+            'vue/component-name-in-template-casing': ['error', 'PascalCase'],
+            '@typescript-eslint/no-unused-vars': 'warn',
+            '@typescript-eslint/no-explicit-any': 'warn',
+            '@typescript-eslint/prefer-as-const': 'error',
+            '@typescript-eslint/no-non-null-assertion': 'warn'
         }
     },
     {
