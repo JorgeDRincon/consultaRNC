@@ -19,7 +19,7 @@ export default defineConfig(({ command, mode }) => {
     if (mode !== 'test') {
         plugins.unshift(
             laravel({
-                input: 'resources/js/app.js',
+                input: 'resources/js/app.ts',
                 refresh: true
             })
         )
