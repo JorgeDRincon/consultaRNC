@@ -1,5 +1,7 @@
 import js from '@eslint/js'
 import pluginVue from 'eslint-plugin-vue'
+import parserVue from 'vue-eslint-parser'
+import parserTypeScript from '@typescript-eslint/parser'
 
 export default [
     js.configs.recommended,
@@ -9,6 +11,13 @@ export default [
         languageOptions: {
             ecmaVersion: 'latest',
             sourceType: 'module',
+            parser: parserVue,
+            parserOptions: {
+                parser: parserTypeScript,
+                ecmaVersion: 'latest',
+                sourceType: 'module',
+                extraFileExtensions: ['.vue']
+            },
             globals: {
                 console: 'readonly',
                 process: 'readonly',
