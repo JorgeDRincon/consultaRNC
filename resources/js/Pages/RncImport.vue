@@ -332,133 +332,119 @@
     </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { Head } from '@inertiajs/vue3'
 import { ref } from 'vue'
 
-export default {
-    components: {
-        Head
-    },
-    props: {
-        flash: {
-            type: Object,
-            default: () => ({})
-        }
-    },
-    setup() {
-        const selectedFile = ref(null)
-        const isDragOver = ref(false)
-        const uploading = ref(false)
-        const uploadProgress = ref(0)
-        const fileInput = ref(null)
+interface Props {
+    flash?: {
+        success?: string
+        error?: string
+    }
+}
 
-        const handleFileSelect = (event) => {
-            const file = event.target.files[0]
-            if (file && validateFile(file)) {
-                selectedFile.value = file
+const props = withDefaults(defineProps<Props>(), {
+    flash: () => ({})
+})
+
+const selectedFile = ref<File | null>(null)
+const isDragOver = ref(false)
+const uploading = ref(false)
+const uploadProgress = ref(0)
+const fileInput = ref<HTMLInputElement | null>(null)
+
+const handleFileSelect = (event: Event) => {
+    const target = event.target as HTMLInputElement
+    const file = target.files?.[0]
+    if (file && validateFile(file)) {
+        selectedFile.value = file
+    }
+}
+
+const handleFileDrop = (event: DragEvent) => {
+    isDragOver.value = false
+    const files = event.dataTransfer?.files
+    if (files && files.length > 0) {
+        const file = files[0]
+        if (validateFile(file)) {
+            selectedFile.value = file
+        }
+    }
+}
+
+const validateFile = (file: File): boolean => {
+    if (!file.name.toLowerCase().endsWith('.csv')) {
+        alert('Por favor selecciona un archivo CSV válido.')
+        return false
+    }
+
+    const maxSize = 200 * 1024 * 1024 // 200MB
+    if (file.size > maxSize) {
+        alert(
+            'El archivo es demasiado grande. El tamaño máximo es 200MB.'
+        )
+        return false
+    }
+
+    return true
+}
+
+const removeFile = () => {
+    selectedFile.value = null
+    if (fileInput.value) {
+        fileInput.value.value = ''
+    }
+}
+
+const formatFileSize = (bytes: number): string => {
+    if (bytes === 0) return '0 Bytes'
+    const k = 1024
+    const sizes = ['Bytes', 'KB', 'MB', 'GB']
+    const i = Math.floor(Math.log(bytes) / Math.log(k))
+    return (
+        parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
+    )
+}
+
+const submitForm = async () => {
+    if (!selectedFile.value) return
+
+    uploading.value = true
+    uploadProgress.value = 0
+
+    const formData = new FormData()
+    formData.append('file', selectedFile.value)
+
+    try {
+        const response = await fetch('/rnc/import', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': document
+                    .querySelector('meta[name="csrf-token"]')
+                    ?.getAttribute('content') || ''
             }
-        }
+        })
 
-        const handleFileDrop = (event) => {
-            isDragOver.value = false
-            const files = event.dataTransfer.files
-            if (files.length > 0) {
-                const file = files[0]
-                if (validateFile(file)) {
-                    selectedFile.value = file
+        if (response.ok) {
+            // Simulate progress for better UX
+            const interval = setInterval(() => {
+                uploadProgress.value += Math.random() * 10
+                if (uploadProgress.value >= 100) {
+                    clearInterval(interval)
+                    uploadProgress.value = 100
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 500)
                 }
-            }
+            }, 100)
+        } else {
+            throw new Error('Error al subir el archivo')
         }
-
-        const validateFile = (file) => {
-            if (!file.name.toLowerCase().endsWith('.csv')) {
-                alert('Por favor selecciona un archivo CSV válido.')
-                return false
-            }
-
-            const maxSize = 200 * 1024 * 1024 // 200MB
-            if (file.size > maxSize) {
-                alert(
-                    'El archivo es demasiado grande. El tamaño máximo es 200MB.'
-                )
-                return false
-            }
-
-            return true
-        }
-
-        const removeFile = () => {
-            selectedFile.value = null
-            if (fileInput.value) {
-                fileInput.value.value = ''
-            }
-        }
-
-        const formatFileSize = (bytes) => {
-            if (bytes === 0) return '0 Bytes'
-            const k = 1024
-            const sizes = ['Bytes', 'KB', 'MB', 'GB']
-            const i = Math.floor(Math.log(bytes) / Math.log(k))
-            return (
-                parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
-            )
-        }
-
-        const submitForm = async () => {
-            if (!selectedFile.value) return
-
-            uploading.value = true
-            uploadProgress.value = 0
-
-            const formData = new FormData()
-            formData.append('file', selectedFile.value)
-
-            try {
-                const response = await fetch('/rnc/import', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-CSRF-TOKEN': document
-                            .querySelector('meta[name="csrf-token"]')
-                            .getAttribute('content')
-                    }
-                })
-
-                if (response.ok) {
-                    // Simulate progress for better UX
-                    const interval = setInterval(() => {
-                        uploadProgress.value += Math.random() * 10
-                        if (uploadProgress.value >= 100) {
-                            clearInterval(interval)
-                            uploadProgress.value = 100
-                            setTimeout(() => {
-                                window.location.reload()
-                            }, 500)
-                        }
-                    }, 100)
-                } else {
-                    throw new Error('Error al subir el archivo')
-                }
-            } catch (error) {
-                alert('Error al subir el archivo: ' + error.message)
-                uploading.value = false
-                uploadProgress.value = 0
-            }
-        }
-
-        return {
-            selectedFile,
-            isDragOver,
-            uploading,
-            uploadProgress,
-            fileInput,
-            handleFileSelect,
-            handleFileDrop,
-            removeFile,
-            formatFileSize,
-            submitForm
-        }
+    } catch (error) {
+        alert('Error al subir el archivo: ' + (error as Error).message)
+        uploading.value = false
+        uploadProgress.value = 0
     }
 }
 </script>

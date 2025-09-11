@@ -166,9 +166,11 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import FeatureCard from '@/Components/FeatureCard.vue'
 import Footer from '@/Components/Footer.vue'
 import Navigation from '@/Components/Navigation.vue'
 import { Head, Link } from '@inertiajs/vue3'
+
+// About page - No props needed for this static page
 </script>

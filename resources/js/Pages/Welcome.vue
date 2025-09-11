@@ -135,8 +135,10 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Footer from '@/Components/Footer.vue'
 import Navigation from '@/Components/Navigation.vue'
 import { Head, Link } from '@inertiajs/vue3'
+
+// Welcome page - No props needed for this static page
 </script>

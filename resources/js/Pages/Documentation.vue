@@ -919,20 +919,20 @@
     </div>
 </template>
 
-<script setup>
-import FeatureCard from '@/Components/FeatureCard.vue' // Added FeatureCard import
+<script setup lang="ts">
+import FeatureCard from '@/Components/FeatureCard.vue'
 import Footer from '@/Components/Footer.vue'
 import Navigation from '@/Components/Navigation.vue'
 import ParamCard from '@/Components/ParamCard.vue'
 import { Head } from '@inertiajs/vue3'
 import { onMounted, onUnmounted, ref } from 'vue'
 
-const activeSection = ref('busqueda-rnc')
+const activeSection = ref<string>('busqueda-rnc')
 
 // Copiar URL base al portapapeles
-const showToast = ref(false)
+const showToast = ref<boolean>(false)
 
-const copyBaseUrl = () => {
+const copyBaseUrl = (): void => {
     navigator.clipboard
         .writeText('https://consultarnc.com.do/api/search?')
         .then(() => {
@@ -947,7 +947,7 @@ const copyBaseUrl = () => {
         })
 }
 
-const sections = [
+const sections: string[] = [
     'url-base',
     'busqueda-rnc',
     'param-rnc',
@@ -966,11 +966,11 @@ const sections = [
     'informacion-adicional'
 ]
 
-const updateActiveSection = () => {
+const updateActiveSection = (): void => {
     const scrollPosition = window.scrollY + 50 // Offset for header
 
     // Check parameter subsections first (they have priority when within their bounds)
-    const paramSections = sections.filter((section) =>
+    const paramSections = sections.filter((section: string) =>
         section.startsWith('param-')
     )
     for (let i = paramSections.length - 1; i >= 0; i--) {
@@ -990,7 +990,7 @@ const updateActiveSection = () => {
     }
 
     // Check response type subsections
-    const responseSections = [
+    const responseSections: string[] = [
         'respuesta-exitosa',
         'respuesta-error',
         'codigos-estado'
@@ -1013,7 +1013,7 @@ const updateActiveSection = () => {
 
     // If no parameter or response section is active, check main sections
     const mainSections = sections.filter(
-        (section) =>
+        (section: string) =>
             !section.startsWith('param-') && !responseSections.includes(section)
     )
     for (let i = mainSections.length - 1; i >= 0; i--) {
