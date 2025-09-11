@@ -2,10 +2,12 @@ import js from '@eslint/js'
 import pluginVue from 'eslint-plugin-vue'
 import parserVue from 'vue-eslint-parser'
 import parserTypeScript from '@typescript-eslint/parser'
+import pluginTypeScript from '@typescript-eslint/eslint-plugin'
 
 export default [
     js.configs.recommended,
     ...pluginVue.configs['flat/recommended'],
+    ...pluginTypeScript.configs.recommended,
     {
         files: ['**/*.{js,vue}'],
         languageOptions: {
@@ -31,7 +33,13 @@ export default [
                 FormData: 'readonly',
                 fetch: 'readonly',
                 HTMLElement: 'readonly',
-                global: 'readonly'
+                global: 'readonly',
+                // TypeScript DOM types
+                KeyboardEvent: 'readonly',
+                MouseEvent: 'readonly',
+                Event: 'readonly',
+                Element: 'readonly',
+                Node: 'readonly'
             }
         },
         rules: {
