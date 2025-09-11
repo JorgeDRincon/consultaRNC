@@ -41,8 +41,15 @@ warning() {
 check_file_structure() {
     log "Checking file structure..."
     
+    # Debug information
+    log "Checking path: ${CURRENT_PATH}"
+    log "Directory listing:"
+    ls -la "$(dirname ${CURRENT_PATH})" || true
+    
     if [ ! -L "${CURRENT_PATH}" ]; then
         error "Application symlink does not exist: ${CURRENT_PATH}"
+        error "Directory contents:"
+        ls -la "$(dirname ${CURRENT_PATH})" || true
         return 1
     fi
     
