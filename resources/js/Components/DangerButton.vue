@@ -5,3 +5,7 @@
         <slot />
     </button>
 </template>
+
+<script setup lang="ts">
+// DangerButton component - No props needed for this simple button
+</script>

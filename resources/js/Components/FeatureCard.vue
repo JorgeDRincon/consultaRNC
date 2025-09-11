@@ -56,50 +56,37 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 
-const props = defineProps({
-    title: {
-        type: String,
-        required: true
-    },
-    description: {
-        type: String,
-        required: true
-    },
-    icon: {
-        type: String,
-        required: true
-    },
-    faIcon: {
-        type: String,
-        default: null
-    },
-    color: {
-        type: String,
-        required: true,
-        validator: (value) => {
-            return [
-                'blue',
-                'green',
-                'purple',
-                'orange',
-                'red',
-                'yellow',
-                'indigo',
-                'pink'
-            ].includes(value)
-        }
-    },
-    iconSize: {
-        type: String,
-        default: 'w-10 h-10'
-    }
+type ColorType = 'blue' | 'green' | 'purple' | 'orange' | 'red' | 'yellow' | 'indigo' | 'pink'
+
+interface Props {
+    title: string
+    description: string
+    icon: string
+    faIcon?: string | null
+    color: ColorType
+    iconSize?: string
+    subtitle?: string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+    faIcon: null,
+    iconSize: 'w-10 h-10',
+    subtitle: undefined
 })
 
 const colorClasses = computed(() => {
-    const colorMap = {
+    const colorMap: Record<ColorType, {
+        background: string
+        border: string
+        hoverShadow: string
+        iconBackground: string
+        title: string
+        subtitle: string
+        description: string
+    }> = {
         blue: {
             background: 'from-blue-50 to-blue-100',
             border: 'border-blue-200',

@@ -1,14 +1,27 @@
 import js from '@eslint/js'
 import pluginVue from 'eslint-plugin-vue'
+import parserVue from 'vue-eslint-parser'
+import parserTypeScript from '@typescript-eslint/parser'
+import pluginTypeScript from '@typescript-eslint/eslint-plugin'
 
 export default [
     js.configs.recommended,
     ...pluginVue.configs['flat/recommended'],
     {
         files: ['**/*.{js,vue}'],
+        plugins: {
+            '@typescript-eslint': pluginTypeScript
+        },
         languageOptions: {
             ecmaVersion: 'latest',
             sourceType: 'module',
+            parser: parserVue,
+            parserOptions: {
+                parser: parserTypeScript,
+                ecmaVersion: 'latest',
+                sourceType: 'module',
+                extraFileExtensions: ['.vue']
+            },
             globals: {
                 console: 'readonly',
                 process: 'readonly',
@@ -22,7 +35,13 @@ export default [
                 FormData: 'readonly',
                 fetch: 'readonly',
                 HTMLElement: 'readonly',
-                global: 'readonly'
+                global: 'readonly',
+                // TypeScript DOM types
+                KeyboardEvent: 'readonly',
+                MouseEvent: 'readonly',
+                Event: 'readonly',
+                Element: 'readonly',
+                Node: 'readonly'
             }
         },
         rules: {
@@ -60,7 +79,11 @@ export default [
                     }
                 }
             ],
-            'vue/component-name-in-template-casing': ['error', 'PascalCase']
+            'vue/component-name-in-template-casing': ['error', 'PascalCase'],
+            '@typescript-eslint/no-unused-vars': 'warn',
+            '@typescript-eslint/no-explicit-any': 'warn',
+            '@typescript-eslint/prefer-as-const': 'error',
+            '@typescript-eslint/no-non-null-assertion': 'warn'
         }
     },
     {

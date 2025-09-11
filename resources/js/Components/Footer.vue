@@ -68,3 +68,7 @@
         </div>
     </footer>
 </template>
+
+<script setup lang="ts">
+// Footer component - Static footer with no props
+</script>

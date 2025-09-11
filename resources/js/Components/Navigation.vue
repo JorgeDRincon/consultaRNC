@@ -32,12 +32,12 @@
     </header>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { Link, usePage } from '@inertiajs/vue3'
 
 const page = usePage()
 
-const isActive = (path) => {
+const isActive = (path: string): boolean => {
     return page.url === path
 }
 </script>
