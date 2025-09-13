@@ -7,3 +7,7 @@
         </p>
     </section>
 </template>
+
+<script setup lang="ts">
+// Instalacion page - Simple static content with no props
+</script>

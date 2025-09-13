@@ -1,8 +1,16 @@
 // Global type definitions
 
+export interface FlashMessages {
+    success?: string;
+    error?: string;
+    warning?: string;
+    info?: string;
+}
+
 declare global {
     interface Window {
         axios: any;
+        route: (name: string, params?: Record<string, any>) => string;
     }
 }
 
@@ -22,4 +30,4 @@ interface ImportMeta {
     readonly env: ImportMetaEnv;
 }
 
-export {};
+export { };

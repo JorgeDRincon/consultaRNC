@@ -96,6 +96,8 @@ GET /api/v1/search?q=empresa&page=1&per_page=20</pre>
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3'
+
+// Endpoints page - Static documentation page with no props
 </script>
