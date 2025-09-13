@@ -143,9 +143,26 @@ fi
 
 # Atomic switch - this is the zero-downtime moment
 log "Performing atomic switch..."
+log "Creating symlink: ${CURRENT_PATH} -> ${RELEASE_PATH}"
+
+# Handle existing directory (not symlink)
+if [ -d "${CURRENT_PATH}" ] && [ ! -L "${CURRENT_PATH}" ]; then
+    warning "Found existing directory (not symlink): ${CURRENT_PATH}"
+    log "Moving existing directory to backup"
+    mv "${CURRENT_PATH}" "${CURRENT_PATH}.backup.$(date +%s)"
+fi
+
 ln -sfn "${RELEASE_PATH}" "${CURRENT_PATH}"
 
-success "Atomic switch completed successfully!"
+# Verify the symlink was created 
+if [ -L "${CURRENT_PATH}" ] && [ -e "${CURRENT_PATH}" ]; then
+    success "Atomic switch completed successfully!"
+    log "Symlink verification: $(ls -la ${CURRENT_PATH})"
+else
+    error "Symlink creation failed!"
+    ls -la "$(dirname ${CURRENT_PATH})"
+    exit 1
+fi
 
 # Restart PHP-FPM gracefully
 log "Restarting PHP-FPM..."
@@ -170,7 +187,7 @@ fi
 log "Running final verification..."
 if [ -f "/tmp/health-check.sh" ]; then
     chmod +x /tmp/health-check.sh
-    if /tmp/health-check.sh; then
+    if bash /tmp/health-check.sh; then
         success "Deployment completed successfully!"
         success "Release: ${RELEASE_NAME}"
         success "Path: ${RELEASE_PATH}"
