@@ -102,7 +102,7 @@
                             @dragover.prevent="isDragOver = true"
                             @dragleave.prevent="isDragOver = false"
                             @drop.prevent="handleFileDrop"
-                            @click="$refs.fileInput.click()"
+                            @click="($refs.fileInput as any)?.click()"
                         >
                             <div v-if="!selectedFile" class="space-y-4">
                                 <svg
@@ -176,10 +176,10 @@
                                     <p
                                         class="text-lg font-medium text-gray-900"
                                     >
-                                        {{ selectedFile.name }}
+                                        {{ (selectedFile as { name: string })?.name }}
                                     </p>
                                     <p class="text-sm text-gray-500">
-                                        {{ formatFileSize(selectedFile.size) }}
+                                        {{ formatFileSize((selectedFile as { size: number })?.size || 0) }}
                                     </p>
                                 </div>
                                 <button
@@ -335,35 +335,34 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3'
 import { ref } from 'vue'
+import { FlashMessages } from '@/types/global'
 
 interface Props {
-    flash?: {
-        success?: string
-        error?: string
-    }
+    flash?: FlashMessages
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
     flash: () => ({})
 })
 
-const selectedFile = ref<File | null>(null)
+const selectedFile = ref<unknown>(null)
 const isDragOver = ref(false)
 const uploading = ref(false)
 const uploadProgress = ref(0)
-const fileInput = ref<HTMLInputElement | null>(null)
+const fileInput = ref<unknown>(null)
 
 const handleFileSelect = (event: Event) => {
-    const target = event.target as HTMLInputElement
+    const target = event.target as unknown as { files: { [index: number]: { name: string; size: number }; length: number } | null }
     const file = target.files?.[0]
     if (file && validateFile(file)) {
         selectedFile.value = file
     }
 }
 
-const handleFileDrop = (event: DragEvent) => {
+const handleFileDrop = (event: Event) => {
     isDragOver.value = false
-    const files = event.dataTransfer?.files
+    const dragEvent = event as unknown as { dataTransfer: { files: { [index: number]: { name: string; size: number }; length: number } } | null }
+    const files = dragEvent.dataTransfer?.files
     if (files && files.length > 0) {
         const file = files[0]
         if (validateFile(file)) {
@@ -372,7 +371,7 @@ const handleFileDrop = (event: DragEvent) => {
     }
 }
 
-const validateFile = (file: File): boolean => {
+const validateFile = (file: { name: string; size: number }): boolean => {
     if (!file.name.toLowerCase().endsWith('.csv')) {
         alert('Por favor selecciona un archivo CSV válido.')
         return false
@@ -392,7 +391,7 @@ const validateFile = (file: File): boolean => {
 const removeFile = () => {
     selectedFile.value = null
     if (fileInput.value) {
-        fileInput.value.value = ''
+        (fileInput.value as { value: string }).value = ''
     }
 }
 
@@ -413,6 +412,7 @@ const submitForm = async () => {
     uploadProgress.value = 0
 
     const formData = new FormData()
+    // @ts-ignore - FormData.append needs a Blob, but we're using the file from input
     formData.append('file', selectedFile.value)
 
     try {

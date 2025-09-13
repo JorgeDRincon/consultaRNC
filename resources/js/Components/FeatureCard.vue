@@ -64,7 +64,7 @@ type ColorType = 'blue' | 'green' | 'purple' | 'orange' | 'red' | 'yellow' | 'in
 interface Props {
     title: string
     description: string
-    icon: string
+    icon?: string
     faIcon?: string | null
     color: ColorType
     iconSize?: string
@@ -72,6 +72,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+    icon: undefined,
     faIcon: null,
     iconSize: 'w-10 h-10',
     subtitle: undefined
