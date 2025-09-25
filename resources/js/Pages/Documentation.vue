@@ -917,12 +917,16 @@
             <span class="text-sm lg:text-base">URL copiada en el portapapeles</span>
         </div>
     </div>
+    
+    <!-- Scroll to Top Button -->
+    <ScrollToTop />
 </template>
 
 <script setup lang="ts">
 import FeatureCard from '@/Components/FeatureCard.vue'
 import Footer from '@/Components/Footer.vue'
 import Navigation from '@/Components/Navigation.vue'
+import ScrollToTop from '@/Components/ScrollToTop.vue'
 import ParamCard from '@/Components/ParamCard.vue'
 import { Head } from '@inertiajs/vue3'
 import { onMounted, onUnmounted, ref } from 'vue'

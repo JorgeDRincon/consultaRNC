@@ -5,9 +5,36 @@ import Dropdown from '@/Components/Dropdown.vue'
 import DropdownLink from '@/Components/DropdownLink.vue'
 import NavLink from '@/Components/NavLink.vue'
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'
+import ScrollToTop from '@/Components/ScrollToTop.vue'
 import { Link } from '@inertiajs/vue3'
 
 const showingNavigationDropdown = ref<boolean>(false)
+
+// Type for page props
+interface PageProps {
+    auth: {
+        user: {
+            name: string
+            email: string
+        }
+    }
+}
+
+// Helper functions for template usage
+const route = (name: string, params?: Record<string, unknown>) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (window as any).route(name, params)
+}
+
+const $page = (() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (window as any).$page as { props: PageProps }
+})()
+
+const isCurrentRoute = (routeName: string): boolean => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return route(routeName) === (window as any).location.pathname
+}
 </script>
 
 <template>
@@ -35,7 +62,7 @@ const showingNavigationDropdown = ref<boolean>(false)
                             >
                                 <NavLink
                                     :href="route('dashboard')"
-                                    :active="route().current('dashboard')"
+                                    :active="isCurrentRoute('dashboard')"
                                 >
                                     Dashboard
                                 </NavLink>
@@ -142,7 +169,7 @@ const showingNavigationDropdown = ref<boolean>(false)
                     <div class="space-y-1 pb-3 pt-2">
                         <ResponsiveNavLink
                             :href="route('dashboard')"
-                            :active="route().current('dashboard')"
+                            :active="isCurrentRoute('dashboard')"
                         >
                             Dashboard
                         </ResponsiveNavLink>
@@ -194,5 +221,8 @@ const showingNavigationDropdown = ref<boolean>(false)
                 <slot />
             </main>
         </div>
+        
+        <!-- Scroll to Top Button -->
+        <ScrollToTop />
     </div>
 </template>

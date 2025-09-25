@@ -164,12 +164,16 @@
         </div>
         <Footer />
     </div>
+    
+    <!-- Scroll to Top Button -->
+    <ScrollToTop />
 </template>
 
 <script setup lang="ts">
 import FeatureCard from '@/Components/FeatureCard.vue'
 import Footer from '@/Components/Footer.vue'
 import Navigation from '@/Components/Navigation.vue'
+import ScrollToTop from '@/Components/ScrollToTop.vue'
 import { Head, Link } from '@inertiajs/vue3'
 
 // About page - No props needed for this static page

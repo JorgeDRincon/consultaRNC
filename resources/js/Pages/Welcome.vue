@@ -133,11 +133,15 @@
         <!-- Footer -->
         <Footer />
     </div>
+    
+    <!-- Scroll to Top Button -->
+    <ScrollToTop />
 </template>
 
 <script setup lang="ts">
 import Footer from '@/Components/Footer.vue'
 import Navigation from '@/Components/Navigation.vue'
+import ScrollToTop from '@/Components/ScrollToTop.vue'
 import { Head, Link } from '@inertiajs/vue3'
 
 // Welcome page - No props needed for this static page

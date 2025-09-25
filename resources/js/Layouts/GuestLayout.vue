@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ApplicationLogo from '@/Components/ApplicationLogo.vue'
+import ScrollToTop from '@/Components/ScrollToTop.vue'
 import { Link } from '@inertiajs/vue3'
 
 // GuestLayout - Simple layout with no props
@@ -20,5 +21,8 @@ import { Link } from '@inertiajs/vue3'
         >
             <slot />
         </div>
+        
+        <!-- Scroll to Top Button -->
+        <ScrollToTop />
     </div>
 </template>
