@@ -10,7 +10,7 @@
         <button
             v-if="isVisible"
             :class="[
-                'group fixed right-4 sm:right-6 z-50 bg-white/90 hover:bg-white text-gray-500 hover:text-gray-700 p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-blue-500/50 backdrop-blur-md border border-gray-200/50 hover:border-gray-300/50',
+                'group fixed right-4 sm:right-6 z-50 bg-white/90 hover:bg-white dark:bg-gray-800/90 dark:hover:bg-gray-800 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl dark:shadow-gray-900/20 dark:hover:shadow-gray-900/30 transition-all duration-300 ease-in-out transform hover:scale-105 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-blue-500/50 backdrop-blur-md border border-gray-200/50 hover:border-gray-300/50 dark:border-gray-700/50 dark:hover:border-gray-600/50',
                 isNearFooter 
                     ? 'bottom-8 sm:bottom-10 lg:bottom-40' 
                     : 'bottom-8 sm:bottom-10 lg:bottom-8'
@@ -20,7 +20,7 @@
             @click="scrollToTop"
         >
             <!-- Subtle background glow -->
-            <div class="absolute inset-0 rounded-xl sm:rounded-2xl bg-gradient-to-br from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div class="absolute inset-0 rounded-xl sm:rounded-2xl bg-gradient-to-br from-blue-50/50 to-transparent dark:from-blue-900/20 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             
             <!-- Main icon with modern styling -->
             <svg
@@ -39,7 +39,7 @@
             </svg>
             
             <!-- Subtle shine effect -->
-            <div class="absolute inset-0 rounded-xl sm:rounded-2xl bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div class="absolute inset-0 rounded-xl sm:rounded-2xl bg-gradient-to-r from-transparent via-white/30 dark:via-gray-600/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </button>
     </Transition>
 </template>

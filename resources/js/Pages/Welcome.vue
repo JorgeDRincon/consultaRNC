@@ -1,7 +1,7 @@
 <template>
     <Head title="Bienvenido" />
     <div
-        class="min-h-screen flex flex-col items-center bg-gradient-to-br from-slate-50 to-slate-200"
+        class="min-h-screen flex flex-col items-center bg-gradient-to-br from-slate-50 to-slate-200 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300"
     >
         <!-- Header con navegación -->
         <Navigation />
@@ -10,17 +10,17 @@
         <div class="flex w-full max-w-7xl mt-24 mb-6 mx-auto flex-1">
             <div class="flex-1">
                 <div
-                    class="bg-white rounded-2xl shadow-lg px-10 py-8 text-center relative overflow-hidden"
+                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20 px-10 py-8 text-center relative overflow-hidden transition-colors duration-300"
                 >
                     <div class="flex flex-col items-center relative z-10 mb-4">
-                        <img src="/images/logo.png" alt="Logo" width="400" />
+                        <img src="/images/logo.png" alt="Logo" width="400" class="dark:brightness-0 dark:invert" />
 
-                        <p class="text-lg text-gray-500 font-medium">
+                        <p class="text-lg text-gray-500 dark:text-gray-400 font-medium">
                             Bienvenido a la plataforma de consulta tributaria
                         </p>
                     </div>
 
-                    <p class="text-xl text-gray-600 mb-6 relative z-10">
+                    <p class="text-xl text-gray-600 dark:text-gray-300 mb-6 relative z-10">
                         Una plataforma moderna para consultar información
                         tributaria y de RNC en República Dominicana
                     </p>
@@ -76,27 +76,27 @@
 
                     <!-- Estadísticas -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                        <div class="bg-gray-100 p-6 rounded -lg">
-                            <div class="text-3xl font-bold text-blue-600 mb-2">
+                        <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg transition-colors duration-300">
+                            <div class="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
                                 24/7
                             </div>
-                            <div class="text-gray-600">
+                            <div class="text-gray-600 dark:text-gray-300">
                                 Disponibilidad
                             </div>
                         </div>
-                        <div class="bg-gray-100 p-6 rounded-lg">
-                            <div class="text-3xl font-bold text-red-600 mb-2">
+                        <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg transition-colors duration-300">
+                            <div class="text-3xl font-bold text-red-600 dark:text-red-400 mb-2">
                                 &lt;3s
                             </div>
-                            <div class="text-gray-600">
+                            <div class="text-gray-600 dark:text-gray-300">
                                 Tiempo de Respuesta
                             </div>
                         </div>
-                        <div class="bg-gray-100 p-6 rounded-lg">
-                            <div class="text-3xl font-bold text-blue-600 mb-2">
+                        <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg transition-colors duration-300">
+                            <div class="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
                                 ≤ 7 días
                             </div>
-                            <div class="text-gray-600">
+                            <div class="text-gray-600 dark:text-gray-300">
                                 Frecuencia de actualización
                             </div>
                         </div>
@@ -104,7 +104,7 @@
 
                     <!-- Call to Action -->
                     <div class="space-y-4">
-                        <p class="text-gray-600 mb-4">
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
                             ¿Listo para empezar? Explora nuestra documentación
                             completa y comienza a integrar la API en tus
                             proyectos.

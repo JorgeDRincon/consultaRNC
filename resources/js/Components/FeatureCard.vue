@@ -89,76 +89,76 @@ const colorClasses = computed(() => {
         description: string
     }> = {
         blue: {
-            background: 'from-blue-50 to-blue-100',
-            border: 'border-blue-200',
-            hoverShadow: 'hover:shadow-blue-200/50',
+            background: 'from-blue-50 to-blue-100 dark:from-blue-950/30 dark:to-blue-900/20',
+            border: 'border-blue-200 dark:border-blue-800/50',
+            hoverShadow: 'hover:shadow-blue-200/50 dark:hover:shadow-blue-950/20',
             iconBackground: 'bg-blue-600',
-            title: 'text-blue-900',
-            subtitle: 'text-blue-700',
-            description: 'text-blue-800'
+            title: 'text-blue-900 dark:text-blue-100',
+            subtitle: 'text-blue-700 dark:text-blue-200',
+            description: 'text-blue-800 dark:text-blue-300'
         },
         green: {
-            background: 'from-green-50 to-green-100',
-            border: 'border-green-200',
-            hoverShadow: 'hover:shadow-green-200/50',
+            background: 'from-green-50 to-green-100 dark:from-green-950/30 dark:to-green-900/20',
+            border: 'border-green-200 dark:border-green-800/50',
+            hoverShadow: 'hover:shadow-green-200/50 dark:hover:shadow-green-950/20',
             iconBackground: 'bg-green-600',
-            title: 'text-green-900',
-            subtitle: 'text-green-700',
-            description: 'text-green-800'
+            title: 'text-green-900 dark:text-green-100',
+            subtitle: 'text-green-700 dark:text-green-200',
+            description: 'text-green-800 dark:text-green-300'
         },
         purple: {
-            background: 'from-purple-50 to-purple-100',
-            border: 'border-purple-200',
-            hoverShadow: 'hover:shadow-purple-200/50',
+            background: 'from-purple-50 to-purple-100 dark:from-purple-950/30 dark:to-purple-900/20',
+            border: 'border-purple-200 dark:border-purple-800/50',
+            hoverShadow: 'hover:shadow-purple-200/50 dark:hover:shadow-purple-950/20',
             iconBackground: 'bg-purple-600',
-            title: 'text-purple-900',
-            subtitle: 'text-purple-700',
-            description: 'text-purple-800'
+            title: 'text-purple-900 dark:text-purple-100',
+            subtitle: 'text-purple-700 dark:text-purple-200',
+            description: 'text-purple-800 dark:text-purple-300'
         },
         orange: {
-            background: 'from-orange-50 to-orange-100',
-            border: 'border-orange-200',
-            hoverShadow: 'hover:shadow-orange-200/50',
+            background: 'from-orange-50 to-orange-100 dark:from-orange-950/30 dark:to-orange-900/20',
+            border: 'border-orange-200 dark:border-orange-800/50',
+            hoverShadow: 'hover:shadow-orange-200/50 dark:hover:shadow-orange-950/20',
             iconBackground: 'bg-orange-600',
-            title: 'text-orange-900',
-            subtitle: 'text-orange-700',
-            description: 'text-orange-800'
+            title: 'text-orange-900 dark:text-orange-100',
+            subtitle: 'text-orange-700 dark:text-orange-200',
+            description: 'text-orange-800 dark:text-orange-300'
         },
         red: {
-            background: 'from-red-50 to-red-100',
-            border: 'border-red-200',
-            hoverShadow: 'hover:shadow-red-200/50',
+            background: 'from-red-50 to-red-100 dark:from-red-950/30 dark:to-red-900/20',
+            border: 'border-red-200 dark:border-red-800/50',
+            hoverShadow: 'hover:shadow-red-200/50 dark:hover:shadow-red-950/20',
             iconBackground: 'bg-red-600',
-            title: 'text-red-900',
-            subtitle: 'text-red-700',
-            description: 'text-red-800'
+            title: 'text-red-900 dark:text-red-100',
+            subtitle: 'text-red-700 dark:text-red-200',
+            description: 'text-red-800 dark:text-red-300'
         },
         yellow: {
-            background: 'from-yellow-50 to-yellow-100',
-            border: 'border-yellow-200',
-            hoverShadow: 'hover:shadow-yellow-200/50',
+            background: 'from-yellow-50 to-yellow-100 dark:from-yellow-950/30 dark:to-yellow-900/20',
+            border: 'border-yellow-200 dark:border-yellow-800/50',
+            hoverShadow: 'hover:shadow-yellow-200/50 dark:hover:shadow-yellow-950/20',
             iconBackground: 'bg-yellow-600',
-            title: 'text-yellow-900',
-            subtitle: 'text-yellow-700',
-            description: 'text-yellow-800'
+            title: 'text-yellow-900 dark:text-yellow-100',
+            subtitle: 'text-yellow-700 dark:text-yellow-200',
+            description: 'text-yellow-800 dark:text-yellow-300'
         },
         indigo: {
-            background: 'from-indigo-50 to-indigo-100',
-            border: 'border-indigo-200',
-            hoverShadow: 'hover:shadow-indigo-200/50',
+            background: 'from-indigo-50 to-indigo-100 dark:from-indigo-950/30 dark:to-indigo-900/20',
+            border: 'border-indigo-200 dark:border-indigo-800/50',
+            hoverShadow: 'hover:shadow-indigo-200/50 dark:hover:shadow-indigo-950/20',
             iconBackground: 'bg-indigo-600',
-            title: 'text-indigo-900',
-            subtitle: 'text-indigo-700',
-            description: 'text-indigo-800'
+            title: 'text-indigo-900 dark:text-indigo-100',
+            subtitle: 'text-indigo-700 dark:text-indigo-200',
+            description: 'text-indigo-800 dark:text-indigo-300'
         },
         pink: {
-            background: 'from-pink-50 to-pink-100',
-            border: 'border-pink-200',
-            hoverShadow: 'hover:shadow-pink-200/50',
+            background: 'from-pink-50 to-pink-100 dark:from-pink-950/30 dark:to-pink-900/20',
+            border: 'border-pink-200 dark:border-pink-800/50',
+            hoverShadow: 'hover:shadow-pink-200/50 dark:hover:shadow-pink-950/20',
             iconBackground: 'bg-pink-600',
-            title: 'text-pink-900',
-            subtitle: 'text-pink-700',
-            description: 'text-pink-800'
+            title: 'text-pink-900 dark:text-pink-100',
+            subtitle: 'text-pink-700 dark:text-pink-200',
+            description: 'text-pink-800 dark:text-pink-300'
         }
     }
 

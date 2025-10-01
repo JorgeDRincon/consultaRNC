@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="bg-white dark:bg-gray-900 transition-colors duration-300">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +20,7 @@
         <!-- Iconos FontAwesome -->
         <script src="https://kit.fontawesome.com/f61d876e0e.js" crossorigin="anonymous"></script>
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased bg-white dark:bg-gray-900 transition-colors duration-300">
         @inertia
     </body>
 </html>

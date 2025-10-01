@@ -1,9 +1,9 @@
 <template>
     <Head title="Importar RNCs" />
 
-    <div class="min-h-screen bg-gray-100 py-12">
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-900 py-12 transition-colors duration-300">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-900/20 overflow-hidden transition-colors duration-300">
                 <!-- Header -->
                 <div
                     class="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-8"
@@ -120,7 +120,7 @@
                                 </svg>
                                 <div>
                                     <p
-                                        class="text-lg font-medium text-gray-900"
+                                        class="text-lg font-medium text-gray-900 dark:text-white"
                                     >
                                         Arrastra tu archivo CSV aquí
                                     </p>
@@ -174,7 +174,7 @@
                                 </div>
                                 <div>
                                     <p
-                                        class="text-lg font-medium text-gray-900"
+                                        class="text-lg font-medium text-gray-900 dark:text-white"
                                     >
                                         {{ (selectedFile as { name: string })?.name }}
                                     </p>

@@ -1,18 +1,18 @@
 <template>
     <Head title="About" />
     <div
-        class="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-slate-50 to-slate-200"
+        class="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-slate-50 to-slate-200 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300"
     >
         <!-- Header con navegación -->
         <Navigation />
 
         <div class="flex w-full max-w-7xl mt-24 mb-8 mx-auto flex-1">
             <div class="flex-1">
-                <div class="bg-white rounded-2xl shadow-lg p-10 text-center">
-                    <h1 class="text-3xl font-bold mb-2 text-gray-900">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20 p-10 text-center transition-colors duration-300">
+                    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-white">
                         Acerca de ConsultaRNC
                     </h1>
-                    <p class="text-gray-500 mb-6">
+                    <p class="text-gray-500 dark:text-gray-400 mb-6">
                         Conectando el futuro tributario dominicano con
                         tecnología moderna y transparencia
                         <img
@@ -24,10 +24,10 @@
 
                     <!-- Por qué fue desarrollada -->
                     <div class="mb-8 text-left">
-                        <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+                        <h2 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
                             ¿Por qué fue desarrollada esta API?
                         </h2>
-                        <div class="space-y-4 text-gray-700">
+                        <div class="space-y-4 text-gray-700 dark:text-gray-300">
                             <p>
                                 <span class="font-bold">ConsultaRNC</span> nació
                                 de la necesidad de modernizar y simplificar el
@@ -101,10 +101,10 @@
 
                     <!-- Equipo -->
                     <div class="mb-8 text-left">
-                        <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+                        <h2 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
                             Quienes Somos
                         </h2>
-                        <p class="text-gray-700 mb-6">
+                        <p class="text-gray-700 dark:text-gray-300 mb-6">
                             Somos desarrolladores apasionados por la tecnología,
                             comprometidos con ofrecer soluciones innovadoras y
                             fáciles de implementar que generen un impacto
@@ -118,7 +118,7 @@
                             de software de calidad.
                         </p>
 
-                        <p class="text-gray-700 mt-6">
+                        <p class="text-gray-700 dark:text-gray-300 mt-6">
                             Nuestro compromiso es mejorar y mantener
                             continuamente esta API, optimizando el acceso a la
                             información tributaria para
@@ -136,10 +136,10 @@
 
                     <!-- Contacto -->
                     <div v-if="false" class="mb-8">
-                        <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+                        <h2 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
                             ¿Tienes alguna pregunta?
                         </h2>
-                        <p class="text-gray-700 mb-4">
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">
                             Estamos aquí para ayudarte. Si tienes alguna
                             consulta sobre nuestros servicios o quieres
                             colaborar con el proyecto, no dudes en contactarnos.

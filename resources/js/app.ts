@@ -5,8 +5,13 @@ import { createInertiaApp } from '@inertiajs/vue3'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { createApp, h } from 'vue'
 import { ZiggyVue } from '../../vendor/tightenco/ziggy'
+import { useTheme } from './stores/theme'
 
 const appName = import.meta.env.VITE_APP_NAME || 'ConsultaRNC'
+
+// Initialize theme before creating the app
+const { initializeTheme } = useTheme()
+initializeTheme()
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
