@@ -13,7 +13,12 @@
                     class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20 px-10 py-8 text-center relative overflow-hidden transition-colors duration-300"
                 >
                     <div class="flex flex-col items-center relative z-10 mb-4">
-                        <img src="/images/logo.png" alt="Logo" width="400" class="dark:brightness-0 dark:invert" />
+                        <img
+                            src="/images/logo.png"
+                            alt="Logo"
+                            width="400"
+                            class="dark:brightness-0 dark:invert"
+                        />
 
                         <p class="text-lg text-gray-500 dark:text-gray-400 font-medium">
                             Bienvenido a la plataforma de consulta tributaria

@@ -2,7 +2,12 @@
     <header class="absolute top-0 left-0 right-0 p-6 z-10">
         <nav class="max-w-7xl mx-auto flex justify-between items-center">
             <Link href="/">
-                <img src="/images/logo.png" alt="Logo" width="200" class="dark:brightness-0 dark:invert" />
+                <img
+                    src="/images/logo.png"
+                    alt="Logo"
+                    width="200"
+                    class="dark:brightness-0 dark:invert"
+                />
             </Link>
             <div class="flex items-center space-x-6">
                 <Link
