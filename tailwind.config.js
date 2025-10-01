@@ -9,11 +9,26 @@ export default {
         "./resources/views/**/*.blade.php",
         "./resources/js/**/*.vue",
     ],
+    darkMode: 'class',
 
     theme: {
         extend: {
             fontFamily: {
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
+            },
+            colors: {
+                // Dark mode colors
+                dark: {
+                    primary: '#1a1a1a',
+                    secondary: '#2d2d2d',
+                    tertiary: '#404040',
+                },
+                // Light mode colors (default Tailwind colors)
+                light: {
+                    primary: '#ffffff',
+                    secondary: '#f8f9fa',
+                    tertiary: '#e5e7eb',
+                },
             },
             animation: {
                 "gradient-x": "gradient-x 3s ease-in-out infinite",

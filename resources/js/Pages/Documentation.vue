@@ -1,7 +1,7 @@
 <template>
     <Head title="Documentation" />
     <div
-        class="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-slate-50 to-slate-200"
+        class="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-slate-50 to-slate-200 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300"
     >
         <!-- Header con navegación -->
         <Navigation />
@@ -12,8 +12,8 @@
         >
             <!-- Sidebar - Hidden on mobile, visible on large screens -->
             <div class="hidden lg:block w-64 flex-shrink-0 lg:mr-8">
-                <div class="bg-white rounded-2xl shadow-lg p-6 sticky top-8">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20 p-6 sticky top-8 transition-colors duration-300">
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">
                         Contenido 
                     </h3>
                     <nav class="space-y-2">
@@ -23,8 +23,8 @@
                                 :class="[
                                     'block px-3 py-2 text-sm rounded-lg transition font-medium',
                                     activeSection === 'url-base'
-                                        ? 'text-blue-600 bg-blue-50'
-                                        : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50',
+                                        ? 'text-blue-600 bg-blue-50 dark:bg-blue-900/20 dark:text-blue-400'
+                                        : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                 ]"
                             >
                                 URL Base
@@ -36,8 +36,8 @@
                                 :class="[
                                     'block px-3 py-2 text-sm rounded-lg transition font-medium',
                                     activeSection === 'busqueda-rnc'
-                                        ? 'text-blue-600 bg-blue-50'
-                                        : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50',
+                                        ? 'text-blue-600 bg-blue-50 dark:bg-blue-900/20 dark:text-blue-400'
+                                        : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                 ]"
                             >
                                 Búsqueda Avanzada RNC
@@ -49,8 +49,8 @@
                                     :class="[
                                         'block px-3 py-2 text-sm rounded transition',
                                         activeSection === 'param-rnc'
-                                            ? 'text-blue-600 bg-blue-50 font-medium'
-                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                            ? 'text-blue-600 bg-blue-50 font-medium dark:bg-blue-900/20 dark:text-blue-400'
+                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                     ]"
                                 >
                                     • RNC
@@ -60,8 +60,8 @@
                                     :class="[
                                         'block px-3 py-2 text-sm rounded transition',
                                         activeSection === 'param-business-name'
-                                            ? 'text-blue-600 bg-blue-50 font-medium'
-                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                            ? 'text-blue-600 bg-blue-50 font-medium dark:bg-blue-900/20 dark:text-blue-400'
+                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                     ]"
                                 >
                                     • Nombre Comercial
@@ -72,8 +72,8 @@
                                         'block px-3 py-2 text-sm rounded transition',
                                         activeSection ===
                                             'param-economic-activity'
-                                            ? 'text-blue-600 bg-blue-50 font-medium'
-                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                            ? 'text-blue-600 bg-blue-50 font-medium dark:bg-blue-900/20 dark:text-blue-400'
+                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                     ]"
                                 >
                                     • Actividad Económica
@@ -83,8 +83,8 @@
                                     :class="[
                                         'block px-3 py-2 text-sm rounded transition',
                                         activeSection === 'param-status'
-                                            ? 'text-blue-600 bg-blue-50 font-medium'
-                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                            ? 'text-blue-600 bg-blue-50 font-medium dark:bg-blue-900/20 dark:text-blue-400'
+                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                     ]"
                                 >
                                     • Estado
@@ -94,8 +94,8 @@
                                     :class="[
                                         'block px-3 py-2 text-sm rounded transition',
                                         activeSection === 'param-payment-regime'
-                                            ? 'text-blue-600 bg-blue-50 font-medium'
-                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                            ? 'text-blue-600 bg-blue-50 font-medium dark:bg-blue-900/20 dark:text-blue-400'
+                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                     ]"
                                 >
                                     • Régimen de Pago
@@ -105,8 +105,8 @@
                                     :class="[
                                         'block px-3 py-2 text-sm rounded transition',
                                         activeSection === 'param-start-date'
-                                            ? 'text-blue-600 bg-blue-50 font-medium'
-                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                            ? 'text-blue-600 bg-blue-50 font-medium dark:bg-blue-900/20 dark:text-blue-400'
+                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                     ]"
                                 >
                                     • Fecha de Inicio
@@ -116,8 +116,8 @@
                                     :class="[
                                         'block px-3 py-2 text-sm rounded transition',
                                         activeSection === 'ejemplos-uso'
-                                            ? 'text-blue-600 bg-blue-50 font-medium'
-                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                            ? 'text-blue-600 bg-blue-50 font-medium dark:bg-blue-900/20 dark:text-blue-400'
+                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                     ]"
                                 >
                                     • Ejemplos de Uso
@@ -128,8 +128,8 @@
                                         'block px-3 py-2 text-sm rounded transition',
                                         activeSection ===
                                             'ejemplos-combinaciones'
-                                            ? 'text-blue-600 bg-blue-50 font-medium'
-                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                            ? 'text-blue-600 bg-blue-50 font-medium dark:bg-blue-900/20 dark:text-blue-400'
+                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                     ]"
                                 >
                                     • Ejemplos de Combinaciones
@@ -143,8 +143,8 @@
                                 :class="[
                                     'block px-3 py-2 text-sm rounded-lg transition font-medium',
                                     activeSection === 'tipos-respuestas'
-                                        ? 'text-blue-600 bg-blue-50'
-                                        : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50',
+                                        ? 'text-blue-600 bg-blue-50 dark:bg-blue-900/20 dark:text-blue-400'
+                                        : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                 ]"
                             >
                                 Formato de Respuesta y Códigos HTTP
@@ -156,8 +156,8 @@
                                     :class="[
                                         'block px-3 py-2 text-sm rounded transition',
                                         activeSection === 'respuesta-exitosa'
-                                            ? 'text-blue-600 bg-blue-50 font-medium'
-                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                            ? 'text-blue-600 bg-blue-50 font-medium dark:bg-blue-900/20 dark:text-blue-400'
+                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                     ]"
                                 >
                                     • Respuesta Exitosa
@@ -167,8 +167,8 @@
                                     :class="[
                                         'block px-3 py-2 text-sm rounded transition',
                                         activeSection === 'codigos-estado'
-                                            ? 'text-blue-600 bg-blue-50 font-medium'
-                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50',
+                                            ? 'text-blue-600 bg-blue-50 font-medium dark:bg-blue-900/20 dark:text-blue-400'
+                                            : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                     ]"
                                 >
                                     • Códigos de Estado
@@ -182,8 +182,8 @@
                                 :class="[
                                     'block px-3 py-2 text-sm rounded-lg transition font-medium',
                                     activeSection === 'ejemplos-integracion'
-                                        ? 'text-blue-600 bg-blue-50'
-                                        : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50',
+                                        ? 'text-blue-600 bg-blue-50 dark:bg-blue-900/20 dark:text-blue-400'
+                                        : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                 ]"
                             >
                                 Ejemplos de Integración
@@ -196,15 +196,15 @@
             <!-- Contenido principal -->
             <div class="flex-1 w-full">
                 <div
-                    class="bg-white rounded-2xl shadow-lg p-6 lg:p-10 text-center"
+                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20 p-6 lg:p-10 text-center transition-colors duration-300"
                 >
                     <h1
                         id="introduccion"
-                        class="text-2xl lg:text-3xl font-bold mb-2 text-gray-900"
+                        class="text-2xl lg:text-3xl font-bold mb-2 text-gray-900 dark:text-white"
                     >
                         Documentación de ConsultaRNC
                     </h1>
-                    <p class="text-gray-500 mb-6 text-sm lg:text-base">
+                    <p class="text-gray-500 dark:text-gray-400 mb-6 text-sm lg:text-base">
                         Guía completa para integrar y utilizar nuestra API de
                         consulta tributaria.
                     </p>
@@ -212,17 +212,17 @@
                     <!-- URL Base -->
                     <div id="url-base" class="mb-12 text-left">
                         <h2
-                            class="text-xl lg:text-2xl font-semibold mb-6 text-gray-800"
+                            class="text-xl lg:text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200"
                         >
                             URL Base de la API
                         </h2>
                         <div
-                            class="bg-blue-50 border-l-4 border-blue-400 p-4 lg:p-6 rounded-lg"
+                            class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-400 dark:border-blue-500 p-4 lg:p-6 rounded-lg transition-colors duration-300"
                         >
                             <div class="flex items-start">
                                 <div class="w-full">
                                     <p
-                                        class="text-gray-700 mb-2 text-sm lg:text-base"
+                                        class="text-gray-700 dark:text-gray-300 mb-2 text-sm lg:text-base"
                                     >
                                         Todas las peticiones deben realizarse a
                                         la siguiente URL:
@@ -231,12 +231,12 @@
                                         class="flex flex-col sm:flex-row items-start sm:items-center gap-2"
                                     >
                                         <code
-                                            class="text-blue-700 font-mono text-xs lg:text-sm bg-white px-3 py-2 rounded-lg shadow-sm flex-1 break-all"
+                                            class="text-blue-700 dark:text-blue-300 font-mono text-xs lg:text-sm bg-white dark:bg-gray-800 px-3 py-2 rounded-lg shadow-sm dark:shadow-gray-900/20 flex-1 break-all transition-colors duration-300"
                                         >
                                             https://consultarnc.com.do/api/search?
                                         </code>
                                         <button
-                                            class="bg-white hover:bg-blue-50 text-blue-600 hover:text-blue-700 p-2 rounded-lg shadow-sm transition-colors duration-200 flex items-center justify-center flex-shrink-0"
+                                            class="bg-white dark:bg-gray-800 hover:bg-blue-50 dark:hover:bg-blue-900/20 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 p-2 rounded-lg shadow-sm dark:shadow-gray-900/20 transition-colors duration-200 flex items-center justify-center flex-shrink-0"
                                             title="Copiar URL"
                                             @click="copyBaseUrl"
                                         >
@@ -251,7 +251,7 @@
                     <!-- Búsqueda Avanzada RNC -->
                     <div id="busqueda-rnc" class="mb-12 text-left">
                         <h2
-                            class="text-xl lg:text-2xl font-semibold mb-6 text-gray-800"
+                            class="text-xl lg:text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200"
                         >
                             Búsqueda Avanzada RNC
                         </h2>
@@ -328,120 +328,120 @@
 
                         <h5
                             id="ejemplos-uso"
-                            class="font-semibold mb-2 mt-6 text-gray-700"
+                            class="font-semibold mb-2 mt-6 text-gray-700 dark:text-gray-300"
                         >
                             Ejemplos de uso:
                         </h5>
                         <div class="space-y-2">
                             <div
-                                class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
+                                class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg p-3 hover:shadow-md dark:hover:shadow-gray-900/20 transition-all duration-200"
                             >
                                 <h6
-                                    class="text-sm font-medium text-gray-700 mb-2"
+                                    class="text-sm font-medium text-gray-700 dark:text-gray-100 mb-2"
                                 >
                                     Búsqueda de empresas por nombre
                                 </h6>
                                 <code
-                                    class="text-zinc-900 font-mono text-xs lg:text-sm break-all"
+                                    class="text-zinc-900 dark:text-gray-200 font-mono text-xs lg:text-sm break-all"
                                 >
-                                    GET /api/search?<span class="font-semibold">business_name</span>=<span class="text-red-600 font-semibold">empresa</span>
+                                    GET /api/search?<span class="font-semibold">business_name</span>=<span class="text-red-600 dark:text-blue-300 font-semibold">empresa</span>
                                 </code>
                             </div>
                             <div
-                                class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
+                                class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg p-3 hover:shadow-md dark:hover:shadow-gray-900/20 transition-all duration-200"
                             >
                                 <h6
-                                    class="text-sm font-medium text-gray-700 mb-2"
+                                    class="text-sm font-medium text-gray-700 dark:text-gray-100 mb-2"
                                 >
                                     Búsqueda de contribuyente por RNC
                                 </h6>
                                 <code
-                                    class="text-zinc-900 font-mono text-xs lg:text-sm break-all"
+                                    class="text-zinc-900 dark:text-gray-200 font-mono text-xs lg:text-sm break-all"
                                 >
-                                    GET /api/search?<span class="font-semibold">rnc</span>=<span class="text-red-600 font-semibold">123456789</span>
+                                    GET /api/search?<span class="font-semibold">rnc</span>=<span class="text-red-600 dark:text-blue-300 font-semibold">123456789</span>
                                 </code>
                             </div>
                             <div
-                                class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
+                                class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg p-3 hover:shadow-md dark:hover:shadow-gray-900/20 transition-all duration-200"
                             >
                                 <h6
-                                    class="text-sm font-medium text-gray-700 mb-2"
+                                    class="text-sm font-medium text-gray-700 dark:text-gray-100 mb-2"
                                 >
                                     Búsqueda por actividad económica
                                 </h6>
                                 <code
-                                    class="text-zinc-900 font-mono text-xs lg:text-sm break-all"
+                                    class="text-zinc-900 dark:text-gray-200 font-mono text-xs lg:text-sm break-all"
                                 >
-                                    GET /api/search?<span class="font-semibold">economic_activity</span>=<span class="text-red-600 font-semibold">comercio</span>
+                                    GET /api/search?<span class="font-semibold">economic_activity</span>=<span class="text-red-600 dark:text-blue-300 font-semibold">comercio</span>
                                 </code>
                             </div>
                             <div
-                                class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
+                                class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg p-3 hover:shadow-md dark:hover:shadow-gray-900/20 transition-all duration-200"
                             >
                                 <h6
-                                    class="text-sm font-medium text-gray-700 mb-2"
+                                    class="text-sm font-medium text-gray-700 dark:text-gray-100 mb-2"
                                 >
                                     Búsqueda con múltiples filtros
                                 </h6>
                                 <code
-                                    class="text-zinc-900 font-mono text-xs lg:text-sm break-all"
+                                    class="text-zinc-900 dark:text-gray-200 font-mono text-xs lg:text-sm break-all"
                                 >
-                                    GET /api/search?<span class="font-semibold">status</span>=<span class="text-red-600 font-semibold">Activo</span>&<span class="font-semibold">payment_regime</span>=<span class="text-red-600 font-semibold">General</span>
+                                    GET /api/search?<span class="font-semibold">status</span>=<span class="text-red-600 dark:text-blue-300 font-semibold">Activo</span>&<span class="font-semibold">payment_regime</span>=<span class="text-red-600 dark:text-blue-300 font-semibold">General</span>
                                 </code>
                             </div>
                         </div>
 
                         <h5
                             id="ejemplos-combinaciones"
-                            class="font-semibold mb-2 text-gray-700 mt-6"
+                            class="font-semibold mb-2 text-gray-700 dark:text-gray-300 mt-6"
                         >
                             Ejemplos de combinaciones:
                         </h5>
                         <div class="space-y-2">
                             <div
-                                class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
+                                class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg p-3 hover:shadow-md dark:hover:shadow-gray-900/20 transition-all duration-200"
                             >
                                 <h6
-                                    class="text-sm font-medium text-gray-700 mb-2"
+                                    class="text-sm font-medium text-gray-700 dark:text-gray-100 mb-2"
                                 >
                                     Búsqueda de empresas activas por nombre
                                 </h6>
-                                <code class="text-zinc-900 font-mono text-sm">
-                                    GET /api/search?<span class="font-semibold">business_name</span>=<span class="text-red-600 font-semibold">empresa</span>&<span class="font-semibold">status</span>=<span class="text-red-600 font-semibold">Activo</span>
+                                <code class="text-zinc-900 dark:text-gray-200 font-mono text-sm">
+                                    GET /api/search?<span class="font-semibold">business_name</span>=<span class="text-red-600 dark:text-blue-300 font-semibold">empresa</span>&<span class="font-semibold">status</span>=<span class="text-red-600 dark:text-blue-300 font-semibold">Activo</span>
                                 </code>
-                                <p class="text-gray-600 text-xs mt-1">
+                                <p class="text-gray-600 dark:text-gray-300 text-xs mt-1">
                                     Buscar empresas activas con "empresa" en el
                                     nombre
                                 </p>
                             </div>
                             <div
-                                class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
+                                class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg p-3 hover:shadow-md dark:hover:shadow-gray-900/20 transition-all duration-200"
                             >
                                 <h6
-                                    class="text-sm font-medium text-gray-700 mb-2"
+                                    class="text-sm font-medium text-gray-700 dark:text-gray-100 mb-2"
                                 >
                                     Búsqueda de comercios con régimen general
                                 </h6>
-                                <code class="text-zinc-900 font-mono text-sm">
-                                    GET /api/search?<span class="font-semibold">economic_activity</span>=<span class="text-red-600 font-semibold">comercio</span>&<span class="font-semibold">payment_regime</span>=<span class="text-red-600 font-semibold">General</span>
+                                <code class="text-zinc-900 dark:text-gray-200 font-mono text-sm">
+                                    GET /api/search?<span class="font-semibold">economic_activity</span>=<span class="text-red-600 dark:text-blue-300 font-semibold">comercio</span>&<span class="font-semibold">payment_regime</span>=<span class="text-red-600 dark:text-blue-300 font-semibold">General</span>
                                 </code>
-                                <p class="text-gray-600 text-xs mt-1">
+                                <p class="text-gray-600 dark:text-gray-300 text-xs mt-1">
                                     Buscar comercios con régimen general
                                 </p>
                             </div>
                             <div
-                                class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow duration-200"
+                                class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg p-3 hover:shadow-md dark:hover:shadow-gray-900/20 transition-all duration-200"
                             >
                                 <h6
-                                    class="text-sm font-medium text-gray-700 mb-2"
+                                    class="text-sm font-medium text-gray-700 dark:text-gray-100 mb-2"
                                 >
                                     Búsqueda de contribuyentes activos por rango
                                     de fechas
                                 </h6>
-                                <code class="text-zinc-900 font-mono text-sm">
-                                    GET /api/search?<span class="font-semibold">start_date[]</span>=<span class="text-red-600 font-semibold">2020-01-01</span>&<span class="font-semibold">start_date[]</span>=<span class="text-red-600 font-semibold">2024-12-31</span>&<span class="font-semibold">status</span>=<span class="text-red-600 font-semibold">Activo</span>
+                                <code class="text-zinc-900 dark:text-gray-200 font-mono text-sm">
+                                    GET /api/search?<span class="font-semibold">start_date[]</span>=<span class="text-red-600 dark:text-blue-300 font-semibold">2020-01-01</span>&<span class="font-semibold">start_date[]</span>=<span class="text-red-600 dark:text-blue-300 font-semibold">2024-12-31</span>&<span class="font-semibold">status</span>=<span class="text-red-600 dark:text-blue-300 font-semibold">Activo</span>
                                 </code>
-                                <p class="text-gray-600 text-xs mt-1">
+                                <p class="text-gray-600 dark:text-gray-300 text-xs mt-1">
                                     Buscar contribuyentes activos registrados
                                     entre 2020 y 2024
                                 </p>
@@ -452,7 +452,7 @@
                     <!-- TIPOS DE RESPUESTAS -->
                     <div id="tipos-respuestas" class="mb-12 text-left">
                         <h2
-                            class="text-xl lg:text-2xl font-semibold mb-6 text-gray-800"
+                            class="text-xl lg:text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200"
                         >
                             Formato de Respuesta y Códigos HTTP
                         </h2>
@@ -460,18 +460,18 @@
                         <!-- Respuesta Exitosa -->
                         <div id="respuesta-exitosa" class="mb-8">
                             <h3
-                                class="text-lg lg:text-xl font-semibold mb-4 text-gray-800"
+                                class="text-lg lg:text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200"
                             >
                                 Respuesta Exitosa
                             </h3>
-                            <div class="bg-gray-100 p-4 lg:p-6 rounded-lg">
+                            <div class="bg-gray-100 dark:bg-gray-700 p-4 lg:p-6 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors duration-300">
                                 <h4
-                                    class="text-base lg:text-lg font-medium mb-3 text-gray-700"
+                                    class="text-base lg:text-lg font-medium mb-3 text-gray-700 dark:text-gray-200"
                                 >
                                     Estructura
                                 </h4>
                                 <pre
-                                    class="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto text-xs lg:text-sm"
+                                    class="bg-gray-800 dark:bg-gray-800 text-gray-100 dark:text-gray-100 p-4 rounded-lg overflow-x-auto text-xs lg:text-sm"
                                 >
 {
     "message": "Search completed.",
@@ -503,177 +503,177 @@
 }</pre>
                                 <div class="mt-4 space-y-3">
                                     <h4
-                                        class="text-base font-medium text-gray-700"
+                                        class="text-base lg:text-lg font-medium mb-3 text-gray-700 dark:text-gray-200"
                                     >
-                                        Descripción de campos:
+                                        Descripción de campos
                                     </h4>
-                                    <div class="overflow-x-auto">
+                                    <div class="overflow-x-auto rounded-2xl border border-gray-200 dark:border-gray-600">
                                         <table
-                                            class="min-w-full bg-white border border-gray-200 rounded-lg"
+                                            class="min-w-full bg-white dark:bg-gray-800"
                                         >
-                                            <thead class="bg-gray-50">
+                                            <thead class="bg-gray-50 dark:bg-gray-700">
                                                 <tr>
                                                     <th
-                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200"
+                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider border-b border-gray-200 dark:border-gray-600"
                                                     >
                                                         Campo
                                                     </th>
                                                     <th
-                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200"
+                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider border-b border-gray-200 dark:border-gray-600"
                                                     >
                                                         Tipo de Dato
                                                     </th>
                                                     <th
-                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200"
+                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider border-b border-gray-200 dark:border-gray-600"
                                                     >
                                                         Descripción
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody
-                                                class="bg-white divide-y divide-gray-200"
+                                                class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600"
                                             >
-                                                <tr class="hover:bg-gray-50">
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap"
                                                     >
                                                         <code
-                                                            class="text-sm font-semibold text-gray-900 bg-gray-100 px-2 py-1 rounded"
+                                                            class="text-sm font-semibold text-gray-900 dark:text-gray-100 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded"
                                                         >message</code>
                                                     </td>
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap"
                                                     >
                                                         <span
-                                                            class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200"
+                                                            class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-700"
                                                         >
                                                             string
                                                         </span>
                                                     </td>
                                                     <td
-                                                        class="px-6 py-4 text-sm text-gray-600"
+                                                        class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300"
                                                     >
                                                         Mensaje descriptivo del
                                                         resultado de la búsqueda
                                                     </td>
                                                 </tr>
-                                                <tr class="hover:bg-gray-50">
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap"
                                                     >
                                                         <code
-                                                            class="text-sm font-semibold text-gray-900 bg-gray-100 px-2 py-1 rounded"
+                                                            class="text-sm font-semibold text-gray-900 dark:text-gray-100 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded"
                                                         >pages</code>
                                                     </td>
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap"
                                                     >
                                                         <span
-                                                            class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200"
+                                                            class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-700"
                                                         >
                                                             number
                                                         </span>
                                                     </td>
                                                     <td
-                                                        class="px-6 py-4 text-sm text-gray-600"
+                                                        class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300"
                                                     >
                                                         Número total de páginas
                                                         disponibles
                                                     </td>
                                                 </tr>
-                                                <tr class="hover:bg-gray-50">
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap"
                                                     >
                                                         <code
-                                                            class="text-sm font-semibold text-gray-900 bg-gray-100 px-2 py-1 rounded"
+                                                            class="text-sm font-semibold text-gray-900 dark:text-gray-100 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded"
                                                         >next</code>
                                                     </td>
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap"
                                                     >
                                                         <span
-                                                            class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200"
+                                                            class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-700"
                                                         >
                                                             string | null
                                                         </span>
                                                     </td>
                                                     <td
-                                                        class="px-6 py-4 text-sm text-gray-600"
+                                                        class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300"
                                                     >
                                                         URL de la siguiente
                                                         página (null si es la
                                                         última)
                                                     </td>
                                                 </tr>
-                                                <tr class="hover:bg-gray-50">
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap"
                                                     >
                                                         <code
-                                                            class="text-sm font-semibold text-gray-900 bg-gray-100 px-2 py-1 rounded"
+                                                            class="text-sm font-semibold text-gray-900 dark:text-gray-100 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded"
                                                         >prev</code>
                                                     </td>
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap"
                                                     >
                                                         <span
-                                                            class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200"
+                                                            class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-700"
                                                         >
                                                             string | null
                                                         </span>
                                                     </td>
                                                     <td
-                                                        class="px-6 py-4 text-sm text-gray-600"
+                                                        class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300"
                                                     >
                                                         URL de la página
                                                         anterior (null si es la
                                                         primera)
                                                     </td>
                                                 </tr>
-                                                <tr class="hover:bg-gray-50">
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap"
                                                     >
                                                         <code
-                                                            class="text-sm font-semibold text-gray-900 bg-gray-100 px-2 py-1 rounded"
+                                                            class="text-sm font-semibold text-gray-900 dark:text-gray-100 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded"
                                                         >total</code>
                                                     </td>
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap"
                                                     >
                                                         <span
-                                                            class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200"
+                                                            class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-700"
                                                         >
                                                             number
                                                         </span>
                                                     </td>
                                                     <td
-                                                        class="px-6 py-4 text-sm text-gray-600"
+                                                        class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300"
                                                     >
                                                         Número total de
                                                         registros encontrados
                                                     </td>
                                                 </tr>
-                                                <tr class="hover:bg-gray-50">
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap"
                                                     >
                                                         <code
-                                                            class="text-sm font-semibold text-gray-900 bg-gray-100 px-2 py-1 rounded"
+                                                            class="text-sm font-semibold text-gray-900 dark:text-gray-100 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded"
                                                         >data</code>
                                                     </td>
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap"
                                                     >
                                                         <span
-                                                            class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200"
+                                                            class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-700"
                                                         >
                                                             array
                                                         </span>
                                                     </td>
                                                     <td
-                                                        class="px-6 py-4 text-sm text-gray-600"
+                                                        class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300"
                                                     >
                                                         Array con los registros
                                                         RNC encontrados (máximo
@@ -690,38 +690,38 @@
                         <!-- Códigos de Estado HTTP -->
                         <div id="codigos-estado" class="mb-8">
                             <h3
-                                class="text-lg lg:text-xl font-semibold mb-4 text-gray-800"
+                                class="text-lg lg:text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200"
                             >
                                 Códigos de Estado HTTP
                             </h3>
-                            <div class="bg-gray-100 p-4 lg:p-6 rounded-lg">
+                            <div class="bg-gray-100 dark:bg-gray-700 p-4 lg:p-6 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors duration-300">
                                 <ul class="space-y-4">
                                     <li class="flex items-start">
                                         <span
-                                            class="font-semibold text-green-600 mr-2"
+                                            class="font-semibold text-green-600 dark:text-green-400 mr-2"
                                         >200 OK:</span>
-                                        <span class="text-gray-600">La solicitud se procesó
+                                        <span class="text-gray-600 dark:text-gray-300">La solicitud se procesó
                                             correctamente</span>
                                     </li>
                                     <li class="flex items-start">
                                         <span
-                                            class="font-semibold text-yellow-600 mr-2"
+                                            class="font-semibold text-yellow-600 dark:text-yellow-400 mr-2"
                                         >400 Bad Request:</span>
-                                        <span class="text-gray-600">La solicitud contiene parámetros
+                                        <span class="text-gray-600 dark:text-gray-300">La solicitud contiene parámetros
                                             inválidos</span>
                                     </li>
                                     <li class="flex items-start">
                                         <span
-                                            class="font-semibold text-red-600 mr-2"
+                                            class="font-semibold text-red-600 dark:text-red-400 mr-2"
                                         >404 Not Found:</span>
-                                        <span class="text-gray-600">El recurso solicitado no
+                                        <span class="text-gray-600 dark:text-gray-300">El recurso solicitado no
                                             existe</span>
                                     </li>
                                     <li class="flex items-start">
                                         <span
-                                            class="font-semibold text-red-600 mr-2"
+                                            class="font-semibold text-red-600 dark:text-red-400 mr-2"
                                         >500 Internal Server Error:</span>
-                                        <span class="text-gray-600">Error interno del servidor</span>
+                                        <span class="text-gray-600 dark:text-gray-300">Error interno del servidor</span>
                                     </li>
                                 </ul>
                             </div>
@@ -731,19 +731,19 @@
                     <!-- Ejemplos de Integración -->
                     <div id="ejemplos-integracion" class="mb-8 text-left">
                         <h2
-                            class="text-xl lg:text-2xl font-semibold mb-4 text-gray-800"
+                            class="text-xl lg:text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-200"
                         >
                             Ejemplos de Integración
                         </h2>
                         <div class="space-y-6">
-                            <div class="bg-gray-100 p-4 lg:p-6 rounded-lg">
+                            <div class="bg-gray-100 dark:bg-gray-700 p-4 lg:p-6 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors duration-300">
                                 <h3
-                                    class="font-semibold text-gray-700 mb-3 text-sm lg:text-base"
+                                    class="font-semibold text-gray-700 dark:text-gray-200 mb-3 text-sm lg:text-base"
                                 >
                                     JavaScript (Fetch) - Búsqueda
                                 </h3>
                                 <div
-                                    class="bg-gray-800 text-gray-100 p-3 lg:p-4 rounded-lg overflow-x-auto text-xs lg:text-sm"
+                                    class="bg-gray-800 dark:bg-gray-800 text-gray-100 dark:text-gray-100 p-3 lg:p-4 rounded-lg overflow-x-auto text-xs lg:text-sm"
                                 >
                                     <div class="mb-2">
                                         <span
@@ -794,14 +794,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="bg-gray-100 p-4 lg:p-6 rounded-lg">
+                            <div class="bg-gray-100 dark:bg-gray-700 p-4 lg:p-6 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors duration-300">
                                 <h3
-                                    class="font-semibold text-gray-700 mb-3 text-sm lg:text-base"
+                                    class="font-semibold text-gray-700 dark:text-gray-200 mb-3 text-sm lg:text-base"
                                 >
                                     PHP (cURL) - Búsqueda
                                 </h3>
                                 <div
-                                    class="bg-gray-800 text-gray-100 p-3 lg:p-4 rounded-lg overflow-x-auto text-xs lg:text-sm"
+                                    class="bg-gray-800 dark:bg-gray-800 text-gray-100 dark:text-gray-100 p-3 lg:p-4 rounded-lg overflow-x-auto text-xs lg:text-sm"
                                 >
                                     <div class="mb-2">
                                         <span class="text-purple-400">$ch</span>
@@ -872,15 +872,15 @@
                     <!-- Información Adicional -->
                     <div id="informacion-adicional" class="mb-8 text-left">
                         <h2
-                            class="text-xl lg:text-2xl font-semibold mb-4 text-gray-800"
+                            class="text-xl lg:text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-200"
                         >
                             Información Adicional
                         </h2>
-                        <div class="bg-blue-50 border-l-4 border-blue-400 p-4">
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-400 dark:border-blue-500 p-4 rounded-lg transition-colors duration-300">
                             <div class="flex">
                                 <div class="flex-shrink-0">
                                     <svg
-                                        class="h-5 w-5 text-blue-400"
+                                        class="h-5 w-5 text-blue-400 dark:text-blue-500"
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
                                     >
@@ -892,7 +892,7 @@
                                     </svg>
                                 </div>
                                 <div class="ml-3">
-                                    <p class="text-sm text-blue-700">
+                                    <p class="text-sm text-blue-700 dark:text-blue-300">
                                         <strong>Nota:</strong> Esta API está en
                                         desarrollo activo. Para obtener la
                                         información más actualizada sobre nuevos
