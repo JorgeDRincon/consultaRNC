@@ -4,27 +4,36 @@ import './bootstrap'
 import { createInertiaApp } from '@inertiajs/vue3'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { createApp, h } from 'vue'
+import { createPinia } from 'pinia'
 import { ZiggyVue } from '../../vendor/tightenco/ziggy'
-import { useTheme } from './stores/theme'
+import i18n from './i18n'
 
-const appName = import.meta.env.VITE_APP_NAME || 'ConsultaRNC'
-
-// Initialize theme before creating the app
-const { initializeTheme } = useTheme()
-initializeTheme()
+const appName = (import.meta as any).env?.VITE_APP_NAME || 'ConsultaRNC'
 
 createInertiaApp({
-    title: (title) => `${title} - ${appName}`,
+    title: (title) => title ? `${title} - ${appName}` : appName,
     resolve: (name) =>
         resolvePageComponent(
             `./Pages/${name}.vue`,
-            import.meta.glob('./Pages/**/*.vue')
+            (import.meta as any).glob('./Pages/**/*.vue')
         ),
     setup({ el, App, props, plugin }) {
-        return createApp({ render: () => h(App, props) })
-            .use(plugin)
-            .use(ZiggyVue)
-            .mount(el)
+        const app = createApp({ render: () => h(App, props) })
+
+        // Create Pinia instance
+        const pinia = createPinia()
+
+        // Initialize theme after Pinia is created
+        import('./stores/theme').then(({ useTheme }) => {
+            const { initializeTheme } = useTheme()
+            initializeTheme()
+        })
+
+        app.use(plugin)
+        app.use(pinia)
+        app.use(ZiggyVue)
+        app.use(i18n)
+        app.mount(el)
     },
     progress: {
         color: '#4B5563'

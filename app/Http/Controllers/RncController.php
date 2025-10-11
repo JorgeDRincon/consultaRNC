@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class RncController extends Controller
 {
     /**
-     * Search RNC records by one or more parameters.
+     * Advanced search for records by one or more parameters.
      */
     public function advancedSearch(Request $request): JsonResponse
     {

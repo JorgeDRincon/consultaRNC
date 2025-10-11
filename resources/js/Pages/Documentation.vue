@@ -1,5 +1,5 @@
 <template>
-    <Head title="Documentation" />
+    <Head :title="$t('documentation.title')" />
     <div
         class="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-slate-50 to-slate-200 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300"
     >
@@ -8,13 +8,13 @@
 
         <!-- Contenido principal con sidebar -->
         <div
-            class="flex w-full max-w-7xl mt-24 mb-8 mx-auto flex-1 px-4 lg:px-0"
+            class="flex w-full max-w-7xl mt-32 mb-8 mx-auto flex-1 px-4 lg:px-0"
         >
             <!-- Sidebar - Hidden on mobile, visible on large screens -->
             <div class="hidden lg:block w-64 flex-shrink-0 lg:mr-8">
                 <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20 p-6 sticky top-8 transition-colors duration-300">
                     <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">
-                        Contenido 
+                        {{ $t('documentation.content') }}
                     </h3>
                     <nav class="space-y-2">
                         <div>
@@ -27,7 +27,7 @@
                                         : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                 ]"
                             >
-                                URL Base
+                                {{ $t('documentation.base_url') }}
                             </a>
                         </div>
                         <div>
@@ -40,7 +40,7 @@
                                         : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                 ]"
                             >
-                                Búsqueda Avanzada RNC
+                                {{ $t('forms.rnc_search') }}
                             </a>
                             <!-- Sub-opciones de parámetros -->
                             <div class="ml-4 mt-2 space-y-1">
@@ -53,7 +53,7 @@
                                             : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                     ]"
                                 >
-                                    • RNC
+                                    • {{ $t('documentation.rnc_param') }}
                                 </a>
                                 <a
                                     href="#param-business-name"
@@ -64,7 +64,7 @@
                                             : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                     ]"
                                 >
-                                    • Nombre Comercial
+                                    • {{ $t('documentation.business_name_param') }}
                                 </a>
                                 <a
                                     href="#param-economic-activity"
@@ -76,7 +76,7 @@
                                             : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                     ]"
                                 >
-                                    • Actividad Económica
+                                    • {{ $t('documentation.economic_activity_param') }}
                                 </a>
                                 <a
                                     href="#param-status"
@@ -87,7 +87,7 @@
                                             : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                     ]"
                                 >
-                                    • Estado
+                                    • {{ $t('documentation.status_param') }}
                                 </a>
                                 <a
                                     href="#param-payment-regime"
@@ -98,7 +98,7 @@
                                             : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                     ]"
                                 >
-                                    • Régimen de Pago
+                                    • {{ $t('documentation.payment_regime_param') }}
                                 </a>
                                 <a
                                     href="#param-start-date"
@@ -109,7 +109,7 @@
                                             : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                     ]"
                                 >
-                                    • Fecha de Inicio
+                                    • {{ $t('documentation.start_date_param') }}
                                 </a>
                                 <a
                                     href="#ejemplos-uso"
@@ -120,7 +120,7 @@
                                             : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                     ]"
                                 >
-                                    • Ejemplos de Uso
+                                    • {{ $t('documentation.usage_examples') }}
                                 </a>
                                 <a
                                     href="#ejemplos-combinaciones"
@@ -132,7 +132,7 @@
                                             : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                     ]"
                                 >
-                                    • Ejemplos de Combinaciones
+                                    • {{ $t('documentation.combination_examples') }}
                                 </a>
                             </div>
                         </div>
@@ -147,7 +147,7 @@
                                         : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                 ]"
                             >
-                                Formato de Respuesta y Códigos HTTP
+                                {{ $t('documentation.response_format_title') }}
                             </a>
                             <!-- Sub-opciones de tipos de respuestas -->
                             <div class="ml-4 mt-2 space-y-1">
@@ -160,7 +160,7 @@
                                             : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                     ]"
                                 >
-                                    • Respuesta Exitosa
+                                    • {{ $t('documentation.successful_response') }}
                                 </a>
                                 <a
                                     href="#codigos-estado"
@@ -171,7 +171,7 @@
                                             : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                     ]"
                                 >
-                                    • Códigos de Estado
+                                    • {{ $t('documentation.status_codes') }}
                                 </a>
                             </div>
                         </div>
@@ -186,7 +186,7 @@
                                         : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-blue-900/10',
                                 ]"
                             >
-                                Ejemplos de Integración
+                                {{ $t('documentation.integration_examples') }}
                             </a>
                         </div>
                     </nav>
@@ -202,11 +202,10 @@
                         id="introduccion"
                         class="text-2xl lg:text-3xl font-bold mb-2 text-gray-900 dark:text-white"
                     >
-                        Documentación de ConsultaRNC
+                        {{ $t('documentation.title') }}
                     </h1>
-                    <p class="text-gray-500 dark:text-gray-400 mb-6 text-sm lg:text-base">
-                        Guía completa para integrar y utilizar nuestra API de
-                        consulta tributaria.
+                    <p class="text-gray-500 dark:text-gray-400 mb-6">
+                        {{ $t('documentation.subtitle') }}<span>📚</span>
                     </p>
 
                     <!-- URL Base -->
@@ -214,7 +213,7 @@
                         <h2
                             class="text-xl lg:text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200"
                         >
-                            URL Base de la API
+                            {{ $t('documentation.base_url_title') }}
                         </h2>
                         <div
                             class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-400 dark:border-blue-500 p-4 lg:p-6 rounded-lg transition-colors duration-300"
@@ -224,8 +223,7 @@
                                     <p
                                         class="text-gray-700 dark:text-gray-300 mb-2 text-sm lg:text-base"
                                     >
-                                        Todas las peticiones deben realizarse a
-                                        la siguiente URL:
+                                        {{ $t('documentation.base_url_description') }}
                                     </p>
                                     <div
                                         class="flex flex-col sm:flex-row items-start sm:items-center gap-2"
@@ -237,7 +235,7 @@
                                         </code>
                                         <button
                                             class="bg-white dark:bg-gray-800 hover:bg-blue-50 dark:hover:bg-blue-900/20 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 p-2 rounded-lg shadow-sm dark:shadow-gray-900/20 transition-colors duration-200 flex items-center justify-center flex-shrink-0"
-                                            title="Copiar URL"
+                                            :title="$t('documentation.copy_url')"
                                             @click="copyBaseUrl"
                                         >
                                             <i class="fa-regular fa-copy" />
@@ -253,19 +251,19 @@
                         <h2
                             class="text-xl lg:text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200"
                         >
-                            Búsqueda Avanzada RNC
+                            {{ $t('documentation.advanced_search_title') }}
                         </h2>
                         <!-- Leyenda de Badges con FeatureCard -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                             <FeatureCard
-                                title="Exacta"
-                                description="Coincidencia 100&nbsp;% del valor enviado. El parámetro debe coincidir exactamente con el valor almacenado en la base de datos, sin mayúsculas/minúsculas extra ni espacios."
+                                :title="$t('documentation.exact_search')"
+                                :description="$t('documentation.exact_search_description')"
                                 fa-icon="fa-solid fa-crosshairs"
                                 color="red"
                             />
                             <FeatureCard
-                                title="Parcial"
-                                description="Búsqueda flexible (LIKE) que permite coincidencias parciales. El valor ingresado puede encontrarse en cualquier parte del texto almacenado, ideal para búsquedas por nombre o actividad."
+                                :title="$t('documentation.partial_search')"
+                                :description="$t('documentation.partial_search_description')"
                                 fa-icon="fa-solid fa-magnifying-glass"
                                 color="blue"
                             />
@@ -320,7 +318,7 @@
                                 param-id="param-start-date"
                                 type="date | array"
                                 name="start_date"
-                                description="Fecha de inicio de operaciones. Puedes enviar un único valor (YYYY-MM-DD) para coincidencia exacta o un arreglo de dos fechas \[desde, hasta\] para filtrar por rango."
+                                description="Fecha de inicio de operaciones. Puedes enviar un único valor (YYYY-MM-DD) para coincidencia exacta o un arreglo de dos fechas [desde, hasta] para filtrar por rango."
                                 example="/api/search?start_date[]=2020-01-01&start_date[]=2024-12-31"
                                 :is-exact="true"
                             />
@@ -330,7 +328,7 @@
                             id="ejemplos-uso"
                             class="font-semibold mb-2 mt-6 text-gray-700 dark:text-gray-300"
                         >
-                            Ejemplos de uso:
+                            {{ $t('documentation.usage_examples') }}:
                         </h5>
                         <div class="space-y-2">
                             <div
@@ -339,7 +337,7 @@
                                 <h6
                                     class="text-sm font-medium text-gray-700 dark:text-gray-100 mb-2"
                                 >
-                                    Búsqueda de empresas por nombre
+                                    {{ $t('documentation.search_by_name') }}
                                 </h6>
                                 <code
                                     class="text-zinc-900 dark:text-gray-200 font-mono text-xs lg:text-sm break-all"
@@ -353,7 +351,7 @@
                                 <h6
                                     class="text-sm font-medium text-gray-700 dark:text-gray-100 mb-2"
                                 >
-                                    Búsqueda de contribuyente por RNC
+                                    {{ $t('documentation.search_by_rnc') }}
                                 </h6>
                                 <code
                                     class="text-zinc-900 dark:text-gray-200 font-mono text-xs lg:text-sm break-all"
@@ -367,7 +365,7 @@
                                 <h6
                                     class="text-sm font-medium text-gray-700 dark:text-gray-100 mb-2"
                                 >
-                                    Búsqueda por actividad económica
+                                    {{ $t('documentation.search_by_activity') }}
                                 </h6>
                                 <code
                                     class="text-zinc-900 dark:text-gray-200 font-mono text-xs lg:text-sm break-all"
@@ -381,7 +379,7 @@
                                 <h6
                                     class="text-sm font-medium text-gray-700 dark:text-gray-100 mb-2"
                                 >
-                                    Búsqueda con múltiples filtros
+                                    {{ $t('documentation.search_with_filters') }}
                                 </h6>
                                 <code
                                     class="text-zinc-900 dark:text-gray-200 font-mono text-xs lg:text-sm break-all"
@@ -395,7 +393,7 @@
                             id="ejemplos-combinaciones"
                             class="font-semibold mb-2 text-gray-700 dark:text-gray-300 mt-6"
                         >
-                            Ejemplos de combinaciones:
+                            {{ $t('documentation.combination_examples') }}:
                         </h5>
                         <div class="space-y-2">
                             <div
@@ -404,14 +402,13 @@
                                 <h6
                                     class="text-sm font-medium text-gray-700 dark:text-gray-100 mb-2"
                                 >
-                                    Búsqueda de empresas activas por nombre
+                                    {{ $t('documentation.search_active_by_name') }}
                                 </h6>
                                 <code class="text-zinc-900 dark:text-gray-200 font-mono text-sm">
                                     GET /api/search?<span class="font-semibold">business_name</span>=<span class="text-red-600 dark:text-blue-300 font-semibold">empresa</span>&<span class="font-semibold">status</span>=<span class="text-red-600 dark:text-blue-300 font-semibold">Activo</span>
                                 </code>
                                 <p class="text-gray-600 dark:text-gray-300 text-xs mt-1">
-                                    Buscar empresas activas con "empresa" en el
-                                    nombre
+                                    {{ $t('documentation.search_active_with_name') }}
                                 </p>
                             </div>
                             <div
@@ -420,13 +417,13 @@
                                 <h6
                                     class="text-sm font-medium text-gray-700 dark:text-gray-100 mb-2"
                                 >
-                                    Búsqueda de comercios con régimen general
+                                    {{ $t('documentation.search_commerce_general') }}
                                 </h6>
                                 <code class="text-zinc-900 dark:text-gray-200 font-mono text-sm">
                                     GET /api/search?<span class="font-semibold">economic_activity</span>=<span class="text-red-600 dark:text-blue-300 font-semibold">comercio</span>&<span class="font-semibold">payment_regime</span>=<span class="text-red-600 dark:text-blue-300 font-semibold">General</span>
                                 </code>
                                 <p class="text-gray-600 dark:text-gray-300 text-xs mt-1">
-                                    Buscar comercios con régimen general
+                                    {{ $t('documentation.search_commerce_with_regime') }}
                                 </p>
                             </div>
                             <div
@@ -435,15 +432,13 @@
                                 <h6
                                     class="text-sm font-medium text-gray-700 dark:text-gray-100 mb-2"
                                 >
-                                    Búsqueda de contribuyentes activos por rango
-                                    de fechas
+                                    {{ $t('documentation.search_active_by_date') }}
                                 </h6>
                                 <code class="text-zinc-900 dark:text-gray-200 font-mono text-sm">
                                     GET /api/search?<span class="font-semibold">start_date[]</span>=<span class="text-red-600 dark:text-blue-300 font-semibold">2020-01-01</span>&<span class="font-semibold">start_date[]</span>=<span class="text-red-600 dark:text-blue-300 font-semibold">2024-12-31</span>&<span class="font-semibold">status</span>=<span class="text-red-600 dark:text-blue-300 font-semibold">Activo</span>
                                 </code>
                                 <p class="text-gray-600 dark:text-gray-300 text-xs mt-1">
-                                    Buscar contribuyentes activos registrados
-                                    entre 2020 y 2024
+                                    {{ $t('documentation.search_active_by_range') }}
                                 </p>
                             </div>
                         </div>
@@ -454,7 +449,7 @@
                         <h2
                             class="text-xl lg:text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200"
                         >
-                            Formato de Respuesta y Códigos HTTP
+                            {{ $t('documentation.response_format_title') }}
                         </h2>
 
                         <!-- Respuesta Exitosa -->
@@ -462,24 +457,24 @@
                             <h3
                                 class="text-lg lg:text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200"
                             >
-                                Respuesta Exitosa
+                                {{ $t('documentation.successful_response') }}
                             </h3>
                             <div class="bg-gray-100 dark:bg-gray-700 p-4 lg:p-6 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors duration-300">
                                 <h4
                                     class="text-base lg:text-lg font-medium mb-3 text-gray-700 dark:text-gray-200"
                                 >
-                                    Estructura
+                                    {{ $t('documentation.structure') }}
                                 </h4>
                                 <pre
                                     class="bg-gray-800 dark:bg-gray-800 text-gray-100 dark:text-gray-100 p-4 rounded-lg overflow-x-auto text-xs lg:text-sm"
                                 >
 {
-    "message": "Search completed.",
-    "pages": 5,
-    "next": "https://consultarnc.com.do/api/search?page=2",
-    "prev": null,
-    "total": 450,
-    "data": [
+    "{{ $t('documentation.json_keys.message') }}": "{{ $t('documentation.json_values.search_completed') }}",
+    "{{ $t('documentation.json_keys.pages') }}": 5,
+    "{{ $t('documentation.json_keys.next') }}": "https://consultarnc.com.do/api/search?page=2",
+    "{{ $t('documentation.json_keys.prev') }}": null,
+    "{{ $t('documentation.json_keys.total') }}": 450,
+    "{{ $t('documentation.json_keys.data') }}": [
         {
             "rnc": "123456789",
             "nombre": "Empresa Ejemplo S.A.",
@@ -498,14 +493,14 @@
             "regimen_pago": "Pequeño Contribuyente",
             "fecha_inicio": "2021-03-10"
         }
-        // ... más registros
+        // {{ $t('documentation.more_records') }}
     ]
 }</pre>
                                 <div class="mt-4 space-y-3">
                                     <h4
                                         class="text-base lg:text-lg font-medium mb-3 text-gray-700 dark:text-gray-200"
                                     >
-                                        Descripción de campos
+                                        {{ $t('documentation.field_description') }}
                                     </h4>
                                     <div class="overflow-x-auto rounded-2xl border border-gray-200 dark:border-gray-600">
                                         <table
@@ -516,17 +511,17 @@
                                                     <th
                                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider border-b border-gray-200 dark:border-gray-600"
                                                     >
-                                                        Campo
+                                                        {{ $t('documentation.field') }}
                                                     </th>
                                                     <th
                                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider border-b border-gray-200 dark:border-gray-600"
                                                     >
-                                                        Tipo de Dato
+                                                        {{ $t('documentation.data_type') }}
                                                     </th>
                                                     <th
                                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider border-b border-gray-200 dark:border-gray-600"
                                                     >
-                                                        Descripción
+                                                        {{ $t('documentation.description') }}
                                                     </th>
                                                 </tr>
                                             </thead>
@@ -553,8 +548,7 @@
                                                     <td
                                                         class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300"
                                                     >
-                                                        Mensaje descriptivo del
-                                                        resultado de la búsqueda
+                                                        {{ $t('documentation.message_field') }}
                                                     </td>
                                                 </tr>
                                                 <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
@@ -577,8 +571,7 @@
                                                     <td
                                                         class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300"
                                                     >
-                                                        Número total de páginas
-                                                        disponibles
+                                                        {{ $t('documentation.pages_field') }}
                                                     </td>
                                                 </tr>
                                                 <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
@@ -601,9 +594,7 @@
                                                     <td
                                                         class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300"
                                                     >
-                                                        URL de la siguiente
-                                                        página (null si es la
-                                                        última)
+                                                        {{ $t('documentation.next_field') }}
                                                     </td>
                                                 </tr>
                                                 <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
@@ -626,9 +617,7 @@
                                                     <td
                                                         class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300"
                                                     >
-                                                        URL de la página
-                                                        anterior (null si es la
-                                                        primera)
+                                                        {{ $t('documentation.prev_field') }}
                                                     </td>
                                                 </tr>
                                                 <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
@@ -651,8 +640,7 @@
                                                     <td
                                                         class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300"
                                                     >
-                                                        Número total de
-                                                        registros encontrados
+                                                        {{ $t('documentation.total_field') }}
                                                     </td>
                                                 </tr>
                                                 <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
@@ -675,9 +663,7 @@
                                                     <td
                                                         class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300"
                                                     >
-                                                        Array con los registros
-                                                        RNC encontrados (máximo
-                                                        100 por página)
+                                                        {{ $t('documentation.data_field') }}
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -692,7 +678,7 @@
                             <h3
                                 class="text-lg lg:text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200"
                             >
-                                Códigos de Estado HTTP
+                                {{ $t('documentation.status_codes') }}
                             </h3>
                             <div class="bg-gray-100 dark:bg-gray-700 p-4 lg:p-6 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors duration-300">
                                 <ul class="space-y-4">
@@ -700,28 +686,25 @@
                                         <span
                                             class="font-semibold text-green-600 dark:text-green-400 mr-2"
                                         >200 OK:</span>
-                                        <span class="text-gray-600 dark:text-gray-300">La solicitud se procesó
-                                            correctamente</span>
+                                        <span class="text-gray-600 dark:text-gray-300">{{ $t('documentation.http_200') }}</span>
                                     </li>
                                     <li class="flex items-start">
                                         <span
                                             class="font-semibold text-yellow-600 dark:text-yellow-400 mr-2"
                                         >400 Bad Request:</span>
-                                        <span class="text-gray-600 dark:text-gray-300">La solicitud contiene parámetros
-                                            inválidos</span>
+                                        <span class="text-gray-600 dark:text-gray-300">{{ $t('documentation.http_400') }}</span>
                                     </li>
                                     <li class="flex items-start">
                                         <span
                                             class="font-semibold text-red-600 dark:text-red-400 mr-2"
                                         >404 Not Found:</span>
-                                        <span class="text-gray-600 dark:text-gray-300">El recurso solicitado no
-                                            existe</span>
+                                        <span class="text-gray-600 dark:text-gray-300">{{ $t('documentation.http_404') }}</span>
                                     </li>
                                     <li class="flex items-start">
                                         <span
                                             class="font-semibold text-red-600 dark:text-red-400 mr-2"
                                         >500 Internal Server Error:</span>
-                                        <span class="text-gray-600 dark:text-gray-300">Error interno del servidor</span>
+                                        <span class="text-gray-600 dark:text-gray-300">{{ $t('documentation.http_500') }}</span>
                                     </li>
                                 </ul>
                             </div>
@@ -733,14 +716,14 @@
                         <h2
                             class="text-xl lg:text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-200"
                         >
-                            Ejemplos de Integración
+                            {{ $t('documentation.integration_examples') }}
                         </h2>
                         <div class="space-y-6">
                             <div class="bg-gray-100 dark:bg-gray-700 p-4 lg:p-6 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors duration-300">
                                 <h3
                                     class="font-semibold text-gray-700 dark:text-gray-200 mb-3 text-sm lg:text-base"
                                 >
-                                    JavaScript (Fetch) - Búsqueda
+                                    {{ $t('documentation.javascript_example') }}
                                 </h3>
                                 <div
                                     class="bg-gray-800 dark:bg-gray-800 text-gray-100 dark:text-gray-100 p-3 lg:p-4 rounded-lg overflow-x-auto text-xs lg:text-sm"
@@ -798,7 +781,7 @@
                                 <h3
                                     class="font-semibold text-gray-700 dark:text-gray-200 mb-3 text-sm lg:text-base"
                                 >
-                                    PHP (cURL) - Búsqueda
+                                    {{ $t('documentation.php_example') }}
                                 </h3>
                                 <div
                                     class="bg-gray-800 dark:bg-gray-800 text-gray-100 dark:text-gray-100 p-3 lg:p-4 rounded-lg overflow-x-auto text-xs lg:text-sm"
@@ -874,7 +857,7 @@
                         <h2
                             class="text-xl lg:text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-200"
                         >
-                            Información Adicional
+                            {{ $t('documentation.additional_info') }}
                         </h2>
                         <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-400 dark:border-blue-500 p-4 rounded-lg transition-colors duration-300">
                             <div class="flex">
@@ -893,11 +876,7 @@
                                 </div>
                                 <div class="ml-3">
                                     <p class="text-sm text-blue-700 dark:text-blue-300">
-                                        <strong>Nota:</strong> Esta API está en
-                                        desarrollo activo. Para obtener la
-                                        información más actualizada sobre nuevos
-                                        endpoints y funcionalidades, consulta
-                                        regularmente esta documentación.
+                                        <strong>{{ $t('documentation.note_label') }}</strong> {{ $t('documentation.note') }}
                                     </p>
                                 </div>
                             </div>
@@ -914,7 +893,7 @@
             class="fixed top-4 left-4 right-4 sm:left-1/2 sm:right-auto sm:transform sm:-translate-x-1/2 sm:w-auto bg-blue-500 text-white px-4 lg:px-6 py-3 lg:py-4 rounded-lg shadow-lg z-50 flex items-center gap-2 transition-all duration-300"
         >
             <i class="fa-solid fa-check flex-shrink-0" />
-            <span class="text-sm lg:text-base">URL copiada en el portapapeles</span>
+            <span class="text-sm lg:text-base">{{ $t('documentation.url_copied') }}</span>
         </div>
     </div>
     

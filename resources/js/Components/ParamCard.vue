@@ -6,9 +6,9 @@
         <div class="flex items-center gap-2 mb-2">
             <span
                 class="bg-blue-200 dark:bg-blue-800 text-gray-800 dark:text-blue-100 px-2 py-1 rounded text-xs font-semibold"
-            >{{ type }}</span>
+            >{{ translatedType }}</span>
             <code class="text-gray-700 dark:text-gray-300 font-mono font-semibold">{{
-                name
+                translatedName
             }}</code>
             <span :class="badgeClasses">
                 <template v-if="isExact">
@@ -31,6 +31,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 interface Props {
     paramId: string
@@ -43,6 +44,23 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
     isExact: false
+})
+
+const { t } = useI18n()
+
+const translatedType = computed(() => {
+    // Handle complex types like "date | array"
+    if (props.type.includes('|')) {
+        return props.type.split('|').map(type => {
+            const trimmedType = type.trim()
+            return t(`documentation.data_types.${trimmedType}`, trimmedType)
+        }).join(' | ')
+    }
+    return t(`documentation.data_types.${props.type}`, props.type)
+})
+
+const translatedName = computed(() => {
+    return t(`documentation.parameters.${props.name}`, props.name)
 })
 
 const badgeClasses = computed(() => {

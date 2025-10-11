@@ -1,5 +1,5 @@
 <template>
-    <Head title="Bienvenido" />
+    <Head :title="$t('common.welcome')" />
     <div
         class="min-h-screen flex flex-col items-center bg-gradient-to-br from-slate-50 to-slate-200 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300"
     >
@@ -7,34 +7,37 @@
         <Navigation />
 
         <!-- Contenido principal -->
-        <div class="flex w-full max-w-7xl mt-24 mb-6 mx-auto flex-1">
+        <div class="flex w-full max-w-7xl mt-32 mb-8 mx-auto flex-1 px-4 sm:px-0">
             <div class="flex-1">
                 <div
-                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20 px-10 py-8 text-center relative overflow-hidden transition-colors duration-300"
+                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20 px-6 sm:px-10 py-8 text-center relative overflow-hidden transition-colors duration-300"
                 >
-                    <div class="flex flex-col items-center relative z-10 mb-4">
-                        <img
-                            src="/images/logo.png"
-                            alt="Logo"
-                            width="400"
-                            class="dark:brightness-0 dark:invert"
-                        />
+                    <div class="flex flex-col items-center relative z-0 mb-6">
+                        <div class="flex justify-center items-center mb-4">
+                            <img
+                                src="/images/logo.png"
+                                alt="Logo"
+                                width="180"
+                                class="dark:brightness-0 dark:invert mx-auto"
+                            />
+                        </div>
 
-                        <p class="text-lg text-gray-500 dark:text-gray-400 font-medium">
-                            Bienvenido a la plataforma de consulta tributaria
-                        </p>
+                        <div class="text-center space-y-2">
+                            <p class="text-lg font-semibold" style="color: #D1D5D8;">
+                                {{ $t('common.welcome_message') }}
+                            </p>
+                            
+                            <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 leading-relaxed max-w-xl">
+                                {{ $t('common.description') }}
+                            </p>
+                        </div>
                     </div>
-
-                    <p class="text-xl text-gray-600 dark:text-gray-300 mb-6 relative z-10">
-                        Una plataforma moderna para consultar información
-                        tributaria y de RNC en República Dominicana
-                    </p>
 
                     <!-- Hero section -->
                     <div class="mb-8">
                         <div class="bg-blue-700 text-white p-8 rounded-xl">
                             <h2 class="text-2xl font-semibold mb-4">
-                                ¿Qué puedes hacer con nuestra API?
+                                {{ $t('features.api_capabilities') }}
                             </h2>
 
                             <div
@@ -45,11 +48,10 @@
                                         🔍
                                     </div>
                                     <h3 class="font-semibold mb-2">
-                                        Buscar RNC
+                                        {{ $t('features.search_rnc') }}
                                     </h3>
                                     <p class="text-sm opacity-90">
-                                        Consulta información detallada de
-                                        contribuyentes
+                                        {{ $t('features.search_rnc_description') }}
                                     </p>
                                 </div>
                                 <div>
@@ -57,10 +59,10 @@
                                         ⚡
                                     </div>
                                     <h3 class="font-semibold mb-2">
-                                        Respuestas Rápidas
+                                        {{ $t('features.fast_responses') }}
                                     </h3>
                                     <p class="text-sm opacity-90">
-                                        Obtén resultados en segundos
+                                        {{ $t('features.fast_results') }}
                                     </p>
                                 </div>
                                 <div>
@@ -68,11 +70,10 @@
                                         🔗
                                     </div>
                                     <h3 class="font-semibold mb-2">
-                                        Fácil Integración
+                                        {{ $t('features.easy_integration') }}
                                     </h3>
                                     <p class="text-sm opacity-90">
-                                        Conecta con tus sistemas de forma
-                                        sencilla
+                                        {{ $t('features.easy_integration_description') }}
                                     </p>
                                 </div>
                             </div>
@@ -86,23 +87,23 @@
                                 24/7
                             </div>
                             <div class="text-gray-600 dark:text-gray-300">
-                                Disponibilidad
+                                {{ $t('features.availability') }}
                             </div>
                         </div>
                         <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg transition-colors duration-300">
                             <div class="text-3xl font-bold text-red-600 dark:text-red-400 mb-2">
-                                &lt;3s
+                                {{ $t('features.response_time_value') }}
                             </div>
                             <div class="text-gray-600 dark:text-gray-300">
-                                Tiempo de Respuesta
+                                {{ $t('features.response_time') }}
                             </div>
                         </div>
                         <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg transition-colors duration-300">
                             <div class="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-                                ≤ 7 días
+                                {{ $t('features.update_frequency_value') }}
                             </div>
                             <div class="text-gray-600 dark:text-gray-300">
-                                Frecuencia de actualización
+                                {{ $t('features.update_frequency') }}
                             </div>
                         </div>
                     </div>
@@ -110,9 +111,7 @@
                     <!-- Call to Action -->
                     <div class="space-y-4">
                         <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            ¿Listo para empezar? Explora nuestra documentación
-                            completa y comienza a integrar la API en tus
-                            proyectos.
+                            {{ $t('common.get_started') }}
                         </p>
                         <div
                             class="flex flex-col sm:flex-row gap-4 justify-center"
@@ -121,13 +120,13 @@
                                 href="/documentation"
                                 class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition"
                             >
-                                Ver Documentación
+                                {{ $t('common.view_documentation') }}
                             </Link>
                             <Link
                                 href="/documentation/about"
                                 class="inline-block bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-8 rounded-lg transition"
                             >
-                                Conocer Más
+                                {{ $t('common.learn_more') }}
                             </Link>
                         </div>
                     </div>

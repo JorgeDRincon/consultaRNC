@@ -6,7 +6,7 @@
             >
                 <!-- Créditos -->
                 <div class="text-center font-medium">
-                    Desarrollado por
+                    {{ $t('footer.developed_by') }}
                     <a
                         href="https://www.linkedin.com/in/jorgerincon-dev/"
                         target="_blank"
@@ -15,7 +15,7 @@
                     >
                         Jorge D. Rincón
                     </a>
-                    y
+                    {{ $t('common.and') }}
                     <a
                         href="https://www.linkedin.com/in/sherlingdev/"
                         target="_blank"
@@ -59,16 +59,20 @@
 
             <!-- Legal -->
             <div class="text-center text-gray-500 dark:text-gray-400 text-sm mt-2">
-                © 2025 ConsultaRNC – Todos los derechos reservados
+                © {{ currentYear }} ConsultaRNC – {{ $t('footer.rights_reserved') }}
             </div>
             <div class="text-center text-gray-400 dark:text-gray-500 text-xs">
-                Esta plataforma es de uso informativo y no tiene relación
-                oficial con la DGII.
+                {{ $t('footer.disclaimer') }}
             </div>
         </div>
     </footer>
 </template>
 
 <script setup lang="ts">
-// Footer component - Static footer with no props
+import { computed } from 'vue'
+
+// Get current year dynamically
+const currentYear = computed(() => {
+    return new Date().getFullYear()
+})
 </script>
