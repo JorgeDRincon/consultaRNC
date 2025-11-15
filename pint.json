@@ -1,6 +1,7 @@
 {
     "preset": "laravel",
     "rules": {
+        "no_superfluous_phpdoc_tags": false,
         "binary_operator_spaces": {
             "default": "single_space"
         },
