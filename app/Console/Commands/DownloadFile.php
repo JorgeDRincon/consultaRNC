@@ -2,13 +2,27 @@
 
 namespace App\Console\Commands;
 
+use GuzzleHttp\Exception\RequestException;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use RuntimeException;
 use ZipArchive;
 
 class DownloadFile extends Command
 {
+    private const FILE_URL = 'https://dgii.gov.do/app/WebApps/Consultas/RNC/RNC_CONTRIBUYENTES.zip';
+
+    private const TEMP_ZIP_PATH = 'temp/RNC_CONTRIBUYENTES.zip';
+
+    private const FINAL_DESTINATION_DIR = 'downloads/';
+
+    private const MAX_DOWNLOAD_ATTEMPTS = 5;
+
+    private const MIN_ZIP_SIZE_BYTES = 1_000_000;
+
+    private const ZIP_SIGNATURE = "PK\x03\x04";
+
     /**
      * The name and signature of the console command.
      *
@@ -38,126 +52,248 @@ class DownloadFile extends Command
      */
     public function handle()
     {
-        // --- Configuración de Rutas y URL ---
-        $fileUrl = 'https://dgii.gov.do/app/WebApps/Consultas/RNC/RNC_CONTRIBUYENTES.zip';
-
-        // Define la ruta temporal dentro del disco 'local' (storage/app/)
-        // Esto creará el ZIP en 'storage/app/temp/RNC_CONTRIBUYENTES.zip'
-        $tempZipPath = 'temp/RNC_CONTRIBUYENTES.zip';
-
-        // ¡CAMBIO AQUÍ!
-        // Ruta de destino final para el archivo extraído (dentro de storage/app/downloads/)
-        // Esta ubicación NO es accesible públicamente por defecto.
-        $finalDestinationBaseDir = 'downloads/';
-        // ------------------------------------
-
-        $this->info("Attempting to download ZIP file from: {$fileUrl}");
+        $this->info('Attempting to download ZIP file from: '.self::FILE_URL);
 
         try {
-            // 1. Descargar el archivo ZIP.
-            // Aumentamos el timeout a 10 minutos y sin verificar SSL para posibles problemas.
-            $response = Http::timeout(600)->withoutVerifying()->get($fileUrl);
+            $expectedSize = $this->fetchExpectedZipSize(self::FILE_URL);
+            $fullTempZipPath = $this->prepareTempZip(self::TEMP_ZIP_PATH);
 
-            // Verificar si la descarga fue exitosa
-            if (! $response->successful()) {
-                $this->error('Failed to download ZIP file. HTTP Status Code: '.$response->status());
-                $this->error('Response body on failure: '.$response->body());
+            $this->downloadZipWithResume(self::FILE_URL, $fullTempZipPath, $expectedSize, self::MAX_DOWNLOAD_ATTEMPTS);
+            $this->assertZipIntegrity($fullTempZipPath, $expectedSize);
 
-                return Command::FAILURE;
+            [$innerFileName, $extractedFileContent] = $this->extractSingleFileFromZip($fullTempZipPath);
+            $fullExtractedFilePathAbsolute = $this->storeExtractedFile($innerFileName, $extractedFileContent, self::FINAL_DESTINATION_DIR);
+
+            $this->cleanupTempFile(self::TEMP_ZIP_PATH, $fullTempZipPath);
+            $this->processExtractedFile($fullExtractedFilePathAbsolute);
+
+            $this->info('File processing completed successfully.');
+
+            return Command::SUCCESS;
+        } catch (RuntimeException $exception) {
+            $this->handleRuntimeException($exception);
+        } catch (\Throwable $exception) {
+            $this->error('An unexpected error occurred: '.$exception->getMessage());
+        }
+
+        if (Storage::disk('local')->exists(self::TEMP_ZIP_PATH)) {
+            $this->warn('Temporary ZIP file was not deleted due to error. You can inspect it at: '.Storage::disk('local')->path(self::TEMP_ZIP_PATH));
+        }
+
+        return Command::FAILURE;
+    }
+
+    private function handleRuntimeException(RuntimeException $exception): void
+    {
+        $this->error($exception->getMessage());
+
+        if ($exception instanceof RequestException && $exception->hasResponse()) {
+            $this->error('HTTP client error response: '.$exception->getResponse()->getBody()->getContents());
+        }
+    }
+
+    private function fetchExpectedZipSize(string $fileUrl): int
+    {
+        $headResponse = Http::withOptions([
+            'http_errors' => false,
+            'verify' => false,
+        ])->head($fileUrl);
+
+        if (! $headResponse->successful()) {
+            throw new RuntimeException('HEAD request failed. HTTP Status Code: '.$headResponse->status());
+        }
+
+        $expectedSize = (int) $headResponse->header('Content-Length');
+
+        if ($expectedSize <= 0) {
+            throw new RuntimeException('Could not read a valid Content-Length from DGII.');
+        }
+
+        $this->info("Expected ZIP size: {$expectedSize} bytes");
+
+        return $expectedSize;
+    }
+
+    private function prepareTempZip(string $tempZipPath): string
+    {
+        Storage::disk('local')->makeDirectory(dirname($tempZipPath));
+
+        $fullTempZipPath = Storage::disk('local')->path($tempZipPath);
+
+        if (! file_exists($fullTempZipPath)) {
+            touch($fullTempZipPath);
+        }
+
+        return $fullTempZipPath;
+    }
+
+    private function downloadZipWithResume(string $fileUrl, string $fullTempZipPath, int $expectedSize, int $maxAttempts): void
+    {
+        $previousSize = file_exists($fullTempZipPath) ? filesize($fullTempZipPath) : 0;
+
+        for ($attempt = 1; $attempt <= $maxAttempts; $attempt++) {
+            $this->info("Download attempt {$attempt} of {$maxAttempts}...");
+
+            $command = $this->buildCurlCommand($fileUrl, $fullTempZipPath);
+            $this->info('Running: '.$command);
+
+            $lines = [];
+            $exitCode = 0;
+            exec($command, $lines, $exitCode);
+
+            if ($exitCode !== 0) {
+                $this->logCurlFailure($lines, $exitCode);
+                throw new RuntimeException("curl exited with code {$exitCode}.");
             }
 
-            $zipContent = $response->body();
-            $downloadedSize = strlen($zipContent);
-            $expectedSize = $response->header('Content-Length');
-            // Verificar si el tamaño de descarga coincide con el Content-Length
-            if ($expectedSize && $downloadedSize != $expectedSize) {
-                $this->error("Downloaded file size mismatch. Expected: {$expectedSize} bytes, Downloaded: {$downloadedSize} bytes.");
-                $this->error('This indicates an incomplete download.');
-
-                return Command::FAILURE;
+            if (! file_exists($fullTempZipPath)) {
+                $this->logCurlFailure($lines);
+                throw new RuntimeException('ZIP file was not created.');
             }
 
-            // Verificar la firma 'PK' de un archivo ZIP válido
-            if (substr($zipContent, 0, 4) !== "PK\x03\x04") {
-                $this->error("Downloaded file does not appear to be a valid ZIP file (missing 'PK' signature).");
+            clearstatcache(true, $fullTempZipPath);
+            $currentSize = filesize($fullTempZipPath);
+            $this->info("Current ZIP size: {$currentSize} bytes");
 
-                return Command::FAILURE;
+            if ($currentSize >= $expectedSize) {
+                $this->info('Download appears complete.');
+
+                return;
             }
 
-            // Guardar el contenido ZIP en un archivo temporal usando el disco 'local' (storage/app/)
-            // Esto garantiza que se guarde en storage/app/temp/
-            Storage::disk('local')->put($tempZipPath, $zipContent);
-            $fullTempZipPath = Storage::disk('local')->path($tempZipPath); // Obtener la ruta absoluta real
-            $this->info('ZIP file downloaded temporarily to: '.$fullTempZipPath);
-
-            // 2. Abrir el archivo ZIP.
-            $zip = new ZipArchive;
-            $openResult = $zip->open($fullTempZipPath);
-            if ($openResult !== true) {
-                $this->error('Could not open the downloaded ZIP file: '.$openResult.' (See ZipArchive::ER_ constants for details).');
-                $this->error('This often means the downloaded file is not a valid ZIP or is corrupted.');
-
-                // Mantener el ZIP para inspección manual si falla
-                return Command::FAILURE;
+            if ($currentSize <= $previousSize) {
+                $this->logCurlFailure($lines);
+                throw new RuntimeException('No progress between attempts. Stopping.');
             }
 
-            // 3. Verificar y extraer el primer (y único) archivo.
+            $previousSize = $currentSize;
+        }
+
+        throw new RuntimeException('Max attempts reached and file is still incomplete.');
+    }
+
+    private function buildCurlCommand(string $fileUrl, string $fullTempZipPath): string
+    {
+        return sprintf(
+            'curl -C - -L -A %s -H %s -H %s --fail -o %s %s 2>&1',
+            escapeshellarg('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'),
+            escapeshellarg('Accept: */*'),
+            escapeshellarg('Referer: https://dgii.gov.do/'),
+            escapeshellarg($fullTempZipPath),
+            escapeshellarg($fileUrl)
+        );
+    }
+
+    private function logCurlFailure(array $lines, ?int $exitCode = null): void
+    {
+        if ($exitCode !== null) {
+            $this->error("curl exited with code {$exitCode}.");
+        }
+
+        if (! empty($lines)) {
+            $this->error("curl output:\n".implode("\n", $lines));
+        }
+    }
+
+    private function assertZipIntegrity(string $fullTempZipPath, int $expectedSize): void
+    {
+        if (! file_exists($fullTempZipPath)) {
+            throw new RuntimeException('ZIP file was not found after download.');
+        }
+
+        clearstatcache(true, $fullTempZipPath);
+        $actualSize = filesize($fullTempZipPath);
+
+        if ($actualSize < self::MIN_ZIP_SIZE_BYTES) {
+            throw new RuntimeException('Downloaded file seems too small. Possible HTML error instead of ZIP.');
+        }
+
+        if ($actualSize < $expectedSize) {
+            $this->warn('Downloaded ZIP size is smaller than expected Content-Length.');
+        }
+
+        $this->assertZipSignature($fullTempZipPath);
+        $this->info('ZIP file downloaded temporarily to: '.$fullTempZipPath);
+    }
+
+    private function assertZipSignature(string $fullTempZipPath): void
+    {
+        $filePointer = fopen($fullTempZipPath, 'rb');
+
+        if ($filePointer === false) {
+            throw new RuntimeException('Could not open downloaded file for validation.');
+        }
+
+        $firstBytes = fread($filePointer, 4);
+        fclose($filePointer);
+
+        if ($firstBytes !== self::ZIP_SIGNATURE) {
+            throw new RuntimeException("Downloaded file does not appear to be a valid ZIP file (missing 'PK' signature).");
+        }
+    }
+
+    /**
+     * Extracts the only file contained in the downloaded ZIP archive.
+     *
+     * @param string $fullTempZipPath The absolute path to the temporary ZIP file to extract
+     *
+     * @return array<int, string> Returns an array with [0] = inner file name, [1] = extracted file content
+     */
+    private function extractSingleFileFromZip(string $fullTempZipPath): array
+    {
+        $zip = new ZipArchive;
+        $openResult = $zip->open($fullTempZipPath);
+
+        if ($openResult !== true) {
+            throw new RuntimeException(
+                'Could not open the downloaded ZIP file: '.$openResult.' (See ZipArchive::ER_ constants for details).'
+            );
+        }
+
+        try {
             if ($zip->numFiles !== 1) {
-                $this->error('The ZIP file contains '.$zip->numFiles.' files. Expected exactly 1 file.');
-                $zip->close();
-                Storage::disk('local')->delete($tempZipPath);
-
-                return Command::FAILURE;
+                throw new RuntimeException('The ZIP file contains '.$zip->numFiles.' files. Expected exactly 1 file.');
             }
 
             $innerFileName = $zip->getNameIndex(0);
-            if ($innerFileName === false) {
-                $this->error('Could not get the name of the file inside the ZIP archive.');
-                $zip->close();
-                Storage::disk('local')->delete($tempZipPath);
 
-                return Command::FAILURE;
+            if ($innerFileName === false) {
+                throw new RuntimeException('Could not get the name of the file inside the ZIP archive.');
             }
 
             $extractedFileContent = $zip->getFromName($innerFileName);
+
             if ($extractedFileContent === false) {
-                $this->error("Could not read content of '{$innerFileName}' from the ZIP file.");
-                $zip->close();
-                Storage::disk('local')->delete($tempZipPath);
-
-                return Command::FAILURE;
+                throw new RuntimeException("Could not read content of '{$innerFileName}' from the ZIP file.");
             }
 
-            // 4. Guardar el archivo extraído en su destino final (storage/app/downloads/).
-            // Laravel creará la carpeta 'downloads' si no existe dentro de storage/app/
-            Storage::disk('local')->put($finalDestinationBaseDir.$innerFileName, $extractedFileContent);
-            $fullExtractedFilePathAbsolute = Storage::disk('local')->path($finalDestinationBaseDir.$innerFileName);
-            $this->info("Single file '{$innerFileName}' extracted and saved to: ".$fullExtractedFilePathAbsolute);
-
-            // 5. Cerrar el archivo ZIP y eliminar el temporal.
+            return [$innerFileName, $extractedFileContent];
+        } finally {
             $zip->close();
-            Storage::disk('local')->delete($tempZipPath);
-            $this->info('Temporary ZIP file deleted: '.$fullTempZipPath);
-
-            // 6. Llamar a la nueva función de procesamiento.
-            // Pasa la ruta absoluta del archivo CSV extraído al comando de procesamiento.
-            $this->call('app:process-rnc-data', [
-                'csvFilePath' => $fullExtractedFilePathAbsolute,
-            ]);
-
-            $this->info('File processing completed successfully.');
-        } catch (\Exception $e) {
-            $this->error('An error occurred: '.$e->getMessage());
-            if ($e instanceof \GuzzleHttp\Exception\RequestException && $e->hasResponse()) {
-                $this->error('HTTP client error response: '.$e->getResponse()->getBody()->getContents());
-            }
-            if (Storage::disk('local')->exists($tempZipPath)) {
-                $this->warn('Temporary ZIP file was not deleted due to error. You can inspect it at: '.Storage::disk('local')->path($tempZipPath));
-            }
-
-            return Command::FAILURE;
         }
+    }
 
-        return Command::SUCCESS;
+    private function storeExtractedFile(string $innerFileName, string $extractedFileContent, string $finalDestinationBaseDir): string
+    {
+        Storage::disk('local')->makeDirectory(rtrim($finalDestinationBaseDir, '/'));
+
+        Storage::disk('local')->put($finalDestinationBaseDir.$innerFileName, $extractedFileContent);
+        $fullExtractedFilePathAbsolute = Storage::disk('local')->path($finalDestinationBaseDir.$innerFileName);
+        $this->info("Single file '{$innerFileName}' extracted and saved to: ".$fullExtractedFilePathAbsolute);
+
+        return $fullExtractedFilePathAbsolute;
+    }
+
+    private function cleanupTempFile(string $tempZipPath, string $fullTempZipPath): void
+    {
+        Storage::disk('local')->delete($tempZipPath);
+        $this->info('Temporary ZIP file deleted: '.$fullTempZipPath);
+    }
+
+    private function processExtractedFile(string $fullExtractedFilePathAbsolute): void
+    {
+        $this->call('app:process-rnc-data', [
+            'csvFilePath' => $fullExtractedFilePathAbsolute,
+        ]);
     }
 }
