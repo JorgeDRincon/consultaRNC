@@ -19,6 +19,16 @@
 
         <!-- Iconos FontAwesome -->
         <script src="https://kit.fontawesome.com/f61d876e0e.js" crossorigin="anonymous"></script>
+
+       <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-LR5PGCZ21P"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-LR5PGCZ21P');
+      </script>
     </head>
     <body class="font-sans antialiased bg-white dark:bg-gray-900 transition-colors duration-300">
         @inertia
