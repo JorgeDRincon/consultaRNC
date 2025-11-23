@@ -175,7 +175,7 @@ class DownloadFile extends Command
     private function buildCurlCommand(string $fileUrl, string $fullTempZipPath): string
     {
         return sprintf(
-            'curl -C - -L -A %s -H %s -H %s --fail -o %s %s 2>&1',
+            'curl -C - -L --http1.1 --max-time 600 --connect-timeout 30 --retry 3 --retry-delay 5 --retry-all-errors --fail --show-error -A %s -H %s -H %s -o %s %s 2>&1',
             escapeshellarg('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'),
             escapeshellarg('Accept: */*'),
             escapeshellarg('Referer: https://dgii.gov.do/'),
