@@ -76,7 +76,7 @@ class ProcessRncData extends Command
         try {
             $csv = $this->setupCsv($csvFilePath);
             $headerMapping = $this->buildHeaderMapping($csv);
-            
+
             [$createdCount, $updatedCount, $processedRncs] = $this->processRecords($csv, $headerMapping);
 
             $this->info("Finished processing CSV. Created: {$createdCount}, Updated: {$updatedCount}.");
@@ -100,11 +100,13 @@ class ProcessRncData extends Command
     {
         if (! file_exists($csvFilePath)) {
             $this->error("CSV file not found at: {$csvFilePath}");
+
             return false;
         }
 
         if (! extension_loaded('mbstring')) {
             $this->error("The 'mbstring' PHP extension is not loaded. Please enable 'extension=mbstring' in your php.ini.");
+
             return false;
         }
 
@@ -115,10 +117,10 @@ class ProcessRncData extends Command
     {
         $csv = Reader::createFromPath($csvFilePath, 'r');
         $csv->skipInputBOM();
-        
+
         $delimiter = $this->detectDelimiter($csvFilePath);
         $this->info("Detected CSV delimiter: '{$delimiter}'");
-        
+
         $csv->setDelimiter($delimiter);
         $csv->setEnclosure('"');
         $csv->setHeaderOffset(0);
@@ -144,9 +146,10 @@ class ProcessRncData extends Command
             }
 
             $rncData = $this->processRecord($recordRow, $headerMapping);
-            
+
             if (empty($rncData)) {
                 $progressBar->advance();
+
                 continue;
             }
 
@@ -179,12 +182,13 @@ class ProcessRncData extends Command
     {
         $mappedRecord = $this->mapRecord($recordRow, $headerMapping);
         $rnc = trim($mappedRecord['RNC'] ?? '');
-        
+
         if (empty($rnc)) {
             $this->warn("Skipping record due to missing or empty 'RNC' field.");
+
             return null;
         }
-        
+
         if (! $this->isValidRnc($rnc)) {
             return null;
         }
@@ -203,13 +207,13 @@ class ProcessRncData extends Command
     protected function mapRecord(array $recordRow, array $headerMapping): array
     {
         $mappedRecord = [];
-        
+
         foreach ($headerMapping as $rawKey => $normalizedKey) {
             $rawValue = $recordRow[$rawKey] ?? '';
             $convertedValue = mb_convert_encoding($rawValue, 'UTF-8', $this->csvEncoding);
             $convertedValue = trim($convertedValue);
             $convertedValue = preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/', '', $convertedValue);
-            
+
             $mappedRecord[$normalizedKey] = $convertedValue;
         }
 
@@ -220,6 +224,7 @@ class ProcessRncData extends Command
     {
         if (strpos($rnc, ';') !== false || strpos($rnc, ',') !== false) {
             $this->warn("RNC '{$rnc}' contains delimiter characters. Skipping record.");
+
             return false;
         }
 
@@ -246,6 +251,7 @@ class ProcessRncData extends Command
         }
 
         $this->warn("Could not parse date for RNC {$rnc}: '{$dateRaw}'. Setting 'start_date' to NULL.");
+
         return null;
     }
 
@@ -253,6 +259,7 @@ class ProcessRncData extends Command
     {
         if (empty(trim($value))) {
             $this->warn("'{$fieldName}' is empty for RNC {$rnc}. Setting '{$dbFieldName}' to default value '{$default}'.");
+
             return $default;
         }
 
@@ -273,6 +280,7 @@ class ProcessRncData extends Command
     {
         if (! is_null($this->recordLimit) && $count >= $this->recordLimit) {
             $this->info("Reached record limit of {$this->recordLimit}. Stopping further processing.");
+
             return true;
         }
 
@@ -285,7 +293,8 @@ class ProcessRncData extends Command
             return true;
         }
 
-        $this->warn("Skipping deactivation of records because record limit is active.");
+        $this->warn('Skipping deactivation of records because record limit is active.');
+
         return false;
     }
 
@@ -293,20 +302,20 @@ class ProcessRncData extends Command
     {
         $rawHeaders = $csv->getHeader();
         $this->info('Raw CSV Headers detected: '.implode(', ', $rawHeaders));
-        
+
         if (empty($rawHeaders) || count($rawHeaders) < 2) {
             $this->warn('Warning: Only '.count($rawHeaders).' headers detected. This might indicate a delimiter issue.');
         }
 
-        $convertedHeaders = array_map(fn($header) => mb_convert_encoding($header, 'UTF-8', $this->csvEncoding), $rawHeaders);
+        $convertedHeaders = array_map(fn ($header) => mb_convert_encoding($header, 'UTF-8', $this->csvEncoding), $rawHeaders);
         $this->info('Converted CSV Headers (UTF-8): '.implode(', ', $convertedHeaders));
 
         $mapping = [];
-        
+
         foreach ($convertedHeaders as $index => $convertedHeader) {
             $cleanHeader = trim(str_replace("\xEF\xBB\xBF", '', $convertedHeader));
             $normalizedHeader = $this->normalizeHeader($cleanHeader);
-            
+
             $matched = false;
             foreach ($this->expectedHeaders as $displayHeader => $dbColumnName) {
                 if ($this->normalizeHeader($displayHeader) === $normalizedHeader) {
@@ -323,6 +332,7 @@ class ProcessRncData extends Command
         }
 
         $this->info('Mapped Headers: '.json_encode($mapping));
+
         return $mapping;
     }
 
@@ -333,7 +343,7 @@ class ProcessRncData extends Command
         $normalized = str_replace(' ', '_', $normalized);
         $normalized = strtoupper($normalized);
         $normalized = preg_replace('/_+/', '_', $normalized);
-        
+
         return trim($normalized, '_');
     }
 
@@ -375,13 +385,14 @@ class ProcessRncData extends Command
         $delimiters = [';', ',', "\t", '|'];
         $delimiterCounts = array_fill_keys($delimiters, 0);
         $maxLines = 5;
-        
+
         $handle = @fopen($csvFilePath, 'r');
         if ($handle === false) {
             $this->warn('Could not open CSV file for delimiter detection. Using default ";".');
+
             return ';';
         }
-        
+
         $linesRead = 0;
         while ($linesRead < $maxLines && ($line = fgets($handle)) !== false) {
             foreach ($delimiters as $delimiter) {
@@ -389,17 +400,18 @@ class ProcessRncData extends Command
             }
             $linesRead++;
         }
-        
+
         fclose($handle);
-        
+
         $maxCount = max($delimiterCounts);
         $detectedDelimiter = array_search($maxCount, $delimiterCounts);
-        
+
         if ($maxCount === 0 || $detectedDelimiter === false) {
             $this->warn('Could not detect CSV delimiter. Using default ";".');
+
             return ';';
         }
-        
+
         return $detectedDelimiter;
     }
 
@@ -416,7 +428,7 @@ class ProcessRncData extends Command
             ->chunkById($chunkSize, function ($dbRncsChunk) use ($processedRncsMap, &$totalDeactivated) {
                 $rncsToDeactivate = array_filter(
                     $dbRncsChunk->pluck('rnc')->toArray(),
-                    fn($rnc) => ! isset($processedRncsMap[$rnc])
+                    fn ($rnc) => ! isset($processedRncsMap[$rnc])
                 );
 
                 if (empty($rncsToDeactivate)) {
@@ -428,7 +440,7 @@ class ProcessRncData extends Command
                     $deactivatedCount = Rnc::whereIn('rnc', $rncsToDeactivate)
                         ->where('status', '!=', 'INACTIVE')
                         ->update(['status' => 'INACTIVE', 'updated_at' => Carbon::now()]);
-                    
+
                     $totalDeactivated += $deactivatedCount;
                     $this->info("Deactivated {$deactivatedCount} records in current chunk.");
                     DB::commit();
